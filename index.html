@@ -55,9 +55,9 @@
             <h2>Elevate Your Next Event with a Private Chef</h2>
             <p class="hero-tagline" style="margin-bottom: 200px;">Your story, your gathering, your flavors. Crafted for those who crave an unforgettable memory.</p>
             <div class="cta-buttons">
-                <a href="#" class="btn btn-primary" id="just-exploring">Just Exploring</a>
-                <a href="#" class="btn btn-primary" id="plan-event">Plan Your Event</a>
-                <a href="#" class="btn btn-primary" id="weekly-meals">Weekly Meals</a>
+                <button class="cta-button tertiary" data-modal="explore-modal">Just Exploring</button>
+                <button class="btn btn-primary" id="plan-event">Plan Your Event</button>
+                <button class="btn btn-primary" id="weekly-meals">Weekly Meals</button>
             </div>
         </div>
     </section>
@@ -89,15 +89,161 @@
       </div>
     </footer>
 
-    <!-- Modal Container -->
-    <div id="modal-container" class="modal-container">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div id="modal-body"></div>
+    <!-- Just Exploring Modal -->
+    <div id="explore-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <div class="modal-header-image">
+          <img src="./SBCC-Images/fig-modal.png" alt="Fresh fig" class="feature-image">
         </div>
+        <h2>Welcome to Santa Barbara Chef Collective</h2>
+        <p class="modal-intro">Discover our curated culinary experiences, where expert chefs bring restaurant-quality dining directly to your home or event.</p>
+        <div class="accordion-container">
+          <!-- Gatherings & Celebrations Accordion -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h3>Gatherings & Celebrations</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+              <p>From intimate dinner parties to milestone celebrations, our chefs create custom menus that reflect your vision and delight your guests. We handle everything from menu planning to execution, allowing you to be fully present as a host.</p>
+              <ul>
+                <li>Dinner Parties</li>
+                <li>Special Occasions</li>
+                <li>Milestone Celebrations</li>
+                <li>Family Gatherings</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Weekly Meal Service Accordion -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h3>Weekly Meal Service</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+              <p>Elevate your everyday dining with chef-prepared meals delivered to your home. Our weekly meal service brings restaurant-quality nutrition to your family table, customized to your preferences and dietary needs.</p>
+              <ul>
+                <li>Customized Menu Planning</li>
+                <li>Fresh, Local Ingredients</li>
+                <li>Dietary Accommodations</li>
+                <li>Convenient Delivery</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Our Chefs Accordion -->
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h3>Our Chefs</h3>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+              <p>The Santa Barbara Chef Collective brings together the region's most talented culinary artists. Each chef brings their unique background, specialties, and passion to create memorable dining experiences that showcase the best of California coastal cuisine.</p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 25px; text-align: center;">
+          <button class="btn btn-primary" id="contact-us">Contact Us</button>
+        </div>
+      </div>
     </div>
-
+    <!-- Plan Your Event Modal -->
+    <div id="event-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <div class="modal-header-image">
+          <img src="./SBCC-Images/gathering-modal.jpg" alt="Outdoor dinner gathering" class="feature-image">
+        </div>
+        <h2>Plan Your Event</h2>
+        <p class="modal-intro">Tell us about your vision, and we'll match you with the perfect chef and menu for your special occasion.</p>
+        <form id="event-form">
+          <div class="form-group">
+            <label for="event-type">Event Type</label>
+            <select id="event-type" name="eventType" required>
+              <option value="">Select an event type...</option>
+              <option value="dinner-party">Dinner Party</option>
+              <option value="special-occasion">Special Occasion</option>
+              <option value="corporate">Corporate Event</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="guest-count">Number of Guests</label>
+            <input type="number" id="guest-count" name="guestCount" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="event-date">Event Date</label>
+            <input type="date" id="event-date" name="eventDate" required>
+          </div>
+          <div class="form-group">
+            <label for="event-details">Tell us more about your event</label>
+            <textarea id="event-details" name="eventDetails" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div style="margin-top: 25px; text-align: center;">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Weekly Meals Modal -->
+    <div id="meals-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <div class="modal-header-image">
+          <img src="./SBCC-Images/weekly-meal-modal.jpg" alt="Chef-prepared meals" class="feature-image">
+        </div>
+        <h2>Weekly Meal Service</h2>
+        <p class="modal-intro">Enjoy restaurant-quality meals in the comfort of your home, prepared by our expert chefs and customized to your preferences.</p>
+        <form id="meal-form">
+          <div class="form-group">
+            <label for="household-size">Household Size</label>
+            <input type="number" id="household-size" name="householdSize" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="meals-per-week">Meals Per Week</label>
+            <select id="meals-per-week" name="mealsPerWeek" required>
+              <option value="">Select frequency...</option>
+              <option value="2">2 meals per week</option>
+              <option value="3">3 meals per week</option>
+              <option value="5">5 meals per week</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dietary-preferences">Dietary Preferences (Optional)</label>
+            <textarea id="dietary-preferences" name="dietaryPreferences" rows="3" placeholder="Please note any dietary restrictions or preferences..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="meal-name">Your Name</label>
+            <input type="text" id="meal-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="meal-email">Email</label>
+            <input type="email" id="meal-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="meal-phone">Phone</label>
+            <input type="tel" id="meal-phone" name="phone">
+          </div>
+          <div style="margin-top: 25px; text-align: center;">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <script src="script.js"></script>
     <script src="airtable-integration.js"></script>
+    <script src="modal.js"></script>
 </body>
 </html>
