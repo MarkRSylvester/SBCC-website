@@ -98,6 +98,11 @@ function openModal(modal) {
   modal.style.display = 'flex';
   document.body.classList.add('modal-open');
   
+  // Initialize accordion after modal is displayed
+  setTimeout(() => {
+    initializeAccordion(modal);
+  }, 100);
+  
   // Set focus to first focusable element
   const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
   if (focusableElements.length > 0) {
@@ -170,33 +175,52 @@ function initializeFormInteractions() {
   });
 }
 
-// Accordion Menu functionality (for use in future components)
-function initializeAccordion() {
-  const accordionHeaders = document.querySelectorAll('.accordion-header');
+// Accordion Menu functionality
+function initializeAccordion(modal) {
+  // Only initialize accordions within the specified modal
+  const accordionHeaders = modal.querySelectorAll('.accordion-header');
   
   accordionHeaders.forEach(header => {
-    header.addEventListener('click', () => {
-      const accordionItem = header.parentElement;
-      const isOpen = accordionItem.classList.contains('active');
-      const content = accordionItem.querySelector('.accordion-content');
+    // Remove existing event listeners
+    const clone = header.cloneNode(true);
+    header.parentNode.replaceChild(clone, header);
+    
+    // Add new event listener
+    clone.addEventListener('click', function() {
+      const accordionItem = this.parentElement;
+      const wasOpen = accordionItem.classList.contains('open');
       
-      // Close all items
-      document.querySelectorAll('.accordion-item').forEach(item => {
-        item.classList.remove('active');
-        const otherContent = item.querySelector('.accordion-content');
-        if (otherContent) {
-          otherContent.style.maxHeight = null;
+      // Close all other accordions in this modal
+      modal.querySelectorAll('.accordion-item').forEach(item => {
+        item.classList.remove('open');
+        const header = item.querySelector('.accordion-header');
+        if (header) {
+          header.setAttribute('aria-expanded', 'false');
         }
       });
       
-      // Open the clicked item if it wasn't already open
-      if (!isOpen) {
-        accordionItem.classList.add('active');
+      // Toggle the clicked accordion
+      if (!wasOpen) {
+        accordionItem.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+        
+        // Ensure content is visible
+        const content = accordionItem.querySelector('.accordion-content');
         if (content) {
-          content.style.maxHeight = content.scrollHeight + 'px';
+          content.style.display = 'block';
+          // Force a reflow to ensure the transition works
+          content.offsetHeight;
         }
       }
+      
+      // Log for debugging
+      console.log('Accordion toggled:', this.textContent.trim(), 'Is open:', !wasOpen);
     });
+    
+    // Set initial ARIA attributes
+    clone.setAttribute('role', 'button');
+    clone.setAttribute('aria-expanded', 'false');
+    clone.setAttribute('aria-controls', 'accordion-content-' + Math.random().toString(36).substr(2, 9));
   });
 }
 

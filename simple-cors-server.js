@@ -33,7 +33,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-const PORT = 3000;
+const PORT = 9000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
     console.log('CORS enabled for all origins');

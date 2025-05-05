@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/event-planning.css">
     <link rel="stylesheet" href="css/gatherings.css">
     <link rel="stylesheet" href="css/button-styles.css">
+    <link rel="stylesheet" href="css/modal-close.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
       .site-footer {
@@ -99,7 +100,7 @@
     <!-- Just Exploring Modal -->
     <div id="explore-modal" class="modal">
       <div class="modal-content">
-        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <button class="modal-close" aria-label="Close modal"></button>
         <div class="modal-header-image">
           <img src="/SBCC-Images/fig-modal.png" alt="Fresh fig" class="feature-image">
         </div>
@@ -110,75 +111,83 @@
           <div class="accordion-item">
             <div class="accordion-header">
               <h3>Gatherings & Celebrations</h3>
-              <span class="accordion-icon">+</span>
+              <span class="accordion-arrow"></span>
             </div>
             <div class="accordion-content">
-              <p>From intimate dinner parties to milestone celebrations, our chefs create custom menus that reflect your vision and delight your guests. We handle everything from menu planning to execution, allowing you to be fully present as a host.</p>
+              <p class="section-intro">
+                From intimate dinner parties to milestone celebrations, our chefs create custom menus that reflect your vision and delight your guests.<br> We handle everything from menu planning to execution, allowing you to be fully present as a host.
+              </p>
               
-              <div class="gatherings-grid">
-                <!-- Intimate Gatherings -->
-                <div class="gathering-category">
-                  <h4>Intimate Gatherings</h4>
-                  <ul class="gathering-list">
+              <div class="category-grid">
+                <!-- Category 1: Intimate Gatherings -->
+                <div class="category-card">
+                  <h4 class="category-title">Intimate Gatherings</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
                     <li>Dinner Parties</li>
                     <li>Date Night</li>
                     <li>Anniversary Celebrations</li>
                     <li>Family Reunions</li>
                   </ul>
                 </div>
-
-                <!-- Weddings & Ceremonies -->
-                <div class="gathering-category">
-                  <h4>Weddings & Ceremonies</h4>
-                  <ul class="gathering-list">
+                
+                <!-- Category 2: Weddings & Ceremonies -->
+                <div class="category-card">
+                  <h4 class="category-title">Weddings & Ceremonies</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
                     <li>Boutique Weddings</li>
                     <li>Rehearsal Dinners</li>
                     <li>Post-Wedding Brunches</li>
                     <li>Elopement Celebrations</li>
                   </ul>
                 </div>
-
-                <!-- Special Occasions -->
-                <div class="gathering-category">
-                  <h4>Special Occasions</h4>
-                  <ul class="gathering-list">
-                    <li>Bridal Showers</li>
-                    <li>Baby Showers</li>
-                    <li>Graduation Celebrations</li>
-                    <li>Retirement Parties</li>
-                  </ul>
-                </div>
-
-                <!-- Social Events -->
-                <div class="gathering-category">
-                  <h4>Social Events</h4>
-                  <ul class="gathering-list">
+                
+                <!-- Category 3: Social Events -->
+                <div class="category-card">
+                  <h4 class="category-title">Social Events</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
                     <li>Wine Tasting Dinners</li>
                     <li>Cocktail Parties</li>
                     <li>Seasonal Harvest Dinners</li>
                     <li>Garden Parties</li>
                   </ul>
                 </div>
-
-                <!-- Milestone Celebrations -->
-                <div class="gathering-category">
-                  <h4>Milestone Celebrations</h4>
-                  <ul class="gathering-list">
+                
+                <!-- Category 4: Milestone Celebrations -->
+                <div class="category-card">
+                  <h4 class="category-title">Milestone Celebrations</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
                     <li>Milestone Birthdays</li>
                     <li>Wedding Anniversaries</li>
                     <li>New Home Celebrations</li>
                     <li>Life Achievement Recognitions</li>
                   </ul>
                 </div>
-
-                <!-- Business & Professional -->
-                <div class="gathering-category">
-                  <h4>Business & Professional</h4>
-                  <ul class="gathering-list">
-                    <li>Corporate Events</li>
-                    <li>Team Building Workshops</li>
-                    <li>Client Appreciation Dinners</li>
-                    <li>Board Meetings & Retreats</li>
+                
+                <!-- Category 5: Business & Professional -->
+                <div class="category-card">
+                  <h4 class="category-title">Business & Professional</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Business Dinners</li>
+                    <li>Client Appreciation Events</li>
+                    <li>Team Building Gatherings</li>
+                    <li>Corporate Retreats</li>
+                  </ul>
+                </div>
+                
+                <!-- Category 6: Holiday Celebrations -->
+                <div class="category-card">
+                  <h4 class="category-title">Holiday Celebrations</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Holiday Dinners</li>
+                    <li>Seasonal Gatherings</li>
+                    <li>New Year's Celebrations</li>
+                    <li>Special Holiday Events</li>
                   </ul>
                 </div>
               </div>
@@ -188,7 +197,7 @@
           <div class="accordion-item">
             <div class="accordion-header">
               <h3>Weekly Meal Service</h3>
-              <span class="accordion-icon">+</span>
+              <span class="accordion-arrow"></span>
             </div>
             <div class="accordion-content">
               <p>Elevate your everyday dining with chef-prepared meals delivered to your home. Our weekly meal service brings restaurant-quality nutrition to your family table, customized to your preferences and dietary needs.</p>
@@ -204,7 +213,7 @@
           <div class="accordion-item">
             <div class="accordion-header">
               <h3>Our Chefs</h3>
-              <span class="accordion-icon">+</span>
+              <span class="accordion-arrow"></span>
             </div>
             <div class="accordion-content">
               <p>The Santa Barbara Chef Collective brings together the region's most talented culinary artists. Each chef brings their unique background, specialties, and passion to create memorable dining experiences that showcase the best of California coastal cuisine.</p>
@@ -219,7 +228,7 @@
     <!-- Plan Your Event Modal -->
     <div id="event-modal" class="modal">
       <div class="modal-content">
-        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <button class="modal-close" aria-label="Close modal"></button>
         <div class="modal-header-image">
           <img src="/SBCC-Images/gathering-modal.jpg" alt="Outdoor dinner gathering" class="feature-image">
         </div>
@@ -269,7 +278,7 @@
     <!-- Weekly Meals Modal -->
     <div id="weekly-meals-modal" class="modal">
       <div class="modal-content">
-        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <button class="modal-close" aria-label="Close modal"></button>
         <div class="modal-header-image">
           <img src="/SBCC-Images/weekly-meal-modal.jpg" alt="Chef-prepared meals" class="feature-image">
         </div>

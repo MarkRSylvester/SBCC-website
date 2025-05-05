@@ -461,7 +461,7 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
+  padding: 8px 0;
   cursor: pointer;
 }
 
@@ -473,12 +473,20 @@ header .container {
 }
 
 .accordion-icon {
-  font-size: 24px;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+  color: #3E78B2;
+}
+
+.accordion-icon::before {
+  content: '<';
+  display: inline-block;
+  transform: rotate(-90deg);
   transition: transform 0.3s ease;
 }
 
-.accordion-item.active .accordion-icon {
-  transform: rotate(45deg);
+.accordion-item.active .accordion-icon::before {
+  transform: rotate(90deg);
 }
 
 .accordion-content {
@@ -490,5 +498,5 @@ header .container {
 
 .accordion-item.active .accordion-content {
   padding: 0 0 20px 0;
-  max-height: 500px;
+  max-height: 2000px;
 }
