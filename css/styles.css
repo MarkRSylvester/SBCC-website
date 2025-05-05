@@ -115,13 +115,16 @@ header .container {
 
 /* Hero Section */
 .hero {
-    background-image: url('SBCC-Images/coastal-morning.jpg');
+    background-image: url('/SBCC-Images/coastal-morning.jpg');
     background-size: cover;
     background-position: center;
     color: var(--white);
     text-align: center;
-    padding: 100px 0;
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
     position: relative;
+    padding: 60px 0 60px;
 }
 
 .hero::before {
@@ -131,25 +134,36 @@ header .container {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.25); /* Lighter overlay */
+    background-color: rgba(0, 0, 0, 0.25);
     z-index: 1;
 }
 
 .hero .container {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding-bottom: 0;
+    margin-top: 40px;
 }
 
 .hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px; /* Tighter spacing */
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    margin-bottom: 1rem;
     font-family: 'Playfair Display', serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero-tagline {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    margin-bottom: 2rem;
     font-family: 'Inter', sans-serif;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Button container */
@@ -158,7 +172,9 @@ header .container {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin-top: 30px;
+    margin-top: 2rem;
+    padding: 0 20px;
+    margin-bottom: 0;
 }
 
 /* Make ALL buttons terra cotta/coral colored */
@@ -167,19 +183,20 @@ header .container {
 .cta-buttons .cta-button,
 .cta-button.tertiary,
 .btn-primary {
-  background-color: #ff9980 !important; /* Terra-cotta/coral color */
-  color: white !important;
-  border: 1px solid #ff9980 !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  padding: 12px 24px !important;
-  border-radius: 4px !important;
-  text-decoration: none !important;
-  min-width: 180px !important;
-  text-align: center !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
+    background-color: #ff9980 !important;
+    color: white !important;
+    border: 1px solid #ff9980 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: clamp(14px, 2vw, 16px) !important;
+    padding: 12px 24px !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    min-width: min(180px, 90vw) !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin: 0 !important;
 }
 
 .cta-buttons button:hover,
@@ -187,10 +204,10 @@ header .container {
 .cta-buttons .cta-button:hover,
 .cta-button.tertiary:hover,
 .btn-primary:hover {
-  background-color: #ff8266 !important; /* Slightly darker on hover */
-  border-color: #ff8266 !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    background-color: #ff8266 !important;
+    border-color: #ff8266 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Welcome Section */
@@ -223,50 +240,6 @@ header .container {
 .welcome p {
     max-width: 800px;
     margin: 0 auto;
-}
-
-/* Modal Styles */
-.modal-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
-    overflow-y: auto;
-}
-
-.modal-content {
-    position: relative;
-    background-color: var(--white);
-    margin: 5% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 800px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-out;
-}
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    color: var(--black);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-modal:hover {
-    color: var(--terra-cotta);
-}
-
-#modal-body {
-    margin-top: 20px;
 }
 
 /* Loading Spinner */
@@ -380,25 +353,39 @@ header .container {
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
+    .hero {
+        min-height: 25vh;
+        padding: 30px 0 30px;
+    }
+    
+    .hero .container {
+        margin-top: 10px;
+        gap: 1rem;
+    }
+    
     .hero h2 {
-        font-size: 2rem;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-tagline {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        margin-bottom: 1.5rem;
     }
     
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+        margin-top: 1.5rem;
+        margin-bottom: 0;
     }
     
-    .btn, 
-    .cta-button {
+    .cta-buttons button,
+    .cta-buttons .btn,
+    .cta-buttons .cta-button {
         width: 100%;
-        max-width: 300px;
-        margin-bottom: 10px;
-    }
-    
-    .modal-content {
-        width: 95%;
-        margin: 10% auto;
+        max-width: 250px;
+        margin-bottom: 10px !important;
     }
 }
 
@@ -460,88 +447,6 @@ header .container {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Modal Base Styling */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.modal.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  background-color: white;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 30px;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transform: scale(0.95);
-  transition: transform 0.3s ease;
-}
-
-.modal.active .modal-content {
-  transform: scale(1);
-}
-
-.modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 28px;
-  font-weight: 700;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  padding: 0;
-  line-height: 1;
-}
-
-.modal-close:hover {
-  color: #ff9980;
-}
-
-.modal-header-image {
-  margin: -30px -30px 20px -30px;
-  height: 200px;
-  overflow: hidden;
-}
-
-.modal-header-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.modal h2 {
-  font-family: 'Playfair Display', serif;
-  color: #4A5D23;
-  margin-bottom: 15px;
-}
-
-.modal-intro {
-  margin-bottom: 25px;
-  color: #333;
-  line-height: 1.6;
-}
-
 /* Accordion Styling */
 .accordion-container {
   margin-top: 20px;
@@ -586,9 +491,4 @@ header .container {
 .accordion-item.active .accordion-content {
   padding: 0 0 20px 0;
   max-height: 500px;
-}
-
-/* Prevent body scrolling when modal is open */
-body.modal-open {
-  overflow: hidden;
 }

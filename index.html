@@ -7,7 +7,11 @@
     <meta name="theme-color" content="#3E78B2">
     <title>Santa Barbara Chef Collective</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modal-styles.css">
+    <link rel="stylesheet" href="css/event-planning.css">
+    <link rel="stylesheet" href="css/gatherings.css">
+    <link rel="stylesheet" href="css/button-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
       .site-footer {
@@ -36,7 +40,7 @@
     <header>
         <div class="container">
             <div class="logo-container">
-                <img src="SBCC-Images/Light-SBCC-logo.png" alt="SBCC Logo" class="logo">
+                <img src="/SBCC-Images/Light-SBCC-logo.png" alt="SBCC Logo" class="logo">
                 <div class="brand-container">
                     <h1 class="brand">Santa Barbara Chef Collective</h1>
                     <p class="tagline">Private Chefs for Extraordinary Experiences</p>
@@ -50,14 +54,17 @@
         </div>
     </header>
 
-    <section class="hero" style="height: 50vh;">
+    <section class="hero">
         <div class="container">
             <h2>Elevate Your Next Event with a Private Chef</h2>
-            <p class="hero-tagline" style="margin-bottom: 200px;">Your story, your gathering, your flavors. Crafted for those who crave an unforgettable memory.</p>
+            <p class="hero-tagline">
+                <span class="tagline-top">Your story, your gathering, your flavors.</span>
+                <span class="tagline-bottom">Crafted for those who crave an unforgettable memory.</span>
+            </p>
             <div class="cta-buttons">
                 <button class="cta-button tertiary" data-modal="explore-modal">Just Exploring</button>
-                <button class="btn btn-primary" id="plan-event">Plan Your Event</button>
-                <button class="btn btn-primary" id="weekly-meals">Weekly Meals</button>
+                <button class="btn btn-primary" data-modal="event-modal">Plan Your Event</button>
+                <button class="btn btn-primary" data-modal="weekly-meals-modal">Weekly Meals</button>
             </div>
         </div>
     </section>
@@ -68,10 +75,10 @@
         <div style="margin-bottom: 20px;"><a href="mailto:info@sbchefcollective.com" style="color: white; text-decoration: none;">info@sbchefcollective.com</a></div>
         <div style="display: flex; justify-content: center; gap: 25px; margin: 0 auto; width: fit-content;">
           <a href="https://www.instagram.com/sbchefcollective" style="display: inline-block;">
-            <img src="SBCC-Images/white-instagram-icon.png" alt="Instagram" style="width: 25px; height: 25px;">
+            <img src="/SBCC-Images/white-instagram-icon.png" alt="Instagram" style="width: 25px; height: 25px;">
           </a>
           <a href="https://www.yelp.com/biz/santa-barbara-chef-collective-santa-barbara" style="display: inline-block;">
-            <img src="SBCC-Images/light-yelp-logo.png" alt="Yelp" style="width: 25px; height: 25px;">
+            <img src="/SBCC-Images/light-yelp-logo.png" alt="Yelp" style="width: 25px; height: 25px;">
           </a>
         </div>
       </div>
@@ -94,7 +101,7 @@
       <div class="modal-content">
         <button class="modal-close" aria-label="Close modal">&times;</button>
         <div class="modal-header-image">
-          <img src="./SBCC-Images/fig-modal.png" alt="Fresh fig" class="feature-image">
+          <img src="/SBCC-Images/fig-modal.png" alt="Fresh fig" class="feature-image">
         </div>
         <h2>Welcome to Santa Barbara Chef Collective</h2>
         <p class="modal-intro">Discover our curated culinary experiences, where expert chefs bring restaurant-quality dining directly to your home or event.</p>
@@ -107,12 +114,74 @@
             </div>
             <div class="accordion-content">
               <p>From intimate dinner parties to milestone celebrations, our chefs create custom menus that reflect your vision and delight your guests. We handle everything from menu planning to execution, allowing you to be fully present as a host.</p>
-              <ul>
-                <li>Dinner Parties</li>
-                <li>Special Occasions</li>
-                <li>Milestone Celebrations</li>
-                <li>Family Gatherings</li>
-              </ul>
+              
+              <div class="gatherings-grid">
+                <!-- Intimate Gatherings -->
+                <div class="gathering-category">
+                  <h4>Intimate Gatherings</h4>
+                  <ul class="gathering-list">
+                    <li>Dinner Parties</li>
+                    <li>Date Night</li>
+                    <li>Anniversary Celebrations</li>
+                    <li>Family Reunions</li>
+                  </ul>
+                </div>
+
+                <!-- Weddings & Ceremonies -->
+                <div class="gathering-category">
+                  <h4>Weddings & Ceremonies</h4>
+                  <ul class="gathering-list">
+                    <li>Boutique Weddings</li>
+                    <li>Rehearsal Dinners</li>
+                    <li>Post-Wedding Brunches</li>
+                    <li>Elopement Celebrations</li>
+                  </ul>
+                </div>
+
+                <!-- Special Occasions -->
+                <div class="gathering-category">
+                  <h4>Special Occasions</h4>
+                  <ul class="gathering-list">
+                    <li>Bridal Showers</li>
+                    <li>Baby Showers</li>
+                    <li>Graduation Celebrations</li>
+                    <li>Retirement Parties</li>
+                  </ul>
+                </div>
+
+                <!-- Social Events -->
+                <div class="gathering-category">
+                  <h4>Social Events</h4>
+                  <ul class="gathering-list">
+                    <li>Wine Tasting Dinners</li>
+                    <li>Cocktail Parties</li>
+                    <li>Seasonal Harvest Dinners</li>
+                    <li>Garden Parties</li>
+                  </ul>
+                </div>
+
+                <!-- Milestone Celebrations -->
+                <div class="gathering-category">
+                  <h4>Milestone Celebrations</h4>
+                  <ul class="gathering-list">
+                    <li>Milestone Birthdays</li>
+                    <li>Wedding Anniversaries</li>
+                    <li>New Home Celebrations</li>
+                    <li>Life Achievement Recognitions</li>
+                  </ul>
+                </div>
+
+                <!-- Business & Professional -->
+                <div class="gathering-category">
+                  <h4>Business & Professional</h4>
+                  <ul class="gathering-list">
+                    <li>Corporate Events</li>
+                    <li>Team Building Workshops</li>
+                    <li>Client Appreciation Dinners</li>
+                    <li>Board Meetings & Retreats</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           <!-- Weekly Meal Service Accordion -->
@@ -152,7 +221,7 @@
       <div class="modal-content">
         <button class="modal-close" aria-label="Close modal">&times;</button>
         <div class="modal-header-image">
-          <img src="./SBCC-Images/gathering-modal.jpg" alt="Outdoor dinner gathering" class="feature-image">
+          <img src="/SBCC-Images/gathering-modal.jpg" alt="Outdoor dinner gathering" class="feature-image">
         </div>
         <h2>Plan Your Event</h2>
         <p class="modal-intro">Tell us about your vision, and we'll match you with the perfect chef and menu for your special occasion.</p>
@@ -198,11 +267,11 @@
       </div>
     </div>
     <!-- Weekly Meals Modal -->
-    <div id="meals-modal" class="modal">
+    <div id="weekly-meals-modal" class="modal">
       <div class="modal-content">
         <button class="modal-close" aria-label="Close modal">&times;</button>
         <div class="modal-header-image">
-          <img src="./SBCC-Images/weekly-meal-modal.jpg" alt="Chef-prepared meals" class="feature-image">
+          <img src="/SBCC-Images/weekly-meal-modal.jpg" alt="Chef-prepared meals" class="feature-image">
         </div>
         <h2>Weekly Meal Service</h2>
         <p class="modal-intro">Enjoy restaurant-quality meals in the comfort of your home, prepared by our expert chefs and customized to your preferences.</p>
@@ -242,8 +311,6 @@
         </form>
       </div>
     </div>
-    <script src="script.js"></script>
-    <script src="airtable-integration.js"></script>
-    <script src="modal.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

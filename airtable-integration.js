@@ -3,16 +3,35 @@
  * This file contains functions to interact with Airtable API
  */
 
+// Debug mode to help with testing
+const DEBUG_MODE = true;
+
 // Airtable API Configuration
 const AIRTABLE_CONFIG = {
-    apiKey: 'YOUR_AIRTABLE_API_KEY', // Replace with your actual API key
-    baseId: 'YOUR_AIRTABLE_BASE_ID', // Replace with your actual base ID
+    apiKey: 'patB9mf7fYhSz3PE1.82f3cb61bbb77745b641292d1ebcdc114b585d7cdce8306299a719c12ee829ac',
+    baseId: 'appOWFyYIGbLoKalt',
     tables: {
         chefs: 'Chefs',
         menus: 'Menus',
         faq: 'FAQ',
         contact: 'Contact Submissions'
+    },
+    rateLimit: {
+        requestsPerSecond: 1,     // Reduced to 1 request per second
+        lastRequest: 0,
+        minInterval: 1000,        // 1000ms between requests
+        backoffMultiplier: 2,     // Increased backoff
+        maxRetries: 2,           // Reduced retries
+        burstLimit: 2,           // Reduced burst limit
+        burstInterval: 60000     // Reset burst window every minute
     }
+};
+
+// Enhanced cache configuration with longer durations
+const CACHE_CONFIG = {
+    expiration: 24 * 60 * 60 * 1000,  // 24 hours default
+    shortExpiration: 12 * 60 * 60 * 1000,  // 12 hours for frequently changing data
+    longExpiration: 7 * 24 * 60 * 60 * 1000   // 7 days for static data
 };
 
 // Cache for storing fetched data
@@ -20,108 +39,268 @@ const dataCache = {
     chefs: null,
     menus: null,
     faq: null,
-    lastUpdated: {}
+    lastUpdated: {},
+    pendingRequests: {}
 };
 
-// Cache expiration time in milliseconds (5 minutes)
-const CACHE_EXPIRATION = 5 * 60 * 1000;
+// Request burst tracking with reduced frequency
+let requestBurst = {
+    count: 0,
+    lastReset: Date.now(),
+    maxRequests: 3 // Reduced from 5
+};
 
-/**
- * Generic function to fetch data from Airtable
- * @param {string} tableName - Name of the Airtable table
- * @param {string} view - View name (optional)
- * @param {Array} fields - Fields to fetch (optional)
- * @returns {Promise} - Promise with the fetched data
- */
-async function fetchFromAirtable(tableName, view = 'Grid view', fields = []) {
-    try {
-        // Check if we have cached data that's still valid
-        if (dataCache[tableName] && 
-            dataCache.lastUpdated[tableName] && 
-            (Date.now() - dataCache.lastUpdated[tableName] < CACHE_EXPIRATION)) {
-            console.log(`Using cached data for ${tableName}`);
-            return dataCache[tableName];
+// Queue for managing API requests
+const requestQueue = [];
+let isProcessingQueue = false;
+
+// Debug logging function
+function debugLog(message, data = null) {
+    if (DEBUG_MODE) {
+        console.log(`[Airtable Debug] ${message}`);
+        if (data) {
+            console.log(data);
         }
-
-        // Show loading state
-        const modalBody = document.getElementById('modal-body');
-        if (modalBody) {
-            modalBody.innerHTML = '<div class="loading-spinner"></div>';
-        }
-
-        // Construct the API URL
-        const baseUrl = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tables[tableName]}`;
-        let url = baseUrl;
-        
-        // Add view parameter if provided
-        if (view) {
-            url += `?view=${encodeURIComponent(view)}`;
-        }
-        
-        // Add fields parameter if provided
-        if (fields.length > 0) {
-            const separator = url.includes('?') ? '&' : '?';
-            url += `${separator}fields=${fields.map(field => encodeURIComponent(field)).join(',')}`;
-        }
-
-        // Fetch data from Airtable
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        // Check if the response is successful
-        if (!response.ok) {
-            throw new Error(`Airtable API error: ${response.status} ${response.statusText}`);
-        }
-
-        // Parse the response
-        const data = await response.json();
-        
-        // Cache the data
-        dataCache[tableName] = data;
-        dataCache.lastUpdated[tableName] = Date.now();
-        
-        return data;
-    } catch (error) {
-        console.error(`Error fetching data from Airtable (${tableName}):`, error);
-        throw error;
     }
+}
+
+// Add request to queue with deduplication
+async function queueRequest(request, cacheKey) {
+    // Check if there's already a pending request for this cache key
+    if (cacheKey && dataCache.pendingRequests[cacheKey]) {
+        return dataCache.pendingRequests[cacheKey];
+    }
+
+    const promise = new Promise((resolve, reject) => {
+        requestQueue.push({ request, resolve, reject, cacheKey });
+        if (cacheKey) {
+            dataCache.pendingRequests[cacheKey] = promise;
+        }
+        processQueue();
+    });
+
+    return promise;
+}
+
+// Process queue with improved batching
+async function processQueue() {
+    if (isProcessingQueue || requestQueue.length === 0) return;
+    isProcessingQueue = true;
+
+    try {
+        // Process requests in smaller batches
+        const batchSize = 2; // Process 2 requests at a time
+        while (requestQueue.length > 0 && canProcessRequest()) {
+            const batch = requestQueue.splice(0, batchSize);
+            
+            await Promise.all(batch.map(async ({ request, resolve, reject, cacheKey }) => {
+                try {
+                    const result = await request();
+                    resolve(result);
+                    requestBurst.count++;
+                    
+                    // Clear pending request tracker
+                    if (cacheKey) {
+                        delete dataCache.pendingRequests[cacheKey];
+                    }
+                } catch (error) {
+                    if (error.status === 429) {
+                        requestQueue.unshift({ request, resolve, reject, cacheKey });
+                        await handleRateLimit();
+                    } else {
+                        reject(error);
+                        if (cacheKey) {
+                            delete dataCache.pendingRequests[cacheKey];
+                        }
+                    }
+                }
+            }));
+
+            // Add delay between batches
+            if (requestQueue.length > 0) {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // 1 second delay between batches
+            }
+        }
+    } catch (error) {
+        console.error('Error processing queue:', error);
+    } finally {
+        isProcessingQueue = false;
+        if (requestQueue.length > 0) {
+            setTimeout(processQueue, AIRTABLE_CONFIG.rateLimit.minInterval);
+        }
+    }
+}
+
+// Check if we can process more requests
+function canProcessRequest() {
+    const now = Date.now();
+    
+    // Reset burst counter if window has passed
+    if (now - requestBurst.lastReset >= AIRTABLE_CONFIG.rateLimit.burstInterval) {
+        requestBurst.count = 0;
+        requestBurst.lastReset = now;
+    }
+
+    return requestBurst.count < AIRTABLE_CONFIG.rateLimit.burstLimit;
+}
+
+// Handle rate limit errors
+async function handleRateLimit() {
+    const backoffTime = AIRTABLE_CONFIG.rateLimit.minInterval * 2;
+    console.warn(`Rate limit hit, backing off for ${backoffTime}ms`);
+    await new Promise(resolve => setTimeout(resolve, backoffTime));
+    requestBurst.count = 0; // Reset burst counter
+}
+
+// Enhanced cache management
+function getCacheExpiration(tableName) {
+    switch (tableName) {
+        case 'chefs':
+        case 'menus':
+            return CACHE_CONFIG.shortExpiration;
+        case 'faq':
+            return CACHE_CONFIG.longExpiration;
+        default:
+            return CACHE_CONFIG.expiration;
+    }
+}
+
+// Modified fetchFromAirtable function with debug logging
+async function fetchFromAirtable(tableName, view = 'Grid view', fields = []) {
+    const cacheKey = `${tableName}-${view}-${fields.join(',')}`;
+    debugLog(`Attempting to fetch from table: ${tableName}`);
+    
+    // Check cache first
+    const now = Date.now();
+    const cacheExpiration = getCacheExpiration(tableName);
+    
+    if (dataCache[tableName] && dataCache.lastUpdated[tableName] && 
+        (now - dataCache.lastUpdated[tableName] < cacheExpiration)) {
+        debugLog(`Using cached data for ${tableName}`);
+        return dataCache[tableName];
+    }
+
+    debugLog(`Cache miss for ${tableName}, fetching from Airtable`);
+
+    return queueRequest(async () => {
+        try {
+            const baseUrl = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${encodeURIComponent(AIRTABLE_CONFIG.tables[tableName])}`;
+            const params = new URLSearchParams();
+            if (view) params.append('view', view);
+            if (fields && fields.length > 0) {
+                fields.forEach(field => params.append('fields[]', field));
+            }
+            
+            const url = `${baseUrl}?${params.toString()}`;
+            debugLog(`Making API request to: ${url}`);
+            
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                debugLog(`API Error Response:`, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    errorText: errorText
+                });
+                throw new Error(`Airtable API error: ${response.status} ${response.statusText} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            debugLog(`Successful response for ${tableName}`, {
+                recordCount: data.records ? data.records.length : 0
+            });
+            
+            // Update cache
+            dataCache[tableName] = data;
+            dataCache.lastUpdated[tableName] = now;
+            
+            return data;
+        } catch (error) {
+            debugLog(`Error in fetchFromAirtable:`, error);
+            throw error;
+        }
+    }, cacheKey);
 }
 
 /**
  * Fetch chef profiles from Airtable
  * @returns {Promise} - Promise with the chef profiles
  */
-async function fetchChefProfiles() {
+window.fetchChefProfiles = async function() {
     try {
+        console.log('Fetching chef profiles...');
         const data = await fetchFromAirtable('chefs', 'Grid view', [
-            'Name', 'Bio', 'Specialties', 'Image', 'Experience', 'Contact'
+            'Name',
+            'Specialty',
+            'Bio',
+            'Image',
+            'Status'
         ]);
-        return data;
+
+        if (!data.records || data.records.length === 0) {
+            console.warn('No chef records found');
+            return [];
+        }
+
+        return data.records
+            .filter(record => record.fields && record.fields['Status'] !== 'inactive')
+            .map(record => ({
+                id: record.id,
+                name: record.fields['Name'] || 'Unnamed Chef',
+                specialty: record.fields['Specialty'] || '',
+                bio: record.fields['Bio'] || '',
+                image: record.fields['Image'] ? record.fields['Image'][0].url : null,
+                status: record.fields['Status'] || 'active'
+            }));
     } catch (error) {
-        console.error('Error fetching chef profiles:', error);
-        throw error;
+        console.error('Error in fetchChefProfiles:', error);
+        return [];
     }
-}
+};
 
 /**
  * Fetch menu data from Airtable
  * @returns {Promise} - Promise with the menu data
  */
-async function fetchMenuData() {
+window.fetchMenuData = async function() {
     try {
+        console.log('Fetching menu data...');
         const data = await fetchFromAirtable('menus', 'Grid view', [
-            'Name', 'Description', 'Categories', 'Price Range', 'Image'
+            'Menu Number',
+            'Menu Name',
+            'Menu Description',
+            'Menu Type',
+            'Menu Color',
+            'Status'
         ]);
-        return data;
+
+        if (!data.records || data.records.length === 0) {
+            console.warn('No menu records found');
+            return [];
+        }
+
+        return data.records
+            .filter(record => record.fields && record.fields['Status'] !== 'inactive')
+            .map(record => ({
+                id: record.id,
+                name: record.fields['Menu Name'] || 'Untitled Menu',
+                description: record.fields['Menu Description'] || '',
+                type: record.fields['Menu Type'] || '',
+                color: record.fields['Menu Color'] || '',
+                menuNumber: record.fields['Menu Number'] || ''
+            }));
     } catch (error) {
-        console.error('Error fetching menu data:', error);
-        throw error;
+        console.error('Error in fetchMenuData:', error);
+        return [];
     }
-}
+};
 
 /**
  * Fetch FAQ content from Airtable
@@ -207,20 +386,21 @@ async function loadChefProfiles() {
             
             data.records.forEach(record => {
                 const fields = record.fields;
-                const name = fields.Name || 'Chef';
-                const bio = fields.Bio || 'No bio available';
-                const specialties = fields.Specialties || [];
-                const imageUrl = fields.Image && fields.Image[0] ? fields.Image[0].url : '';
-                
+                const name = fields['Name'] || 'Chef';
+                const bio = fields['Bio'] || 'No description available';
+                const style = fields['Specialty'] || '';
+                const photoUrl = fields['Image'] && Array.isArray(fields['Image']) && fields['Image'].length > 0 ? fields['Image'][0].url : './SBCC-Images/saucing-salmon.jpg';
+                // Fallback placeholder
+                const placeholder = './SBCC-Images/saucing-salmon.jpg';
                 html += `
                     <div class="chef-card">
                         <div class="chef-image">
-                            <img src="${imageUrl}" alt="${name}">
+                            <img src="${photoUrl || placeholder}" alt="${name}" onerror="this.src='${placeholder}'">
                         </div>
                         <div class="chef-info">
                             <h3>${name}</h3>
                             <p>${bio}</p>
-                            ${specialties.length > 0 ? `<p><strong>Specialties:</strong> ${specialties.join(', ')}</p>` : ''}
+                            ${style ? `<p class='chef-style'><strong>Style:</strong> ${style}</p>` : ''}
                         </div>
                     </div>
                 `;
@@ -353,33 +533,95 @@ function loadWeeklyMealsInfo() {
     if (!modalBody) return;
     
     const html = `
-        <h2>Weekly Meals</h2>
-        <p>Our weekly meal service provides delicious, chef-prepared meals delivered to your door.</p>
-        <div class="info-section">
-            <h3>How It Works</h3>
-            <ol>
-                <li>Choose your meal plan (3, 5, or 7 meals per week)</li>
-                <li>Select from our rotating menu of chef-curated dishes</li>
-                <li>Receive your meals fresh and ready to heat</li>
-                <li>Enjoy restaurant-quality food in the comfort of your home</li>
-            </ol>
+        <h2>Signature Meal Program</h2>
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header" aria-expanded="false">
+                    <h3>Program Overview</h3>
+                    <span class="accordion-arrow"></span>
         </div>
-        <div class="info-section">
-            <h3>Benefits</h3>
-            <ul>
-                <li>Save time on meal planning and preparation</li>
-                <li>Enjoy healthy, balanced meals</li>
-                <li>Support local chefs and sustainable ingredients</li>
-                <li>Flexible subscription options</li>
+                <div class="accordion-content">
+                    <p class="program-description">Transform your everyday dining with chef-crafted meals delivered to your home on a schedule that suits your lifestyle. Our Signature Meal Program brings the expertise of Santa Barbara's finest culinary artists to your family table without the planning, shopping, or preparation.</p>
+                    
+                    <div class="program-features">
+                        <div class="feature">
+                            <h4>Personalized Menus</h4>
+                            <p>Tailored to your household's preferences, dietary needs, and schedule.</p>
+                        </div>
+                        
+                        <div class="feature">
+                            <h4>Seasonal Ingredients</h4>
+                            <p>Fresh, locally-sourced produce and premium ingredients that change with the seasons.</p>
+                        </div>
+                        
+                        <div class="feature">
+                            <h4>Flexible Scheduling</h4>
+                            <p>Choose from 2, 3, or 5 meals per week with easy adjustments as your needs change.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" aria-expanded="false">
+                    <h3>Dietary Options</h3>
+                    <span class="accordion-arrow"></span>
+                </div>
+                <div class="accordion-content">
+                    <div class="dietary-options">
+                        <h4>Accommodating Your Dietary Preferences</h4>
+                        <p>Our chefs are skilled in preparing delicious meals for various dietary needs, including:</p>
+                        <ul class="diet-list">
+                            <li><span class="diet-tag">Gluten-Free</span></li>
+                            <li><span class="diet-tag">Dairy-Free</span></li>
+                            <li><span class="diet-tag">Vegan</span></li>
+                            <li><span class="diet-tag">Vegetarian</span></li>
+                            <li><span class="diet-tag">Paleo</span></li>
+                            <li><span class="diet-tag">Keto</span></li>
+                            <li><span class="diet-tag">Low-FODMAP</span></li>
+                            <li><span class="diet-tag">Mediterranean</span></li>
             </ul>
+                        <p class="diet-note">Each dish is clearly labeled with allergens and dietary compliance for your peace of mind.</p>
         </div>
-        <div class="cta-section">
-            <p>Ready to elevate your weekly meals?</p>
-            <button class="btn" onclick="openModal('contact')">Get Started</button>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" aria-expanded="false">
+                    <h3>How It Works</h3>
+                    <span class="accordion-arrow"></span>
+                </div>
+                <div class="accordion-content">
+                    <p class="program-note">Each meal arrives ready to heat and serve, with chef's notes on presentation and optional finishing touches.</p>
+                    <div class="program-steps">
+                        <div class="step">
+                            <h4>1. Design Your Program</h4>
+                            <p>Choose your meal frequency, dietary preferences, and portion sizes.</p>
+                        </div>
+                        <div class="step">
+                            <h4>2. Weekly Menu Selection</h4>
+                            <p>Review and customize your upcoming meals from our seasonal offerings.</p>
+                        </div>
+                        <div class="step">
+                            <h4>3. Convenient Delivery</h4>
+                            <p>Receive your chef-prepared meals on your scheduled delivery day.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="program-cta">
+            <button class="cta-button secondary" data-modal="meal-program">Design Your Program</button>
         </div>
     `;
     
     modalBody.innerHTML = html;
+    
+    // Initialize accordions after content is loaded
+    if (typeof reinitializeAccordions === 'function') {
+        reinitializeAccordions();
+    }
 }
 
 /**
@@ -387,56 +629,91 @@ function loadWeeklyMealsInfo() {
  */
 async function loadMenuData() {
     try {
-        const modalBody = document.getElementById('modal-body');
-        if (!modalBody) return;
+        // First find the Our Menus section
+        const menuAccordion = Array.from(document.querySelectorAll('#explore-modal .accordion-item'))
+            .find(item => item.querySelector('h3')?.textContent.includes('Our Menus'));
         
-        // Show loading spinner
-        modalBody.innerHTML = '<div class="loading-spinner"></div>';
+        if (!menuAccordion) {
+            console.warn('Menu accordion section not found');
+            return;
+        }
+
+        const menuContent = menuAccordion.querySelector('.accordion-content');
+        if (!menuContent) {
+            console.warn('Menu content area not found');
+            return;
+        }
+
+        menuContent.innerHTML = '<div class="loading-indicator">Loading menu information...</div>';
         
-        // Fetch menu data
-        const data = await fetchMenuData();
-        
-        // Generate HTML for menu data
-        let html = '<h2>Our Menus</h2>';
-        
-        if (data.records && data.records.length > 0) {
-            html += '<div class="menus-grid">';
-            
-            data.records.forEach(record => {
-                const fields = record.fields;
-                const name = fields.Name || 'Menu';
-                const description = fields.Description || 'No description available';
-                const categories = fields.Categories || [];
-                const priceRange = fields['Price Range'] || 'Price varies';
-                const imageUrl = fields.Image && fields.Image[0] ? fields.Image[0].url : '';
-                
-                html += `
-                    <div class="menu-card">
-                        <div class="menu-image">
-                            <img src="${imageUrl}" alt="${name}">
+        const menuData = await fetchMenuData();
+        console.log('Received menu data:', menuData);
+
+        if (!menuData || menuData.length === 0) {
+            menuContent.innerHTML = '<p>No menu information available at this time.</p>';
+            return;
+        }
+
+        // Start with the intro text
+        let html = `
+            <div class="section-intro">
+                <p>Experience our diverse range of house menus, crafted with seasonal ingredients and inspired by global cuisines.</p>
                         </div>
+            <div class="menus-grid">
+        `;
+
+        // Add each menu
+        for (const menu of menuData) {
+            if (menu.name) {
+                html += `
+                    <div class="menu-item" data-menu-number="${menu.id}">
                         <div class="menu-info">
-                            <h3>${name}</h3>
-                            <p>${description}</p>
-                            ${categories.length > 0 ? `<p><strong>Categories:</strong> ${categories.join(', ')}</p>` : ''}
-                            <p><strong>Price Range:</strong> ${priceRange}</p>
+                            <h4>${menu.name}</h4>
+                            ${menu.description ? `<p class="menu-description">${menu.description}</p>` : ''}
+                            
+                            <div class="menu-dishes">
+                                ${Object.entries(menu.dishes).map(([courseType, dishes]) => `
+                                    <div class="course-section">
+                                        <h5>${courseType}</h5>
+                                        <ul class="dish-list">
+                                            ${dishes.map(dish => `
+                                                <li class="dish-item">
+                                                    <div class="dish-header">
+                                                        <span class="dish-name">${dish.name}</span>
+                                                        ${dish.price ? `<span class="dish-price">${dish.price}</span>` : ''}
+                                                    </div>
+                                                    ${dish.description ? `<p class="dish-description">${dish.description}</p>` : ''}
+                                                    ${dish.dietaryNotes ? `<span class="dietary-notes">${dish.dietaryNotes}</span>` : ''}
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
                     </div>
                 `;
-            });
-            
-            html += '</div>';
-        } else {
-            html += '<p>No menu data available at this time.</p>';
+            }
         }
-        
-        // Update modal content
-        modalBody.innerHTML = html;
+
+        html += '</div>'; // Close menus-grid
+        menuContent.innerHTML = html;
+
+        // Make sure the accordion is open and stays open
+        const header = menuAccordion.querySelector('.accordion-header');
+        if (header) {
+            header.setAttribute('aria-expanded', 'true');
+            menuContent.style.display = 'block';
+            menuContent.style.maxHeight = 'none';
+            menuContent.style.opacity = '1';
+            menuAccordion.classList.add('active');
+        }
+
     } catch (error) {
-        console.error('Error loading menu data:', error);
-        const modalBody = document.getElementById('modal-body');
-        if (modalBody) {
-            modalBody.innerHTML = '<h2>Error</h2><p>Failed to load menu data. Please try again later.</p>';
+        console.error('Error displaying menu data:', error);
+        const menuContent = document.querySelector('#explore-modal .accordion-content');
+        if (menuContent) {
+            menuContent.innerHTML = '<p>Unable to load menu information. Please try again later.</p>';
         }
     }
 }
@@ -683,7 +960,389 @@ function loadContactForm() {
     }
 }
 
-// Initialize the Airtable integration
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Airtable integration initialized');
-}); 
+// Function to fetch all menus from Airtable
+function fetchMenus() {
+  return new Promise((resolve, reject) => {
+    const menus = [];
+    
+    fetch(`https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tables.menus}`, {
+      headers: {
+        'Authorization': `Bearer ${AIRTABLE_CONFIG.apiKey}`
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Airtable API error: ${response.status} ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        data.records.forEach(record => {
+          menus.push({
+            id: record.id,
+            name: record.fields.Name,
+            description: record.fields.Description,
+            category: record.fields.Category,
+            colorCode: record.fields.ColorCode,
+            dishes: record.fields.Dishes || [],
+            minimumSelections: record.fields.MinimumSelections || 0,
+            priceRange: record.fields.PriceRange,
+            imageUrl: record.fields.ImageURL
+          });
+        });
+        resolve(menus);
+      })
+      .catch(error => {
+        console.error('Error fetching menus:', error);
+        reject(error);
+      });
+  });
+}
+
+// Function to render menus as accordions
+function renderMenuAccordions(menus) {
+  const menuContainer = document.getElementById('menu-accordions');
+  if (!menuContainer) {
+    console.error('Menu container not found');
+    return;
+  }
+  
+  menuContainer.innerHTML = '';
+  
+  menus.forEach(menu => {
+    const accordionItem = document.createElement('div');
+    accordionItem.className = 'accordion-item';
+    accordionItem.dataset.menuId = menu.id;
+    
+    const headerStyles = `border-left: 4px solid ${menu.colorCode || '#4A5D23'};`;
+    
+    const accordionHeader = document.createElement('div');
+    accordionHeader.className = 'accordion-header';
+    accordionHeader.setAttribute('aria-expanded', 'false');
+    accordionHeader.setAttribute('style', headerStyles);
+    
+    const heading = document.createElement('h3');
+    heading.textContent = menu.name;
+    
+    const icon = document.createElement('span');
+    icon.className = 'accordion-icon';
+    
+    accordionHeader.appendChild(heading);
+    accordionHeader.appendChild(icon);
+    
+    const accordionContent = document.createElement('div');
+    accordionContent.className = 'accordion-content';
+    
+    const description = document.createElement('p');
+    description.className = 'menu-description';
+    description.textContent = menu.description;
+    accordionContent.appendChild(description);
+    
+    if (menu.dishes && menu.dishes.length > 0) {
+      const dishesContainer = document.createElement('div');
+      dishesContainer.className = 'dishes-container';
+      
+      const dishesByCategory = groupDishesByCategory(menu.dishes);
+      
+      Object.keys(dishesByCategory).forEach(category => {
+        const categoryContainer = document.createElement('div');
+        categoryContainer.className = 'dish-category';
+        
+        const categoryHeading = document.createElement('h4');
+        categoryHeading.textContent = category;
+        categoryContainer.appendChild(categoryHeading);
+        
+        dishesByCategory[category].forEach(dish => {
+          const dishItem = document.createElement('div');
+          dishItem.className = 'dish-item';
+          
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.id = `dish-${dish.id}`;
+          checkbox.dataset.dishId = dish.id;
+          checkbox.dataset.price = dish.price;
+          
+          const label = document.createElement('label');
+          label.htmlFor = `dish-${dish.id}`;
+          label.innerHTML = `
+            <span class="dish-name">${dish.name}</span>
+            <span class="dish-description">${dish.description}</span>
+          `;
+          
+          if (dish.dietary) {
+            const dietaryInfo = document.createElement('span');
+            dietaryInfo.className = 'dietary-info';
+            dietaryInfo.textContent = dish.dietary;
+            label.appendChild(dietaryInfo);
+          }
+          
+          dishItem.appendChild(checkbox);
+          dishItem.appendChild(label);
+          categoryContainer.appendChild(dishItem);
+        });
+        
+        dishesContainer.appendChild(categoryContainer);
+      });
+      
+      accordionContent.appendChild(dishesContainer);
+      
+      if (menu.minimumSelections > 0) {
+        const minimumNote = document.createElement('p');
+        minimumNote.className = 'minimum-note';
+        minimumNote.textContent = `Please select at least ${menu.minimumSelections} items from this menu.`;
+        accordionContent.appendChild(minimumNote);
+      }
+    }
+    
+    if (menu.priceRange) {
+      const priceInfo = document.createElement('p');
+      priceInfo.className = 'price-info';
+      priceInfo.textContent = `Price range: ${menu.priceRange}`;
+      accordionContent.appendChild(priceInfo);
+    }
+    
+    accordionItem.appendChild(accordionHeader);
+    accordionItem.appendChild(accordionContent);
+    menuContainer.appendChild(accordionItem);
+  });
+  
+  initializeAccordions();
+}
+
+// Helper function to group dishes by category
+function groupDishesByCategory(dishes) {
+  return dishes.reduce((groups, dish) => {
+    const category = dish.category || 'Other';
+    if (!groups[category]) {
+      groups[category] = [];
+    }
+    groups[category].push(dish);
+    return groups;
+  }, {});
+}
+
+// Initialize the menu page
+async function initMenuPage() {
+  try {
+    const menuContainer = document.getElementById('menu-accordions');
+    if (!menuContainer) {
+      console.error('Menu container not found');
+      return;
+    }
+    
+    menuContainer.innerHTML = '<div class="loading">Loading menus...</div>';
+    
+    const menus = await fetchMenus();
+    renderMenuAccordions(menus);
+    initializeRunningTotal();
+    
+  } catch (error) {
+    console.error('Failed to initialize menu page:', error);
+    const menuContainer = document.getElementById('menu-accordions');
+    if (menuContainer) {
+      menuContainer.innerHTML = '<div class="error">Failed to load menus. Please try again later.</div>';
+    }
+  }
+}
+
+// Initialize accordions functionality
+function initializeAccordions() {
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const accordionItem = header.parentElement;
+      accordionItem.classList.toggle('open');
+      header.setAttribute('aria-expanded', accordionItem.classList.contains('open'));
+    });
+  });
+}
+
+// Initialize running total calculation
+function initializeRunningTotal() {
+  const checkboxes = document.querySelectorAll('.dish-item input[type="checkbox"]');
+  const totalElement = document.getElementById('running-total');
+  
+  if (!totalElement) return;
+  
+  let total = 0;
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      const price = parseFloat(checkbox.dataset.price) || 0;
+      total += checkbox.checked ? price : -price;
+      totalElement.textContent = `$${total.toFixed(2)}`;
+    });
+  });
+}
+
+// Update loadChefData to handle the correct field names
+async function loadChefData() {
+    try {
+        // First find the Meet the Chefs section
+        const chefAccordion = Array.from(document.querySelectorAll('#explore-modal .accordion-item'))
+            .find(item => item.querySelector('h3')?.textContent.includes('Meet the Chefs'));
+        
+        if (!chefAccordion) {
+            console.warn('Chef accordion section not found');
+            return;
+        }
+
+        const chefContent = chefAccordion.querySelector('.accordion-content');
+        if (!chefContent) {
+            console.warn('Chef content area not found');
+            return;
+        }
+
+        chefContent.innerHTML = '<div class="loading-indicator">Loading chef information...</div>';
+        
+        const chefData = await fetchChefProfiles();
+        console.log('Received chef data:', chefData);
+
+        if (!chefData || chefData.length === 0) {
+            chefContent.innerHTML = '<p>No chef profiles available at this time.</p>';
+            return;
+        }
+
+        // Start with the intro text
+        let html = `
+            <div class="section-intro">
+                <p>Our collective brings together Santa Barbara's most talented culinary artists, each bringing their unique expertise and passion to your table.</p>
+            </div>
+            <div class="chefs-grid">
+        `;
+
+        // Add each chef
+        for (const chef of chefData) {
+            if (chef.name) {  // Only display if we have at least a name
+                // Ensure image path starts with SBCC-Images
+                const imagePath = chef.image ? 
+                    (chef.image.startsWith('./SBCC-Images') ? chef.image : './SBCC-Images/' + chef.image.split('/').pop()) :
+                    './SBCC-Images/saucing-salmon.jpg';
+                
+                html += `
+                    <div class="chef-card" data-chef-id="${chef.id || ''}">
+                        <div class="chef-preview">
+                            <div class="chef-image">
+                                <img src="${imagePath}" 
+                                     alt="${chef.name}" 
+                                     onerror="this.src='./SBCC-Images/saucing-salmon.jpg'">
+                            </div>
+                            <h4>${chef.name}</h4>
+                        </div>
+                        <div class="chef-details">
+                            ${chef.specialty ? `<p class="chef-specialty">${chef.specialty}</p>` : ''}
+                            ${chef.bio ? `<p class="chef-bio">${chef.bio}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        html += '</div>'; // Close chefs-grid
+        chefContent.innerHTML = html;
+
+        // Add click handlers for expansion
+        const chefCards = chefContent.querySelectorAll('.chef-card');
+        let currentlyExpanded = null;
+
+        chefCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // If there's already an expanded card and it's not this one, collapse it
+                if (currentlyExpanded && currentlyExpanded !== card) {
+                    currentlyExpanded.classList.remove('expanded');
+                }
+
+                // Toggle this card
+                card.classList.toggle('expanded');
+                
+                // Update the currently expanded card reference
+                currentlyExpanded = card.classList.contains('expanded') ? card : null;
+
+                // Ensure the accordion content height is updated
+                const accordionContent = chefAccordion.querySelector('.accordion-content');
+                if (accordionContent) {
+                    accordionContent.style.maxHeight = 'none';
+                }
+            });
+        });
+
+        // Make sure the accordion is open
+        const header = chefAccordion.querySelector('.accordion-header');
+        if (header) {
+            header.setAttribute('aria-expanded', 'true');
+            chefContent.style.display = 'block';
+            chefContent.style.maxHeight = 'none';
+        }
+
+    } catch (error) {
+        console.error('Error displaying chef data:', error);
+        const chefContent = document.querySelector('#explore-modal .accordion-content');
+        if (chefContent) {
+            chefContent.innerHTML = '<p>Unable to load chef information. Please try again later.</p>';
+        }
+    }
+}
+
+// Initialize event listeners for accordion sections
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('explore-modal');
+    if (!modal) return;
+
+    // Find all accordion headers in the modal
+    const accordionHeaders = modal.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const accordionItem = header.closest('.accordion-item');
+            if (!accordionItem) return;
+
+            const content = accordionItem.querySelector('.accordion-content');
+            if (!content) return;
+
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle the expanded state
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.style.display = !isExpanded ? 'block' : 'none';
+            
+            // If expanding and it's a data section, load the content
+            if (!isExpanded) {
+                const sectionTitle = header.querySelector('h3')?.textContent.trim().toLowerCase() || '';
+                
+                if (sectionTitle.includes('chef')) {
+                    await loadChefData();
+                } else if (sectionTitle.includes('menu')) {
+                    await loadMenuData();
+                }
+            }
+        });
+    });
+});
+
+// Initialize modal functionality
+function initializeModal() {
+    const modal = document.getElementById('explore-modal');
+    if (!modal) return;
+
+    // Close button functionality
+    const closeBtn = modal.querySelector('.close-button');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close on outside click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeModal); 

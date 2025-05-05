@@ -1,0 +1,135 @@
+/* Plan Your Event Accordion Styles */
+:root {
+  --color-coastal-navy: #1D3557;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-border-light: #E6E6E6;
+  --color-background-secondary: #F5F5F5;
+  --font-primary: 'Playfair Display', serif;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.75;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --letter-spacing-normal: 0.5px;
+}
+
+.event-planning-accordion {
+  border-left-color: var(--color-coastal-navy) !important;
+}
+
+.event-planning-accordion .accordion-header {
+  background-color: rgba(29, 53, 87, 0.05);
+}
+
+.accordion-intro {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
+}
+
+.accordion-intro em {
+  color: var(--color-coastal-navy);
+  font-style: italic;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Process Tiles */
+.event-process-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.process-tile {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-border-light);
+  position: relative;
+}
+
+.process-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tile-number {
+  position: absolute;
+  top: -12px;
+  left: 1.5rem;
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-coastal-navy);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+.process-tile h4 {
+  font-family: var(--font-primary);
+  color: var(--color-coastal-navy);
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: var(--font-size-lg);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.process-tile p {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Booking Note */
+.booking-note {
+  background-color: var(--color-background-secondary);
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+/* CTA Section */
+.accordion-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.accordion-cta .button {
+  min-width: 200px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .event-process-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .event-process-tiles {
+    grid-template-columns: 1fr;
+  }
+  
+  .process-tile {
+    padding: 1.25rem;
+  }
+  
+  .accordion-cta .button {
+    width: 100%;
+  }
+} 
