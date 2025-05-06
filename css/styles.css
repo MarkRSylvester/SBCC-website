@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Header Styles */
 header {
-    background-color: var(--sbcc-sand);
+    background-color: #E6DBC9;
     color: var(--sbcc-navy);
     padding: 20px 0;
     border-bottom: 3px solid var(--sbcc-navy);
@@ -146,7 +146,7 @@ header .container {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(29, 53, 87, 0.4); /* Using navy with opacity */
+    background-color: rgba(29, 53, 87, 0.25); /* Reduced opacity from 0.4 to 0.25 */
     z-index: 1;
 }
 
@@ -162,21 +162,21 @@ header .container {
 }
 
 .hero h2 {
-    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-size: clamp(2.5rem, 5vw, 3rem);
     margin-bottom: 0.5rem;
     font-family: 'Playfair Display', serif;
-    color: var(--sbcc-cream);
+    color: var(--sbcc-text-light);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero-tagline {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(1.5rem, 3.5vw, 1.8rem);
     margin-bottom: 1.5rem;
     font-family: 'Inter', sans-serif;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    color: var(--sbcc-cream);
+    color: var(--sbcc-text-light);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     line-height: 1.2;
 }
@@ -208,7 +208,7 @@ header .container {
 .cta-buttons .cta-button,
 .btn-primary,
 .cta-button.tertiary {
-    background-color: var(--sbcc-mediterranean-blue) !important;
+    background-color: var(--sbcc-navy) !important;
     color: var(--sbcc-cream) !important;
     border: none !important;
     font-family: 'Playfair Display', serif !important;
@@ -230,7 +230,7 @@ header .container {
 .cta-buttons .cta-button:hover,
 .btn-primary:hover,
 .cta-button.tertiary:hover {
-    background-color: var(--sbcc-navy) !important;
+    background-color: var(--sbcc-mediterranean-blue) !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
 }
@@ -285,7 +285,7 @@ header .container {
 
 /* Footer styling */
 .site-footer {
-    background-color: var(--sbcc-muted-olive);
+    background-color: #A2A284;
     color: var(--sbcc-navy);
     padding: 60px 0 30px;
     text-align: center;
@@ -401,7 +401,7 @@ header .container {
     }
     
     .hero h2 {
-        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-size: clamp(2.25rem, 4.5vw, 2.75rem);
         margin-bottom: 0.75rem;
     }
 
