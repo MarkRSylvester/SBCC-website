@@ -1,0 +1,158 @@
+/* Montecito Mom Style Guide - SBCC */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Primary Colors */
+  --sbcc-cream: #F9F7F2;
+  --sbcc-sand: #E6DBC9;
+  --sbcc-muted-olive: #A2A284;
+  --sbcc-mediterranean-blue: #4779B5;
+  --sbcc-navy: #1D3557;
+  --sbcc-terracotta: #E8B4A2;
+  
+  /* Text Colors */
+  --sbcc-text-dark: #333333;
+  --sbcc-text-medium: #666666;
+  --sbcc-text-light: #F9F9F9;
+}
+
+/* Base Typography */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--sbcc-cream);
+  color: var(--sbcc-text-dark);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--sbcc-navy);
+}
+
+/* Header */
+header {
+  background-color: var(--sbcc-sand);
+  border-bottom: 3px solid var(--sbcc-navy);
+}
+
+header a {
+  color: var(--sbcc-navy);
+}
+
+header a:hover {
+  color: var(--sbcc-mediterranean-blue);
+}
+
+/* Buttons */
+.btn-primary, 
+.button-primary, 
+[class*="primary"],
+.cta-button {
+  background-color: var(--sbcc-mediterranean-blue);
+  color: var(--sbcc-cream);
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover, 
+.button-primary:hover, 
+[class*="primary"]:hover,
+.cta-button:hover {
+  background-color: var(--sbcc-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary, 
+.button-secondary, 
+[class*="secondary"] {
+  background-color: var(--sbcc-navy);
+  color: var(--sbcc-cream);
+}
+
+.btn-secondary:hover, 
+.button-secondary:hover, 
+[class*="secondary"]:hover {
+  background-color: #16293f;
+}
+
+.cta-button.tertiary, 
+[class*="tertiary"], 
+[class*="third"] {
+  background-color: var(--sbcc-sand);
+  color: var(--sbcc-text-dark);
+  border: 1px solid var(--sbcc-navy);
+}
+
+.cta-button.tertiary:hover, 
+[class*="tertiary"]:hover, 
+[class*="third"]:hover {
+  background-color: var(--sbcc-cream);
+}
+
+/* Footer */
+footer {
+  background-color: var(--sbcc-muted-olive);
+  color: var(--sbcc-text-light);
+}
+
+footer h2, 
+footer h3 {
+  color: var(--sbcc-cream);
+}
+
+footer a {
+  color: var(--sbcc-cream);
+  opacity: 0.9;
+}
+
+footer a:hover {
+  opacity: 1;
+}
+
+/* Modal */
+.modal-content {
+  background-color: var(--sbcc-cream);
+}
+
+.modal-close {
+  background-color: var(--sbcc-sand);
+}
+
+.modal-close:hover {
+  background-color: var(--sbcc-cream);
+}
+
+/* Links */
+a {
+  color: var(--sbcc-mediterranean-blue);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--sbcc-navy);
+}
+
+/* Form Elements */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--sbcc-mediterranean-blue);
+  box-shadow: 0 0 0 2px rgba(71, 121, 181, 0.1);
+}
+
+/* Error States */
+.error, 
+.error-message {
+  color: var(--sbcc-terracotta);
+}
+
+input.error, 
+select.error, 
+textarea.error {
+  border-color: var(--sbcc-terracotta);
+} 
