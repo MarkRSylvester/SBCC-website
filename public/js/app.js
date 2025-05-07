@@ -3,6 +3,7 @@ import Accordion from './components/Accordion.js';
 
 class App {
     constructor() {
+        console.log('App constructor called');
         this.components = new Map();
         console.group('🚀 SBCC Application Startup');
         console.log('Initializing application...');
@@ -13,6 +14,7 @@ class App {
         try {
             // Initialize modal system
             console.log('📦 Loading components...');
+            console.log('Creating Modal component...');
             
             const modal = new Modal({
                 closeOnEscape: true,
@@ -23,6 +25,7 @@ class App {
             console.log('✓ Modal system initialized');
 
             // Initialize accordion system
+            console.log('Creating Accordion component...');
             const accordion = new Accordion({
                 singleOpen: true,
                 scrollIntoView: true

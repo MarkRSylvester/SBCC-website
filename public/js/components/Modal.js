@@ -3,6 +3,7 @@ import EventEmitter from '../core/EventEmitter.js';
 class Modal extends EventEmitter {
     constructor(options = {}) {
         super();
+        console.log('Modal constructor called');
         this.options = {
             closeOnEscape: true,
             closeOnOutsideClick: true,
@@ -18,11 +19,19 @@ class Modal extends EventEmitter {
     }
 
     init() {
+        console.log('Modal init called');
         // Initialize all modals on the page
-        document.querySelectorAll('.modal').forEach(modal => {
+        const modals = document.querySelectorAll('.modal');
+        console.log('Found modals:', modals.length);
+        
+        modals.forEach(modal => {
+            console.log('Processing modal:', modal.id);
+            const triggers = document.querySelectorAll(`[data-modal-target="${modal.id}"]`);
+            console.log('Found triggers:', triggers.length);
+            
             this.modals.set(modal.id, {
                 element: modal,
-                triggers: document.querySelectorAll(`[data-modal-target="${modal.id}"]`),
+                triggers: triggers,
                 closeButtons: modal.querySelectorAll('.modal-close')
             });
         });

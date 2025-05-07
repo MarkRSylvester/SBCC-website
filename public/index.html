@@ -65,9 +65,9 @@
                 <span class="tagline-line">Your story, your gathering, your flavors.<br>Crafted for those who crave an unforgettable memory.</span>
             </p>
             <div class="cta-buttons">
-                <button class="cta-button tertiary" data-modal="explore-modal">Just Exploring</button>
-                <button class="btn btn-primary" data-modal="event-modal">Plan Your Event</button>
-                <button class="btn btn-primary" data-modal="weekly-meals-modal">Weekly Meals</button>
+                <button class="cta-button tertiary" data-modal-target="explore-modal">Just Exploring</button>
+                <button class="btn btn-primary" data-modal-target="event-modal">Plan Your Event</button>
+                <button class="btn btn-primary" data-modal-target="weekly-meals-modal">Weekly Meals</button>
             </div>
         </div>
     </section>
@@ -106,7 +106,6 @@
           <div class="accordion-item" id="our-story-accordion">
             <div class="accordion-header">
               <h3>Our Story</h3>
-              <span class="chevron">+</span>
             </div>
             <div class="accordion-content">
               <!-- Welcome Section -->
@@ -189,7 +188,6 @@
           <div class="accordion-item" id="our-chefs-accordion">
             <div class="accordion-header">
               <h3>Our Chefs</h3>
-              <span class="chevron">+</span>
             </div>
             <div class="accordion-content">
               <!-- Our Chefs content goes here -->
@@ -201,7 +199,6 @@
           <div class="accordion-item" id="our-menus-accordion">
             <div class="accordion-header">
               <h3>Our Menus</h3>
-              <span class="chevron">+</span>
             </div>
             <div class="accordion-content">
               <!-- Our Menus content goes here -->
@@ -213,7 +210,6 @@
           <div class="accordion-item" id="gatherings-accordion">
             <div class="accordion-header">
               <h3>Gatherings & Celebrations</h3>
-              <span class="chevron">+</span>
             </div>
             <div class="accordion-content">
               <!-- Gatherings content goes here -->
@@ -225,7 +221,6 @@
           <div class="accordion-item" id="beyond-table-accordion">
             <div class="accordion-header">
               <h3>Beyond the Table</h3>
-              <span class="chevron">+</span>
             </div>
             <div class="accordion-content">
               <!-- Beyond the Table content goes here -->
@@ -237,7 +232,6 @@
           <div class="accordion-item" id="faq-accordion">
             <div class="accordion-header">
               <h3>Frequently Asked Questions</h3>
-              <span class="chevron">+</span>
             </div>
             <div class="accordion-content">
               <!-- FAQ content goes here -->
@@ -346,8 +340,70 @@
       </div>
     </div>
     <script src="scripts.js"></script>
-    <script src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
     <script src="js/clean-duplicates.js"></script>
     <script src="js/standardize-dividers.js"></script>
+    <script src="js/accordion-universal-fix.js"></script>
+    <script>
+    // Immediate execution accordion fix
+    (function() {
+      console.log("Running immediate accordion fix");
+      
+      // Find all accordion headers
+      const headers = document.querySelectorAll('.accordion-header, h3');
+      console.log("Found potential headers:", headers.length);
+      
+      headers.forEach(header => {
+        header.style.cursor = 'pointer';
+        
+        // Add a direct click event
+        header.onclick = function(event) {
+          console.log("Header clicked:", this.textContent.trim());
+          event.preventDefault();
+          
+          // Find the parent container
+          const container = this.closest('.accordion-item') || 
+                            this.closest('[class*="accordion"]') || 
+                            this.parentElement;
+          
+          if (container) {
+            console.log("Found container:", container);
+            
+            // Toggle classes
+            container.classList.toggle('active');
+            container.classList.toggle('open');
+            
+            // Find the content area
+            const content = container.querySelector('.accordion-content') || 
+                            this.nextElementSibling ||
+                            Array.from(container.children).find(el => 
+                              el !== this && !el.classList.contains('accordion-header')
+                            );
+            
+            if (content) {
+              console.log("Found content area:", content);
+              
+              // Apply styles
+              if (container.classList.contains('active') || container.classList.contains('open')) {
+                content.style.display = 'block';
+                content.style.height = 'auto';
+                content.style.maxHeight = '400px';
+                content.style.padding = '20px';
+                content.style.overflow = 'auto';
+              } else {
+                content.style.display = 'none';
+                content.style.height = '0';
+                content.style.maxHeight = '0';
+                content.style.padding = '0';
+                content.style.overflow = 'hidden';
+              }
+            }
+          }
+        };
+      });
+      
+      console.log("Direct accordion fix applied");
+    })();
+    </script>
 </body>
 </html>
