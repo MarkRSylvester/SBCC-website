@@ -1,0 +1,179 @@
+/* Base Accordion Styles */
+.accordion-item {
+  position: relative;
+  margin-bottom: 16px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Left border color - matches the Montecito Mom palette */
+#beyond-table-accordion:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #A2A284; /* Muted Olive */
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px; /* Reduced padding by 50% at the top */
+  cursor: pointer;
+  position: relative;
+}
+
+.accordion-header h3 {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  color: #1D3557; /* Navy */
+  font-weight: 500;
+}
+
+/* Simple plus icon */
+.accordion-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4779B5; /* Mediterranean Blue */
+  font-size: 20px;
+  font-weight: 300;
+}
+
+/* Accordion Content - with proper scroll behavior */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  padding: 0 24px;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 1000px; /* Large enough to contain content but will animate properly */
+  padding: 0 24px 24px 24px;
+  overflow-y: auto;
+}
+
+/* Section Intro */
+.section-intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333333; /* Dark Text */
+  margin-bottom: 24px;
+}
+
+/* Category Grid - specifically 2x2 layout */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Category Cards */
+.category-card {
+  background-color: #FFFFFF; /* White background like in images */
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Center all grid box titles */
+.category-title {
+  font-family: 'Playfair Display', serif;
+  color: #1D3557; /* Navy */
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Remove divider as shown in images */
+.divider {
+  display: none;
+}
+
+/* Event List with properly centered bullets */
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-list li {
+  padding-left: 20px;
+  margin-bottom: 0; /* No spacing between bullet points as requested */
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Single bullet per item - Mediterranean Blue as in images */
+.event-list li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px; /* Center with text */
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #4779B5; /* Mediterranean Blue - matches images */
+}
+
+/* Color-coded bullets for different categories */
+.category-card[data-category="wine"] .event-list li:before {
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+.category-card[data-category="tablesetting"] .event-list li:before {
+  background-color: #E6DBC9; /* Sand */
+}
+
+.category-card[data-category="cooking"] .event-list li:before {
+  background-color: #E8B4A2; /* Terracotta */
+}
+
+.category-card[data-category="produce"] .event-list li:before {
+  background-color: #A2A284; /* Muted Olive */
+}
+
+/* Pricing item styling */
+.event-list li:last-child {
+  font-weight: 500;
+  color: #1D3557; /* Navy */
+  margin-top: 12px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-card {
+    margin-bottom: 16px;
+  }
+}
+
+/* Make sure accordion content grows down not up */
+#beyond-table-accordion .accordion-content {
+  transform-origin: top center;
+}
+
+/* Remove any remaining chevron styles */
+.accordion-header:not(:has(.accordion-icon))::after {
+  display: none !important;
+} 

@@ -1,0 +1,101 @@
+/* Responsive solution for Beyond the Table category titles */
+
+/* Base styles for all screen sizes */
+#beyond-table-accordion .category-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0 0 12px 0;
+  color: #1D3557;
+  letter-spacing: 0.02em;
+  white-space: normal; /* Allow text to wrap */
+  overflow: visible; /* Don't clip text */
+  text-overflow: initial; /* Remove ellipsis */
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+}
+
+/* Mobile: Smaller font, left-aligned */
+@media (max-width: 767px) {
+  #beyond-table-accordion .category-title {
+    font-size: 16px;
+    text-align: left;
+    min-height: 40px; /* Ensure consistent height on mobile */
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  #beyond-table-accordion .divider {
+    width: 50%;
+    margin: -4px auto 12px;
+  }
+  
+  #beyond-table-accordion .category-card {
+    padding: 14px 16px;
+  }
+}
+
+/* Tablet & Desktop: Regular size, centered, two lines */
+@media (min-width: 768px) {
+  #beyond-table-accordion .category-title {
+    font-size: 18px;
+    text-align: center;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #beyond-table-accordion .divider {
+    width: 60%;
+    margin: -4px auto 16px;
+  }
+  
+  #beyond-table-accordion .category-card {
+    padding: 16px 20px;
+  }
+}
+
+/* Ensure consistent card heights and layout */
+#beyond-table-accordion .category-card {
+  display: flex;
+  flex-direction: column;
+  height: 80px; /* Initial collapsed height */
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#beyond-table-accordion .category-card.expanded {
+  height: auto;
+  min-height: 200px;
+}
+
+/* Style the divider consistently */
+#beyond-table-accordion .divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #E6DBC9, transparent);
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover effect for the divider */
+#beyond-table-accordion .category-card:hover .divider {
+  width: 75%;
+}
+
+/* Keep list items properly aligned */
+#beyond-table-accordion .event-list {
+  text-align: left;
+  flex-grow: 1;
+  margin-top: 4px;
+}
+
+/* Ensure smooth transitions */
+#beyond-table-accordion * {
+  transition-property: height, opacity, transform, width;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+} 

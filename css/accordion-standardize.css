@@ -1,0 +1,97 @@
+/* Base accordion styling */
+.accordion-item {
+  margin-bottom: 1rem !important;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #d0d0d0;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-color: #f3f7ff;
+}
+
+/* Left border styling */
+.accordion-item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: #3E78B2;
+  z-index: 1;
+}
+
+/* Header styling */
+.accordion-header {
+  background-color: transparent;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  border-left: none;
+}
+
+.accordion-header:hover {
+  background-color: #e1ecff;
+}
+
+.accordion-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #2a4374;
+  line-height: 1.4;
+}
+
+/* Content area styling */
+.accordion-content {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+  padding: 1.5rem 2rem !important;
+  max-height: none !important;
+}
+
+/* Make sure description text has consistent styling */
+.accordion-content p {
+  color: #555555;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  max-width: 100%;
+}
+
+/* Section intro styling */
+.section-intro {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333333;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .accordion-item.active .accordion-content {
+    padding: 1.25rem 1.5rem !important;
+  }
+  
+  .accordion-header h3 {
+    font-size: 16px;
+  }
+} 
