@@ -1,0 +1,104 @@
+/* Beyond the Table Accordion Styles */
+
+/* Customize the left border color for this specific accordion */
+#beyond-table-accordion:before {
+    background-color: #A2A284; /* Muted Olive from the Montecito Mom palette */
+}
+
+/* Category card specific styling for Beyond the Table */
+#beyond-table-accordion .category-card {
+    position: relative;
+    overflow: hidden;
+}
+
+#beyond-table-accordion .category-card:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 0 0 0 8px;
+}
+
+/* Color coding for different service categories */
+#beyond-table-accordion .category-card[data-category="wine"]:after {
+    background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#beyond-table-accordion .category-card[data-category="tablesetting"]:after {
+    background-color: #E6DBC9; /* Sand */
+}
+
+#beyond-table-accordion .category-card[data-category="cooking"]:after {
+    background-color: #E8B4A2; /* Terracotta */
+}
+
+#beyond-table-accordion .category-card[data-category="produce"]:after {
+    background-color: #A2A284; /* Muted Olive */
+}
+
+/* Custom list marker colors for each category */
+#beyond-table-accordion .category-card[data-category="wine"] .event-list li::before {
+    background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#beyond-table-accordion .category-card[data-category="tablesetting"] .event-list li::before {
+    background-color: #E6DBC9; /* Sand */
+}
+
+#beyond-table-accordion .category-card[data-category="cooking"] .event-list li::before {
+    background-color: #E8B4A2; /* Terracotta */
+}
+
+#beyond-table-accordion .category-card[data-category="produce"] .event-list li::before {
+    background-color: #A2A284; /* Muted Olive */
+}
+
+/* Add subtle pattern to cards */
+#beyond-table-accordion .category-card {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                    url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="none"/><circle cx="10" cy="10" r="1" fill="%23F9F7F2" opacity="0.3"/></svg>');
+    background-size: 20px 20px;
+}
+
+/* Enhanced hover effect for category cards */
+#beyond-table-accordion .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+#beyond-table-accordion .category-card:hover .category-title {
+    color: #4779B5; /* Mediterranean Blue on hover */
+}
+
+/* Adjust spacing between list items */
+#beyond-table-accordion .event-list li {
+    margin-bottom: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 4px;
+    padding: 6px 0 6px 20px;
+}
+
+#beyond-table-accordion .event-list li:hover {
+    background-color: rgba(249, 247, 242, 0.8); /* Light cream background on hover */
+    padding-left: 24px; /* Slight indent on hover */
+    transform: translateX(2px);
+}
+
+/* Pricing item styling */
+#beyond-table-accordion .event-list li:last-child {
+    font-weight: 500;
+    color: #1D3557; /* Navy */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    #beyond-table-accordion .category-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    #beyond-table-accordion .category-card {
+        margin-bottom: 16px;
+    }
+} 

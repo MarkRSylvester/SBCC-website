@@ -1,0 +1,67 @@
+/* Scrollable Accordion Styles */
+
+/* Container for scrollable content */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* When accordion is active/open */
+.accordion-item.active .accordion-content {
+    max-height: 70vh !important; /* Viewport-based height */
+    overflow-y: auto !important; /* Enable vertical scrolling */
+    padding: 1.5rem 2rem !important;
+    
+    /* Custom scrollbar styling */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #A2A284 #f0f0f0; /* Firefox: thumb and track colors */
+}
+
+/* Webkit (Chrome, Safari, Edge) scrollbar styling */
+.accordion-item.active .accordion-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.accordion-item.active .accordion-content::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.accordion-item.active .accordion-content::-webkit-scrollbar-thumb {
+    background-color: #A2A284;
+    border-radius: 4px;
+    border: 2px solid #f0f0f0;
+}
+
+.accordion-item.active .accordion-content::-webkit-scrollbar-thumb:hover {
+    background-color: #8a8a6e;
+}
+
+/* Ensure content is properly spaced */
+.accordion-content > *:first-child {
+    margin-top: 0;
+}
+
+.accordion-content > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Add padding to prevent content from touching scrollbar */
+.accordion-content .category-grid,
+.accordion-content .section-intro {
+    padding-right: 4px;
+}
+
+/* Smooth scroll behavior */
+.accordion-content {
+    scroll-behavior: smooth;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .accordion-item.active .accordion-content {
+        max-height: 80vh !important; /* Slightly taller on mobile */
+        padding: 1rem !important;
+    }
+} 

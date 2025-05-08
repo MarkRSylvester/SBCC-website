@@ -1,0 +1,87 @@
+/* Button Styles for Santa Barbara Chef Collective */
+
+:root {
+    --olive-grove: #4A5D4C;
+    --sandstone: #D4C19C;
+    --coastal-blue: #2C3E50;
+    --cream: #F5F5F0;
+    --text-dark: #333333;
+    --text-light: #FFFFFF;
+    --terra-cotta: #E9967A;
+    --terra-cotta-dark: #D88569;
+    --modal-bg: #F9F6F0;
+    --transition: all 0.3s ease;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+    background-color: var(--terra-cotta);
+    color: var(--text-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: var(--terra-cotta-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    background-color: var(--sandstone);
+    color: var(--text-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+    background-color: #C4B18C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal specific button styles */
+.modal-buttons .btn {
+    margin: 8px;
+    min-width: 160px;
+}
+
+/* Modal styles */
+.modal-content {
+    background-color: var(--modal-bg);
+    padding: 40px;
+}
+
+.modal-template {
+    padding: 20px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .modal-buttons .btn {
+        min-width: 140px;
+        margin: 6px;
+    }
+    
+    .modal-template {
+        padding: 15px 25px;
+    }
+} 

@@ -1,0 +1,78 @@
+/* Fix for Beyond the Table list bullets */
+
+/* Remove the default bullets and set up custom styling */
+#beyond-table-accordion .event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Style the list items */
+#beyond-table-accordion .event-list li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  opacity: 1;
+  transform: none;
+  transition: all 0.3s ease;
+}
+
+/* Create a single, left-aligned bullet for each list item */
+#beyond-table-accordion .event-list li::after {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #4779B5; /* Mediterranean Blue */
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Remove any extra blue dots or markers */
+#beyond-table-accordion .event-list li > * {
+  display: inline;
+}
+
+/* Fix for any specific blue dot markers */
+#beyond-table-accordion .event-list li > [class*="dot"],
+#beyond-table-accordion .event-list li > [class*="marker"],
+#beyond-table-accordion .event-list li > [class*="bullet"] {
+  display: none;
+}
+
+/* Remove any remaining icons */
+#beyond-table-accordion .category-card .icon,
+#beyond-table-accordion .minus-icon,
+#beyond-table-accordion svg.minus,
+#beyond-table-accordion button.icon,
+#beyond-table-accordion .accordion-icon,
+#beyond-table-accordion .expand-button {
+  display: none !important;
+}
+
+/* Animation states for list items */
+.category-card.expanded .event-list li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger the list item animations */
+.category-card.expanded .event-list li:nth-child(1) { transition-delay: 0.1s; }
+.category-card.expanded .event-list li:nth-child(2) { transition-delay: 0.2s; }
+.category-card.expanded .event-list li:nth-child(3) { transition-delay: 0.3s; }
+.category-card.expanded .event-list li:nth-child(4) { transition-delay: 0.4s; }
+.category-card.expanded .event-list li:nth-child(5) { transition-delay: 0.5s; }
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #beyond-table-accordion .event-list li {
+    font-size: 13px;
+    margin-bottom: 0.6rem;
+    padding-left: 0.875rem;
+  }
+  
+  #beyond-table-accordion .event-list li::after {
+    font-size: 0.875rem;
+  }
+} 

@@ -1,0 +1,108 @@
+/* Our Story Accordion Styles */
+
+/* Section spacing */
+.section-content {
+  margin-bottom: 10px;
+}
+
+.section-content h4 {
+  color: #1D3557;
+  font-family: "Playfair Display", serif;
+  font-size: 1.3rem;
+  margin: 0 0 15px 0;
+  font-weight: 500;
+}
+
+/* Founder bio with image */
+.founder-bio {
+  position: relative;
+  overflow: hidden;
+}
+
+.founder-image {
+  width: 200px;
+  height: auto !important;
+  max-height: none !important;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  float: left;
+}
+
+.founder-image img {
+  width: 100%;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* Clear the float after the bio */
+.founder-bio:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Signature styling */
+.signature {
+  font-style: italic;
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+/* Process list styling */
+.process-list {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: process-counter;
+}
+
+.process-list li {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 20px;
+  counter-increment: process-counter;
+}
+
+.process-list li:before {
+  content: counter(process-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background-color: #4779B5;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.process-list li strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #1D3557;
+}
+
+/* Standardized tapered divider */
+.tapered-divider {
+  height: 1px;
+  background: linear-gradient(to right, 
+      rgba(230, 219, 201, 0), 
+      rgba(230, 219, 201, 1) 20%, 
+      rgba(230, 219, 201, 1) 80%, 
+      rgba(230, 219, 201, 0));
+  width: 60%;
+  margin: 30px auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .founder-image {
+    float: none;
+    margin: 0 auto 20px;
+    display: block;
+  }
+} 

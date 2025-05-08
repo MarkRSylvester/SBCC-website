@@ -1,0 +1,185 @@
+/* Gatherings & Celebrations Complete Styles */
+
+/* Color Variables */
+:root {
+    --coastal-navy: #1D3557;
+    --mediterranean-sand: #F2E8CF;
+    --nantucket-white: #F8F9FA;
+    --ocean-mist: #E6EEF2;
+    --shell-pink: #FFE5E5;
+}
+
+/* 1. Accordion Container & Header */
+#explore-modal .accordion-item {
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #d0d0d0;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #f3f7ff;
+}
+
+#explore-modal .accordion-item:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background-color: #3E78B2;
+    z-index: 1;
+}
+
+#explore-modal .accordion-header {
+    background-color: transparent;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    border-left: none;
+}
+
+#explore-modal .accordion-header:hover {
+    background-color: #e1ecff;
+}
+
+#explore-modal .accordion-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #2a4374;
+    line-height: 1;
+}
+
+/* 2. Category Grid Layout */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* 3. Category Titles */
+.category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #1D3557;
+    margin: 0 0 12px 0;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.divider {
+    height: 2px;
+    background: linear-gradient(to right, transparent, #EFE2BD, transparent);
+    margin: 0 auto 16px;
+    width: 80%;
+}
+
+/* 4. Event List Styling */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #333333;
+    padding: 4px 0 4px 20px;
+    position: relative;
+    line-height: 1.2;
+}
+
+.event-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #A8CAFF;
+}
+
+/* 5. Section Introduction */
+.section-intro {
+    color: #555555;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 6. Responsive Design */
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .category-title {
+        font-size: 16px;
+    }
+    
+    .accordion-item.open .accordion-content {
+        padding: 20px;
+    }
+    
+    #explore-modal .modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    #explore-modal .gatherings-grid,
+    #explore-modal .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 7. Accordion Content */
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 1.5rem 2rem !important;
+    max-height: 2000px;
+}
+
+/* Additional Hover Effects */
+.accordion-content li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+} 
