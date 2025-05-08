@@ -1,0 +1,569 @@
+/* ========== GENERAL ACCORDION STYLES ========== */
+.accordion-item {
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background-color: #1D3557; /* Default Navy color */
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  cursor: pointer;
+  background-color: #F9F7F2; /* Cream */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.accordion-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #1D3557; /* Navy */
+  margin: 0;
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon svg {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+  padding: 20px;
+  height: auto;
+  overflow: visible;
+}
+
+.section-intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666666; /* Medium Text */
+  margin-bottom: 24px;
+}
+
+/* ========== BEYOND THE TABLE STYLES ========== */
+/* Category grid and cards */
+#beyond-table-accordion:before {
+  background-color: #A2A284; /* Muted Olive from the Montecito Mom palette */
+}
+
+#beyond-table-accordion .category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+#beyond-table-accordion .category-card {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#beyond-table-accordion .category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+#beyond-table-accordion .category-card:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 0 0 0 8px;
+}
+
+/* Color coding for different service categories */
+#beyond-table-accordion .category-card[data-category="wine"]:after {
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#beyond-table-accordion .category-card[data-category="tablesetting"]:after {
+  background-color: #E6DBC9; /* Sand */
+}
+
+#beyond-table-accordion .category-card[data-category="cooking"]:after {
+  background-color: #E8B4A2; /* Terracotta */
+}
+
+#beyond-table-accordion .category-card[data-category="produce"]:after {
+  background-color: #A2A284; /* Muted Olive */
+}
+
+/* Category title styling */
+#beyond-table-accordion .category-title {
+  font-family: 'Playfair Display', serif;
+  color: #1D3557; /* Navy */
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+#beyond-table-accordion .category-card:hover .category-title {
+  color: #4779B5; /* Mediterranean Blue on hover */
+}
+
+/* Divider styling */
+#beyond-table-accordion .divider {
+  height: 2px;
+  background-color: #F9F7F2; /* Cream */
+  margin: 8px 0 12px;
+}
+
+/* Event list styling */
+#beyond-table-accordion .event-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 12px;
+}
+
+#beyond-table-accordion .event-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  transition: transform 0.2s ease, padding 0.2s ease;
+  border-radius: 4px;
+  padding: 6px 0 6px 20px;
+}
+
+#beyond-table-accordion .event-list li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #1D3557; /* Default dot color */
+}
+
+/* Custom list marker colors for each category */
+#beyond-table-accordion .category-card[data-category="wine"] .event-list li::before {
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#beyond-table-accordion .category-card[data-category="tablesetting"] .event-list li::before {
+  background-color: #E6DBC9; /* Sand */
+}
+
+#beyond-table-accordion .category-card[data-category="cooking"] .event-list li::before {
+  background-color: #E8B4A2; /* Terracotta */
+}
+
+#beyond-table-accordion .category-card[data-category="produce"] .event-list li::before {
+  background-color: #A2A284; /* Muted Olive */
+}
+
+#beyond-table-accordion .event-list li:hover {
+  background-color: rgba(249, 247, 242, 0.8); /* Light cream background on hover */
+  padding-left: 24px; /* Slight indent on hover */
+  transform: translateX(2px);
+}
+
+/* Pricing item styling */
+#beyond-table-accordion .event-list li:last-child {
+  font-weight: 500;
+  color: #1D3557; /* Navy */
+}
+
+/* ========== CHEF STYLES ========== */
+#chefs-accordion:before {
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#chefs-accordion .chef-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+#chefs-accordion .chef-card {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#chefs-accordion .chef-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+#chefs-accordion .chef-image {
+  height: 250px;
+  overflow: hidden;
+}
+
+#chefs-accordion .chef-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+#chefs-accordion .chef-card:hover .chef-image img {
+  transform: scale(1.05);
+}
+
+#chefs-accordion .chef-info {
+  padding: 20px;
+}
+
+#chefs-accordion .chef-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #1D3557; /* Navy */
+  margin-bottom: 4px;
+}
+
+#chefs-accordion .chef-specialty {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #4779B5; /* Mediterranean Blue */
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+#chefs-accordion .chef-bio {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666666; /* Medium Text */
+  margin-bottom: 16px;
+}
+
+#chefs-accordion .chef-link {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1D3557; /* Navy */
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+#chefs-accordion .chef-link:after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #4779B5; /* Mediterranean Blue */
+  transition: width 0.3s ease;
+}
+
+#chefs-accordion .chef-link:hover {
+  color: #4779B5; /* Mediterranean Blue */
+}
+
+#chefs-accordion .chef-link:hover:after {
+  width: 100%;
+}
+
+/* ========== MENUS STYLES ========== */
+#menus-accordion:before {
+  background-color: #E8B4A2; /* Terracotta */
+}
+
+#menus-accordion .menu-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+#menus-accordion .menu-category {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#menus-accordion .menu-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+#menus-accordion .menu-category:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+}
+
+#menus-accordion .menu-category[data-menu="coastal"]:before {
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#menus-accordion .menu-category[data-menu="vineyard"]:before {
+  background-color: #E8B4A2; /* Terracotta */
+}
+
+#menus-accordion .menu-category[data-menu="rancho"]:before {
+  background-color: #A2A284; /* Muted Olive */
+}
+
+#menus-accordion .menu-category[data-menu="garden"]:before {
+  background-color: #8FC1A9; /* Sage Green */
+}
+
+#menus-accordion .menu-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #1D3557; /* Navy */
+  margin-bottom: 8px;
+  padding-left: 10px;
+}
+
+#menus-accordion .divider {
+  height: 2px;
+  background-color: #F9F7F2; /* Cream */
+  margin: 8px 0 12px;
+}
+
+#menus-accordion .menu-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666666; /* Medium Text */
+  margin-bottom: 16px;
+  padding-left: 10px;
+}
+
+#menus-accordion .menu-highlights {
+  margin-bottom: 16px;
+  padding-left: 10px;
+}
+
+#menus-accordion .highlight-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#menus-accordion .highlight-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 12px;
+  background-color: #1D3557; /* Navy */
+}
+
+#menus-accordion .menu-category[data-menu="coastal"] .highlight-dot {
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#menus-accordion .menu-category[data-menu="vineyard"] .highlight-dot {
+  background-color: #E8B4A2; /* Terracotta */
+}
+
+#menus-accordion .menu-category[data-menu="rancho"] .highlight-dot {
+  background-color: #A2A284; /* Muted Olive */
+}
+
+#menus-accordion .menu-category[data-menu="garden"] .highlight-dot {
+  background-color: #8FC1A9; /* Sage Green */
+}
+
+#menus-accordion .highlight-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #333333; /* Dark Text */
+}
+
+#menus-accordion .view-menu-btn {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: #1D3557; /* Navy */
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #1D3557; /* Navy */
+  border-radius: 3px;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+}
+
+#menus-accordion .view-menu-btn:hover {
+  background-color: #1D3557; /* Navy */
+  color: white;
+}
+
+/* ========== GATHERINGS STYLES ========== */
+#gatherings-accordion:before {
+  background-color: #1D3557; /* Navy */
+}
+
+#gatherings-accordion .event-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+#gatherings-accordion .event-type-card {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gatherings-accordion .event-type-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+#gatherings-accordion .event-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #1D3557; /* Navy */
+  margin-bottom: 8px;
+}
+
+#gatherings-accordion .divider {
+  height: 2px;
+  background-color: #F9F7F2; /* Cream */
+  margin: 8px 0 12px;
+}
+
+#gatherings-accordion .event-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666666; /* Medium Text */
+  margin-bottom: 16px;
+}
+
+#gatherings-accordion .event-features {
+  list-style: none;
+  padding-left: 0;
+}
+
+#gatherings-accordion .event-features li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #333333; /* Dark Text */
+}
+
+#gatherings-accordion .event-features li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #4779B5; /* Mediterranean Blue */
+}
+
+#gatherings-accordion .event-features li:last-child {
+  font-weight: 500;
+  color: #1D3557; /* Navy */
+}
+
+/* ========== FAQ STYLES ========== */
+#faq-accordion:before {
+  background-color: #E6DBC9; /* Sand */
+}
+
+#faq-accordion .faq-container {
+  margin-top: 24px;
+}
+
+#faq-accordion .faq-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+#faq-accordion .faq-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+#faq-accordion .faq-question {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: #1D3557; /* Navy */
+  margin-bottom: 10px;
+}
+
+#faq-accordion .faq-answer {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666666; /* Medium Text */
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 768px) {
+  .accordion-header {
+    padding: 15px 20px;
+  }
+  
+  .accordion-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  /* Beyond the Table mobile */
+  #beyond-table-accordion .category-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Chefs mobile */
+  #chefs-accordion .chef-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Menus mobile */
+  #menus-accordion .menu-categories {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Gatherings mobile */
+  #gatherings-accordion .event-types-grid {
+    grid-template-columns: 1fr;
+  }
+} 
