@@ -339,71 +339,38 @@
         </form>
       </div>
     </div>
-    <script src="scripts.js"></script>
-    <script type="module" src="js/app.js"></script>
-    <script src="js/clean-duplicates.js"></script>
-    <script src="js/standardize-dividers.js"></script>
-    <script src="js/accordion-universal-fix.js"></script>
-    <script>
+    <!-- Commented out all accordion-related JS scripts and inline JS for emergency fix -->
+    <!-- <script src="js/clean-duplicates.js"></script> -->
+    <!-- <script src="js/standardize-dividers.js"></script> -->
+    <!-- <script src="js/accordion-universal-fix.js"></script> -->
+    <!-- <script>
     // Immediate execution accordion fix
     (function() {
-      console.log("Running immediate accordion fix");
-      
-      // Find all accordion headers
-      const headers = document.querySelectorAll('.accordion-header, h3');
-      console.log("Found potential headers:", headers.length);
-      
-      headers.forEach(header => {
-        header.style.cursor = 'pointer';
-        
-        // Add a direct click event
-        header.onclick = function(event) {
-          console.log("Header clicked:", this.textContent.trim());
-          event.preventDefault();
-          
-          // Find the parent container
-          const container = this.closest('.accordion-item') || 
-                            this.closest('[class*="accordion"]') || 
-                            this.parentElement;
-          
-          if (container) {
-            console.log("Found container:", container);
-            
-            // Toggle classes
-            container.classList.toggle('active');
-            container.classList.toggle('open');
-            
-            // Find the content area
-            const content = container.querySelector('.accordion-content') || 
-                            this.nextElementSibling ||
-                            Array.from(container.children).find(el => 
-                              el !== this && !el.classList.contains('accordion-header')
-                            );
-            
-            if (content) {
-              console.log("Found content area:", content);
-              
-              // Apply styles
-              if (container.classList.contains('active') || container.classList.contains('open')) {
-                content.style.display = 'block';
-                content.style.height = 'auto';
-                content.style.maxHeight = '400px';
-                content.style.padding = '20px';
-                content.style.overflow = 'auto';
-              } else {
-                content.style.display = 'none';
-                content.style.height = '0';
-                content.style.maxHeight = '0';
-                content.style.padding = '0';
-                content.style.overflow = 'hidden';
-              }
-            }
-          }
-        };
-      });
-      
-      console.log("Direct accordion fix applied");
+      ...
     })();
+    </script> -->
+    <script>
+    // Emergency modal open fix
+    document.addEventListener('DOMContentLoaded', function() {
+      const modalTriggers = document.querySelectorAll('[data-modal-target]');
+      const modals = document.querySelectorAll('.modal');
+      console.log('Modal triggers found:', modalTriggers.length);
+      console.log('Modals found:', modals.length);
+      modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          const modalId = this.getAttribute('data-modal-target');
+          console.log('Trying to open modal:', modalId);
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.add('open');
+            console.log('Modal opened');
+          } else {
+            console.error('Modal not found:', modalId);
+          }
+        });
+      });
+    });
     </script>
 </body>
 </html>
