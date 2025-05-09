@@ -50,18 +50,12 @@
         overflow: hidden;
       }
       
-      /* Fix scrolling for long accordion content */
-      .accordion-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-      }
-      
-      .accordion-item.active .accordion-content {
-        display: block !important;
+      /* Scrolling for accordion content */
+      .accordion-item.active .accordion-content,
+      .accordion-item.open .accordion-content {
         max-height: 400px !important;
-        padding: 15px !important;
         overflow-y: auto !important;
+        padding: 20px !important;
       }
       
       .accordion-content::-webkit-scrollbar {
@@ -83,12 +77,54 @@
         scrollbar-color: #1D3557 #f1f1f1;
       }
       
+      .accordion-content > *:last-child {
+        margin-bottom: 10px;
+      }
+      
       .accordion-icon {
         transition: transform 0.3s ease;
       }
       
       .accordion-item.active .accordion-icon {
         transform: rotate(180deg);
+      }
+      
+      /* Override accordion icons to make them visible */
+      .accordion-icon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 24px !important;
+        height: 24px !important;
+      }
+      /* Hide the + symbols */
+      .accordion-icon:empty,
+      .accordion-icon:contains("+"),
+      .accordion-icon:contains("++") {
+        position: relative !important;
+      }
+      /* Replace with CSS chevron */
+      .accordion-icon:empty::before,
+      .accordion-icon:contains("+")::before,
+      .accordion-icon:contains("++")::before {
+        content: '' !important;
+        display: block !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-right: 2px solid #1D3557 !important;
+        border-bottom: 2px solid #1D3557 !important;
+        transform: rotate(45deg) !important;
+        transition: transform 0.3s ease !important;
+      }
+      /* Rotate when open */
+      .accordion-item.active .accordion-icon::before,
+      .accordion-item.open .accordion-icon::before {
+        transform: rotate(225deg) !important;
+      }
+      /* Make chevron SVGs larger if they exist */
+      .accordion-icon svg {
+        width: 16px !important;
+        height: 16px !important;
       }
     </style>
 </head>
@@ -158,6 +194,7 @@
           <div class="accordion-item" id="our-story-accordion">
             <div class="accordion-header">
               <h3>Our Story</h3>
+              <div class="accordion-icon"></div>
             </div>
             <div class="accordion-content">
               <!-- Welcome Section -->
@@ -240,6 +277,7 @@
           <div class="accordion-item" id="our-chefs-accordion">
             <div class="accordion-header">
               <h3>Our Chefs</h3>
+              <div class="accordion-icon"></div>
             </div>
             <div class="accordion-content">
               <!-- Our Chefs content goes here -->
@@ -251,6 +289,7 @@
           <div class="accordion-item" id="our-menus-accordion">
             <div class="accordion-header">
               <h3>Our Menus</h3>
+              <div class="accordion-icon"></div>
             </div>
             <div class="accordion-content">
               <!-- Our Menus content goes here -->
@@ -262,6 +301,7 @@
           <div class="accordion-item" id="gatherings-accordion">
             <div class="accordion-header">
               <h3>Gatherings & Celebrations</h3>
+              <div class="accordion-icon"></div>
             </div>
             <div class="accordion-content">
               <!-- Gatherings content goes here -->
@@ -273,6 +313,7 @@
           <div class="accordion-item" id="beyond-table-accordion">
             <div class="accordion-header">
               <h3>Beyond the Table</h3>
+              <div class="accordion-icon"></div>
             </div>
             <div class="accordion-content">
               <!-- Beyond the Table content goes here -->
@@ -284,6 +325,7 @@
           <div class="accordion-item" id="faq-accordion">
             <div class="accordion-header">
               <h3>Frequently Asked Questions</h3>
+              <div class="accordion-icon"></div>
             </div>
             <div class="accordion-content">
               <!-- FAQ content goes here -->
@@ -551,50 +593,63 @@ document.addEventListener('DOMContentLoaded', function() {
 });
     </script>
     <script>
-  // Fix for chevron icons - Runs after main script
-  document.addEventListener('DOMContentLoaded', function() {
-    // Replace "+" icons with proper chevrons
-    document.querySelectorAll('.accordion-icon').forEach(function(icon) {
-      if (icon.textContent === '+') {
+  // Chevron fix function
+  function fixAccordionChevrons() {
+    console.log('Chevron fix script running');
+    var accordionIcons = document.querySelectorAll('.accordion-icon');
+    console.log('Found ' + accordionIcons.length + ' accordion icons');
+    accordionIcons.forEach(function(icon, i) {
+      console.log('Processing icon #' + (i+1));
+      icon.textContent = '';
+      try {
         icon.innerHTML = `
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 12L16 4L14.59 2.58L8 9.17L1.41 2.58L0 4L8 12Z" fill="#1D3557"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9l6 6 6-6" stroke="#1D3557" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         `;
+        console.log('SVG chevron inserted');
+      } catch (e) {
+        icon.textContent = '▼';
+        icon.style.fontSize = '24px';
+        icon.style.color = '#1D3557';
+        console.log('SVG failed, used Unicode arrow');
       }
+      icon.style.display = 'flex';
+      icon.style.alignItems = 'center';
+      icon.style.justifyContent = 'center';
+      icon.style.transition = 'transform 0.3s ease';
     });
-    // Fix for closing other accordions when one opens
-    document.querySelectorAll('.accordion-header').forEach(function(header) {
-      header.addEventListener('click', function(event) {
-        event.stopPropagation();
-        const clickedItem = this.parentElement;
-        const isActive = clickedItem.classList.contains('active');
-        document.querySelectorAll('.accordion-item.active').forEach(function(item) {
-          if (item !== clickedItem) {
-            item.classList.remove('active');
-            const content = item.querySelector('.accordion-content');
-            if (content) {
-              content.style.maxHeight = '0';
-            }
-          }
-        });
-        if (!isActive) {
-          clickedItem.classList.add('active');
-          const content = clickedItem.querySelector('.accordion-content');
-          if (content) {
-            content.style.maxHeight = '400px';
-          }
-        } else {
-          clickedItem.classList.remove('active');
-          const content = clickedItem.querySelector('.accordion-content');
-          if (content) {
-            content.style.maxHeight = '0';
-          }
+    // Add styles for chevron rotation
+    if (!document.getElementById('chevron-style')) {
+      var style = document.createElement('style');
+      style.id = 'chevron-style';
+      style.textContent = `
+        .accordion-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.3s ease;
         }
-      }, true);
+        .accordion-item.active .accordion-icon,
+        .accordion-item.open .accordion-icon {
+          transform: rotate(180deg);
+        }
+      `;
+      document.head.appendChild(style);
+    }
+    console.log('Chevron fix completed');
+  }
+  document.addEventListener('DOMContentLoaded', fixAccordionChevrons);
+  // Patch modal open logic to re-run chevron fix
+  document.addEventListener('DOMContentLoaded', function() {
+    var modalTriggers = document.querySelectorAll('[data-modal-target]');
+    modalTriggers.forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        setTimeout(fixAccordionChevrons, 100); // Run after modal content is injected
+      });
     });
   });
-</script>
+    </script>
     <script>
   // Self-contained script to make accordions close automatically
   // This runs independently of your existing accordion.js
@@ -646,5 +701,147 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Auto-close script initialized');
   });
     </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Accordion icon fix running');
+    // Replace all + symbols with CSS chevrons
+    function fixAccordionIcons() {
+      // Find all accordion icons
+      var icons = document.querySelectorAll('.accordion-icon');
+      console.log('Found ' + icons.length + ' accordion icons');
+      // Process each icon
+      icons.forEach(function(icon) {
+        // Check content
+        var content = icon.innerHTML.trim();
+        console.log('Icon content: "' + content + '"');
+        // If it's empty or contains + symbols, replace it with a CSS arrow
+        if (content === '' || content === '+' || content === '++') {
+          console.log('Replacing icon content');
+          icon.innerHTML = '';
+          icon.style.position = 'relative';
+          icon.style.width = '24px';
+          icon.style.height = '24px';
+          icon.style.display = 'flex';
+          icon.style.alignItems = 'center';
+          icon.style.justifyContent = 'center';
+          // Create a span for the arrow
+          var arrow = document.createElement('span');
+          arrow.style.display = 'block';
+          arrow.style.width = '10px';
+          arrow.style.height = '10px';
+          arrow.style.borderRight = '2px solid #1D3557';
+          arrow.style.borderBottom = '2px solid #1D3557';
+          arrow.style.transform = 'rotate(45deg)';
+          arrow.style.transition = 'transform 0.3s ease';
+          // Add it to the icon
+          icon.appendChild(arrow);
+          // Check if parent accordion is active/open
+          var accordionItem = icon.closest('.accordion-item');
+          if (accordionItem && (accordionItem.classList.contains('active') || accordionItem.classList.contains('open'))) {
+            arrow.style.transform = 'rotate(225deg)';
+          }
+        }
+      });
+    }
+    // Run the fix initially
+    fixAccordionIcons();
+    // Also run it after a short delay to catch any dynamic changes
+    setTimeout(fixAccordionIcons, 500);
+    // Set up a MutationObserver to catch any dynamically added icons
+    var observer = new MutationObserver(function(mutations) {
+      fixAccordionIcons();
+    });
+    // Start observing the document with the configured parameters
+    observer.observe(document.body, { childList: true, subtree: true });
+    console.log('Accordion icon fix complete');
+  });
+    </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Text-based icon fix running');
+    // Function to replace text-based icons with proper chevrons
+    function fixTextIcons() {
+      // Get all accordion headers
+      var headers = document.querySelectorAll('.accordion-header');
+      headers.forEach(function(header) {
+        // Get all text nodes within this header
+        var walker = document.createTreeWalker(
+          header, 
+          NodeFilter.SHOW_TEXT, 
+          null, 
+          false
+        );
+        var textNodes = [];
+        var currentNode;
+        // Collect all text nodes
+        while (currentNode = walker.nextNode()) {
+          textNodes.push(currentNode);
+        }
+        // Check each text node for "+" or "-" characters
+        textNodes.forEach(function(textNode) {
+          var text = textNode.nodeValue.trim();
+          // If it contains plus or minus signs, replace the node
+          if (text === '+' || text === '-' || text === '++' || text === '--' || text === '+-' || text === '-+') {
+            console.log('Found text icon: "' + text + '"');
+            // Create a chevron span
+            var chevron = document.createElement('span');
+            chevron.className = 'chevron-icon';
+            chevron.style.display = 'inline-block';
+            chevron.style.width = '12px';
+            chevron.style.height = '12px';
+            chevron.style.borderRight = '2px solid #4779B5';
+            chevron.style.borderBottom = '2px solid #4779B5';
+            chevron.style.transform = 'rotate(45deg)';
+            chevron.style.marginLeft = '5px';
+            chevron.style.transition = 'transform 0.3s ease';
+            // Check if the accordion is open/active
+            var accordionItem = header.closest('.accordion-item');
+            if (accordionItem && (accordionItem.classList.contains('active') || accordionItem.classList.contains('open'))) {
+              chevron.style.transform = 'rotate(225deg)';
+            }
+            // Replace the text node with our chevron
+            textNode.parentNode.replaceChild(chevron, textNode);
+            // Add a rotation listener to this header
+            header.addEventListener('click', function() {
+              setTimeout(function() {
+                var isActive = accordionItem.classList.contains('active') || accordionItem.classList.contains('open');
+                chevron.style.transform = isActive ? 'rotate(225deg)' : 'rotate(45deg)';
+              }, 10);
+            });
+          }
+        });
+      });
+    }
+    // Run the fix
+    fixTextIcons();
+    // Run again after a short delay to catch any dynamic changes
+    setTimeout(fixTextIcons, 500);
+  });
+</script>
+<style>
+  /* Hide any other plus/minus signs that might appear in accordion headers */
+  .accordion-header .accordion-icon,
+  .accordion-header [class*="icon"],
+  .accordion-header [class*="arrow"] {
+    font-size: 0 !important; /* Make text invisible */
+  }
+  /* Style for our custom chevrons */
+  .chevron-icon {
+    position: relative !important;
+    display: inline-block !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-right: 2px solid #4779B5 !important;
+    border-bottom: 2px solid #4779B5 !important;
+    transform: rotate(45deg) !important;
+    margin-left: 5px !important;
+    transition: transform 0.3s ease !important;
+  }
+  /* Rotate when accordion is open */
+  .accordion-item.active .chevron-icon,
+  .accordion-item.open .chevron-icon {
+    transform: rotate(225deg) !important;
+  }
+</style>
 </body>
 </html>
