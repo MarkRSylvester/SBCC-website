@@ -38,6 +38,58 @@
       .footer-social {
         margin-bottom: 25px;
       }
+      
+      #our-story-accordion .accordion-content {
+        max-height: 400px;
+        overflow-y: auto;
+        transition: max-height 0.3s ease;
+      }
+      
+      #our-story-accordion:not(.active) .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+      }
+      
+      /* Fix scrolling for long accordion content */
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      
+      .accordion-item.active .accordion-content {
+        display: block !important;
+        max-height: 400px !important;
+        padding: 15px !important;
+        overflow-y: auto !important;
+      }
+      
+      .accordion-content::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      .accordion-content::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+      
+      .accordion-content::-webkit-scrollbar-thumb {
+        background-color: #1D3557;
+        border-radius: 3px;
+      }
+      
+      .accordion-content {
+        scrollbar-width: thin;
+        scrollbar-color: #1D3557 #f1f1f1;
+      }
+      
+      .accordion-icon {
+        transition: transform 0.3s ease;
+      }
+      
+      .accordion-item.active .accordion-icon {
+        transform: rotate(180deg);
+      }
     </style>
 </head>
 <body>
@@ -106,9 +158,8 @@
           <div class="accordion-item" id="our-story-accordion">
             <div class="accordion-header">
               <h3>Our Story</h3>
-              <div class="accordion-icon">+</div>
             </div>
-            <div class="accordion-content" style="max-height: 0; padding: 0 1rem;">
+            <div class="accordion-content">
               <!-- Welcome Section -->
               <div class="section-content">
                 <h4>Welcome to the Santa Barbara Chef Collective</h4>
@@ -185,25 +236,23 @@
             </div>
           </div>
           
-          <!-- MEET THE CHEFS ACCORDION (was Our Chefs) -->
-          <div class="accordion-item" id="meet-the-chefs-accordion">
+          <!-- OUR CHEFS ACCORDION -->
+          <div class="accordion-item" id="our-chefs-accordion">
             <div class="accordion-header">
-              <h3>Meet the Chefs</h3>
-              <div class="accordion-icon">+</div>
+              <h3>Our Chefs</h3>
             </div>
-            <div class="accordion-content" style="max-height: 0; padding: 0 1rem;">
+            <div class="accordion-content">
               <!-- Our Chefs content goes here -->
               <p>Chef content placeholder</p>
             </div>
           </div>
           
-          <!-- SIGNATURE MENUS ACCORDION (was Our Menus) -->
-          <div class="accordion-item" id="signature-menus-accordion">
+          <!-- OUR MENUS ACCORDION -->
+          <div class="accordion-item" id="our-menus-accordion">
             <div class="accordion-header">
-              <h3>Signature Menus</h3>
-              <div class="accordion-icon">+</div>
+              <h3>Our Menus</h3>
             </div>
-            <div class="accordion-content" style="max-height: 0; padding: 0 1rem;">
+            <div class="accordion-content">
               <!-- Our Menus content goes here -->
               <p>Menu content placeholder</p>
             </div>
@@ -214,7 +263,7 @@
             <div class="accordion-header">
               <h3>Gatherings & Celebrations</h3>
             </div>
-            <div class="accordion-content" style="max-height: 0; padding: 0 1rem;">
+            <div class="accordion-content">
               <!-- Gatherings content goes here -->
               <p>Gatherings content placeholder</p>
             </div>
@@ -225,7 +274,7 @@
             <div class="accordion-header">
               <h3>Beyond the Table</h3>
             </div>
-            <div class="accordion-content" style="max-height: 0; padding: 0 1rem;">
+            <div class="accordion-content">
               <!-- Beyond the Table content goes here -->
               <p>Beyond the Table content placeholder</p>
             </div>
@@ -236,7 +285,7 @@
             <div class="accordion-header">
               <h3>Frequently Asked Questions</h3>
             </div>
-            <div class="accordion-content" style="max-height: 0; padding: 0 1rem;">
+            <div class="accordion-content">
               <!-- FAQ content goes here -->
               <p>FAQ content placeholder</p>
             </div>
@@ -375,6 +424,227 @@
       });
     });
     </script>
-    <script src="/js/accordion.js"></script>
+    <script>
+    // Accordion debug script
+    console.log('Accordion script running');
+    const headers = document.querySelectorAll('.accordion-header');
+    console.log('Found', headers.length, 'accordion headers');
+    headers.forEach(header => {
+      header.style.cursor = 'pointer';
+      header.addEventListener('click', function() {
+        console.log('Accordion header clicked:', this.textContent.trim());
+        const item = this.parentElement;
+        const content = item.querySelector('.accordion-content');
+        const icon = this.querySelector('.accordion-icon');
+        const isOpen = item.classList.contains('active');
+        if (isOpen) {
+          item.classList.remove('active');
+          content.style.display = 'none';
+          if (icon) icon.textContent = '+';
+        } else {
+          item.classList.add('active');
+          content.style.display = 'block';
+          if (icon) icon.textContent = '-';
+        }
+      });
+      // Start closed
+      const content = header.parentElement.querySelector('.accordion-content');
+      if (content) content.style.display = 'none';
+      const icon = header.querySelector('.accordion-icon');
+      if (icon) icon.textContent = '+';
+    });
+    </script>
+    <script>
+    // Simple accordion open/close functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.style.cursor = 'pointer';
+      header.addEventListener('click', function() {
+        const item = this.parentElement;
+        const content = item.querySelector('.accordion-content');
+        const icon = this.querySelector('.accordion-icon');
+        const isOpen = item.classList.contains('active');
+        if (isOpen) {
+          item.classList.remove('active');
+          content.style.display = 'none';
+          if (icon) icon.textContent = '+';
+        } else {
+          item.classList.add('active');
+          content.style.display = 'block';
+          if (icon) icon.textContent = '-';
+        }
+      });
+      // Start closed
+      const content = header.parentElement.querySelector('.accordion-content');
+      if (content) content.style.display = 'none';
+      const icon = header.querySelector('.accordion-icon');
+      if (icon) icon.textContent = '+';
+    });
+    </script>
+    <script>
+/**
+ * Santa Barbara Chef Collective
+ * Minimal Accordion Fix
+ * This is a minimal fix that only addresses the syntax error
+ * without changing existing functionality
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Select all accordion headers
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  
+  // Add click event listeners to all accordion headers
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', function() {
+      // Get the parent accordion item
+      const accordionItem = this.parentElement;
+      
+      // Toggle the active class
+      accordionItem.classList.toggle('active');
+      accordionItem.classList.toggle('open');
+      
+      // Get the accordion content
+      const content = this.nextElementSibling;
+      
+      // Toggle the content display
+      if (accordionItem.classList.contains('active')) {
+        content.style.display = 'block';
+        // Try to adjust max-height for animation
+        try {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        } catch(e) {
+          // Fallback if scrollHeight causes issues
+          content.style.maxHeight = '1000px';
+        }
+      } else {
+        // Hide the content
+        content.style.display = 'none';
+        content.style.maxHeight = '0';
+      }
+      
+      // Try to rotate the chevron if it exists
+      try {
+        const icon = this.querySelector('.accordion-icon');
+        if (icon) {
+          icon.style.transform = accordionItem.classList.contains('active') ? 
+            'rotate(180deg)' : 'rotate(0deg)';
+        }
+      } catch(e) {
+        // Ignore errors with the icon
+        console.log('Note: Could not rotate accordion icon');
+      }
+    });
+  });
+  
+  // Initialize any accordions that should start open
+  document.querySelectorAll('.accordion-item.active, .accordion-item.open').forEach(item => {
+    const content = item.querySelector('.accordion-content');
+    if (content) {
+      content.style.display = 'block';
+      content.style.maxHeight = content.scrollHeight + 'px';
+      
+      const icon = item.querySelector('.accordion-icon');
+      if (icon) {
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+  });
+});
+    </script>
+    <script>
+  // Fix for chevron icons - Runs after main script
+  document.addEventListener('DOMContentLoaded', function() {
+    // Replace "+" icons with proper chevrons
+    document.querySelectorAll('.accordion-icon').forEach(function(icon) {
+      if (icon.textContent === '+') {
+        icon.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12L16 4L14.59 2.58L8 9.17L1.41 2.58L0 4L8 12Z" fill="#1D3557"/>
+          </svg>
+        `;
+      }
+    });
+    // Fix for closing other accordions when one opens
+    document.querySelectorAll('.accordion-header').forEach(function(header) {
+      header.addEventListener('click', function(event) {
+        event.stopPropagation();
+        const clickedItem = this.parentElement;
+        const isActive = clickedItem.classList.contains('active');
+        document.querySelectorAll('.accordion-item.active').forEach(function(item) {
+          if (item !== clickedItem) {
+            item.classList.remove('active');
+            const content = item.querySelector('.accordion-content');
+            if (content) {
+              content.style.maxHeight = '0';
+            }
+          }
+        });
+        if (!isActive) {
+          clickedItem.classList.add('active');
+          const content = clickedItem.querySelector('.accordion-content');
+          if (content) {
+            content.style.maxHeight = '400px';
+          }
+        } else {
+          clickedItem.classList.remove('active');
+          const content = clickedItem.querySelector('.accordion-content');
+          if (content) {
+            content.style.maxHeight = '0';
+          }
+        }
+      }, true);
+    });
+  });
+</script>
+    <script>
+  // Self-contained script to make accordions close automatically
+  // This runs independently of your existing accordion.js
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Auto-close script running');
+    // Function to close all accordions except the one specified
+    function closeOtherAccordions(exceptThisOne) {
+      console.log('Closing other accordions');
+      // Get all active accordions
+      var allActive = document.querySelectorAll('.accordion-item.active');
+      console.log('Found ' + allActive.length + ' active accordions to process');
+      // Close each one that's not the current one
+      allActive.forEach(function(item) {
+        if (item !== exceptThisOne) {
+          console.log('Closing an accordion');
+          // Remove the active class
+          item.classList.remove('active');
+          item.classList.remove('open');
+          // Get and hide the content
+          var content = item.querySelector('.accordion-content');
+          if (content) {
+            content.style.display = 'none';
+            content.style.maxHeight = '0';
+          }
+          // Reset the icon if it exists
+          var icon = item.querySelector('.accordion-icon');
+          if (icon) {
+            icon.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+    }
+    // Add direct click handlers to all accordion headers
+    var headers = document.querySelectorAll('.accordion-header');
+    console.log('Found ' + headers.length + ' accordion headers');
+    headers.forEach(function(header) {
+      // Add our own click handler that runs first
+      header.addEventListener('click', function(event) {
+        console.log('Header clicked with auto-close handler');
+        // Get the parent accordion item
+        var parentAccordion = this.parentElement;
+        // Only proceed with auto-closing if this accordion is being opened
+        if (!parentAccordion.classList.contains('active')) {
+          // Close all other accordions
+          closeOtherAccordions(parentAccordion);
+        }
+      }, true); // true makes this run before other handlers (capture phase)
+    });
+    console.log('Auto-close script initialized');
+  });
+    </script>
 </body>
 </html>

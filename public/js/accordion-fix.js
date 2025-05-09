@@ -74,83 +74,59 @@ const accordionFixCSS = `
 }
 `;
 
-// Fix accordion behavior to ensure only one opens at a time
+// Brand new accordion implementation based on the actual HTML structure
 document.addEventListener('DOMContentLoaded', function() {
-  // Add the CSS fixes
-  const styleElement = document.createElement('style');
-  styleElement.textContent = accordionFixCSS;
-  document.head.appendChild(styleElement);
+  console.log("New accordion implementation loading");
   
-  // Initialize accordion functionality
-  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  // Target the exact HTML structure I see in your screenshots
+  // Each accordion has a div.accordion-item with an h3 title and a +/- button
   
-  accordionHeaders.forEach(header => {
-    // Add plus icon if it doesn't exist
-    if (!header.querySelector('.accordion-icon')) {
-      const iconDiv = document.createElement('div');
-      iconDiv.className = 'accordion-icon';
-      iconDiv.textContent = '+';
-      header.appendChild(iconDiv);
-    }
+  // Find all h3 elements inside elements with blue left borders
+  document.querySelectorAll('h3').forEach(heading => {
+    console.log("Found heading:", heading.textContent.trim());
     
-    header.addEventListener('click', function() {
-      const accordionItem = this.closest('.accordion-item');
+    // Make it clickable
+    heading.style.cursor = 'pointer';
+    
+    // Add click handler
+    heading.addEventListener('click', function() {
+      console.log("Clicked heading:", this.textContent.trim());
       
-      // Close all other accordions first
-      const allAccordionItems = document.querySelectorAll('.accordion-item');
-      allAccordionItems.forEach(item => {
-        if (item !== accordionItem && item.classList.contains('active')) {
-          item.classList.remove('active');
-          
-          // Reset plus icon
-          const icon = item.querySelector('.accordion-icon');
-          if (icon) {
-            icon.textContent = '+';
-          }
-        }
-      });
-      
-      // Toggle active class for clicked accordion
-      const isActive = accordionItem.classList.contains('active');
-      accordionItem.classList.toggle('active');
-      
-      // Update plus/minus icon
-      const icon = this.querySelector('.accordion-icon');
-      if (icon) {
-        icon.textContent = isActive ? '+' : '-';
+      // Find the content div (it's the next element after the h3)
+      const contentDiv = this.nextElementSibling;
+      if (!contentDiv) {
+        console.log("No content div found");
+        return;
       }
       
-      // Toggle aria-expanded for accessibility
-      this.setAttribute('aria-expanded', !isActive);
+      // Toggle visibility
+      const isVisible = contentDiv.style.display !== 'none';
       
-      // Handle content visibility
-      const content = accordionItem.querySelector('.accordion-content');
-      if (content) {
-        if (!isActive) {
-          content.style.maxHeight = content.scrollHeight + 'px';
-          content.style.padding = '0 24px 24px 24px';
-        } else {
-          content.style.maxHeight = '0';
-          content.style.padding = '0 24px';
-        }
+      if (isVisible) {
+        // Hide it
+        contentDiv.style.display = 'none';
+        // Update plus/minus if it exists
+        const icon = this.querySelector('span, .accordion-icon');
+        if (icon) icon.textContent = '+';
+      } else {
+        // Show it
+        contentDiv.style.display = 'block';
+        // Update plus/minus if it exists
+        const icon = this.querySelector('span, .accordion-icon');
+        if (icon) icon.textContent = '-';
       }
     });
   });
   
-  // Close all accordions by default
-  const allAccordions = document.querySelectorAll('.accordion-item');
-  allAccordions.forEach(accordion => {
-    accordion.classList.remove('active');
-    const content = accordion.querySelector('.accordion-content');
-    if (content) {
-      content.style.maxHeight = '0';
-      content.style.padding = '0 24px';
-    }
-    const icon = accordion.querySelector('.accordion-icon');
-    if (icon) {
-      icon.textContent = '+';
+  // Initialize all accordions to be closed by default
+  document.querySelectorAll('h3').forEach(heading => {
+    const contentDiv = heading.nextElementSibling;
+    if (contentDiv && contentDiv.tagName !== 'H3') {
+      contentDiv.style.display = 'none';
     }
   });
+  
+  console.log("New accordion implementation loaded");
 });
 
 // Close all accordions

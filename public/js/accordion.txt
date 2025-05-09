@@ -1,0 +1,45 @@
+```javascript
+// Simple accordion implementation - no HTML tags, just plain JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Simple accordion implementation loading");
+  
+  // Find all headings that match our accordion titles
+  document.querySelectorAll('h3').forEach(function(heading) {
+    // Only target our main accordion headers
+    if (heading.textContent.includes('Story') || 
+        heading.textContent.includes('Chefs') ||
+        heading.textContent.includes('Menus') ||
+        heading.textContent.includes('Gatherings') ||
+        heading.textContent.includes('Beyond') ||
+        heading.textContent.includes('Asked')) {
+      
+      console.log("Found heading:", heading.textContent);
+      
+      // Make it clickable
+      heading.style.cursor = 'pointer';
+      
+      // Add click handler
+      heading.addEventListener('click', function() {
+        console.log("Clicked heading:", this.textContent);
+        
+        // Find the content element (next sibling)
+        const content = this.nextElementSibling;
+        
+        if (content) {
+          console.log("Found content element");
+          
+          // Toggle display
+          if (getComputedStyle(content).display === 'none') {
+            content.style.display = 'block';
+            console.log("Opened accordion");
+          } else {
+            content.style.display = 'none';
+            console.log("Closed accordion");
+          }
+        } else {
+          console.log("No content element found");
+        }
+      });
+    }
+  });
+});

@@ -19,6 +19,7 @@
 }
 
 .accordion-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,9 +35,26 @@
   font-size: 1.4rem;
   color: #1D3557; /* Navy */
   margin: 0;
+  flex-grow: 1;
 }
 
 .accordion-icon {
+  /* Force visibility and proper position */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.accordion-icon svg {
+  /* Make sure SVG is visible */
+  display: block;
+  width: 16px;
+  height: 16px;
   transition: transform 0.3s ease;
 }
 
@@ -45,16 +63,20 @@
 }
 
 .accordion-content {
-  padding: 0;
+  display: none;
   height: 0;
+  max-height: 0;
+  padding: 0;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .accordion-item.active .accordion-content {
-  padding: 20px;
+  display: block;
   height: auto;
-  overflow: visible;
+  max-height: none;
+  padding: 20px;
+  overflow: auto;
 }
 
 .section-intro {
