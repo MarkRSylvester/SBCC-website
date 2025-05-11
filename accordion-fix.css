@@ -1,0 +1,23 @@
+/* Accordion scroll fix */
+.accordion-item.active .accordion-content, 
+.accordion-item.open .accordion-content {
+  max-height: 80vh !important; /* Allow scrolling within the viewport */
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  padding: 20px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Make sure event grids are visible */
+.main-event-types-grid,
+.additional-event-types-grid,
+.category-grid {
+  display: grid;
+  margin-bottom: 20px;
+}
+
+/* Make sure no overflow is hidden */
+.accordion-item {
+  overflow: visible !important;
+}

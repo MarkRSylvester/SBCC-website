@@ -1,0 +1,263 @@
+/* Base accordion styles */
+.accordion-item {
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #E6DBC9;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.accordion-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f1f8ff;
+}
+
+.accordion-header h3 {
+  margin: 0;
+  color: #2a4374;
+  font-weight: 500;
+}
+
+/* Replace + sign with chevron */
+.accordion-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.accordion-icon:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #2a4374;
+  position: absolute;
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Accordion content area */
+.accordion-content {
+  display: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.accordion-item.active .accordion-content {
+  display: block;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* Our Story specific styling */
+.story-section {
+  margin-bottom: 2rem;
+}
+
+.story-section h4 {
+  color: #2a4374;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, #A2A284 30%, transparent 100%);
+  margin: 1.5rem auto;
+  width: 80%;
+  max-width: 300px;
+  opacity: 0.6;
+}
+
+/* Founder section styles - fix text wrapping */
+.founder-content {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.founder-image {
+  flex: 0 0 auto;
+  width: 200px;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.founder-image img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.founder-text {
+  flex: 1;
+}
+
+.founder-signature {
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Process steps styles - fix number alignment */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #2a4374;
+  color: white;
+  font-weight: bold;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h5 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2a4374;
+}
+
+/* Beyond the Table category grid - 2x3 layout */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.category-card {
+  background-color: #F9F7F2;
+  border-radius: 4px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.category-title {
+  font-family: 'Playfair Display', serif;
+  color: #1D3557;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+/* Divider styling */
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, #A2A284 0%, transparent 100%);
+  margin: 0.75rem 0 1rem 0;
+  width: 100%;
+  max-width: 100px;
+}
+
+/* List styling - reduce line height */
+.event-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.25rem; /* Reduced from 0.5rem */
+  line-height: 1.3; /* Reduced from 1.5 */
+  color: #333333;
+}
+
+.event-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #A2A284;
+}
+
+/* FAQ styling */
+.faq-group {
+  margin-bottom: 2rem;
+}
+
+.faq-group h4 {
+  font-family: 'Playfair Display', serif;
+  color: #1D3557;
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+}
+
+.faq-item {
+  margin-bottom: 1.5rem;
+}
+
+.faq-question {
+  font-weight: 600;
+  color: #1D3557;
+  margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+  color: #666666;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .founder-content {
+    flex-direction: column;
+  }
+  
+  .founder-image {
+    width: 180px;
+    margin-bottom: 1rem;
+  }
+  
+  .accordion-header h3 {
+    font-size: 1.25rem;
+  }
+}

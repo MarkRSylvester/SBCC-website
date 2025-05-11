@@ -129,7 +129,7 @@
   overflow: visible !important;
 }
 </style>
-<link rel="stylesheet" href="css/accordion-styles.css"><link rel="stylesheet" href="css/accordion-styles.css"></head>
+</head>
 <body>
     <header>
         <div class="container">
@@ -196,80 +196,85 @@
           <div class="accordion-item" id="our-story-accordion">
             <div class="accordion-header">
               <h3>Our Story</h3>
-              <div class="accordion-icon">+</div>
             </div>
             <div class="accordion-content">
-              <div class="story-section">
+              <!-- Welcome Section -->
+              <div class="section-content">
                 <h4>Welcome to the Santa Barbara Chef Collective</h4>
                 <p>We're a community of local chefs on a shared mission: to make private dining effortless—and unforgettable. Whether you're planning an intimate dinner, a wedding, or a weekend retreat, we'll match you with the perfect chef to bring your vision to life through thoughtful, beautifully prepared food.</p>
-                <div class="section-divider"></div>
               </div>
               
-              <div class="story-section">
+              <div class="tapered-divider"></div>
+              
+              <!-- Founder's Story with Image -->
+              <div class="section-content">
                 <h4>Our Founder's Story</h4>
-                <div class="founder-content">
+                
+                <div class="founder-bio">
                   <div class="founder-image">
                     <img src="/SBCC-Images/coco-portrait.jpg" alt="Coco, Founder of Santa Barbara Chef Collective">
                   </div>
-                  <div class="founder-text">
-                    <p>I had the joy of being a private yacht chef for eight years, cooking for royalty, celebrities, and adventurers while sailing the globe. But my passion for food began earlier, in the fresh markets of France, where I fell in love with seasonal ingredients, aged cheeses, and the art of gathering.</p>
-                    <p>Motivated by that culture, I trained at Tante Marie's in San Francisco and have never stopped cooking since. From buying octopus in a Greek village to slicing fresh-caught sashimi in Alaska, I've always believed food should reflect where you are and who you're with.</p>
-                    <p>Now rooted in Santa Barbara and close to family, I cook for local events and gatherings using vibrant, organic California ingredients. I specialize in Mediterranean and raw cuisine and love meals that make you feel great, body and soul.</p>
-                    <p>Founding the Chef Collective let me bring together a team of chefs who care deeply about food, craft, and connection. I'm so glad you're here.</p>
-                    <p class="founder-signature">— Coco</p>
-                  </div>
+                  
+                  <p>I had the joy of being a private yacht chef for eight years, cooking for royalty, celebrities, and adventurers while sailing the globe. But my passion for food began earlier, in the fresh markets of France, where I fell in love with seasonal ingredients, aged cheeses, and the art of gathering.</p>
+                  
+                  <p>Motivated by that culture, I trained at Tante Marie's in San Francisco and have never stopped cooking since. From buying octopus in a Greek village to slicing fresh-caught sashimi in Alaska, I've always believed food should reflect where you are and who you're with.</p>
+                  
+                  <p>Now rooted in Santa Barbara and close to family, I cook for local events and gatherings using vibrant, organic California ingredients. I specialize in Mediterranean and raw cuisine and love meals that make you feel great, body and soul.</p>
+                  
+                  <p>Founding the Chef Collective let me bring together a team of chefs who care deeply about food, craft, and connection. I'm so glad you're here.</p>
+                  
+                  <p class="signature">— Coco</p>
                 </div>
-                <div class="section-divider"></div>
               </div>
               
-              <div class="story-section">
+              <div class="tapered-divider"></div>
+              
+              <!-- Global Talent, Local Roots Section -->
+              <div class="section-content">
                 <h4>Global Talent, Local Roots</h4>
                 <p>From Michelin-trained masters to creative culinary artisans, our chefs bring world-class skill to Santa Barbara tables. Every chef is personally vetted and selected not just for talent, but for hospitality and heart.</p>
-                <div class="section-divider"></div>
               </div>
               
-              <div class="story-section">
+              <div class="tapered-divider"></div>
+              
+              <!-- Connecting Great Chefs with Great Clients Section -->
+              <div class="section-content">
                 <h4>Connecting Great Chefs with Great Clients</h4>
                 <p>Our platform makes it easy to browse and connect with top local chefs. Every detail is handled with care, so you can focus on the experience, not the logistics.</p>
-                <div class="section-divider"></div>
               </div>
               
-              <div class="story-section">
+              <div class="tapered-divider"></div>
+              
+              <!-- Celebrating Local Flavor Section -->
+              <div class="section-content">
                 <h4>Celebrating Local Flavor</h4>
                 <p>We partner with Santa Barbara farmers, fishers, and foragers to create dishes that reflect the vibrant spirit of the Central Coast. Every meal is a celebration of community, seasonality, and creativity.</p>
-                <div class="section-divider"></div>
               </div>
               
-              <div class="story-section">
+              <div class="tapered-divider"></div>
+              
+              <!-- Process Section - MOVED TO END -->
+              <div class="section-content">
                 <h4>The Process</h4>
-                <div class="process-steps">
-                  <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                      <h5>Chef Selection</h5>
-                      <p>Once you reach out, we'll send you curated resumes from chefs matched to your tastes, event style, and household needs.</p>
-                    </div>
-                  </div>
-                  
-                  <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                      <h5>Personal Interviews</h5>
-                      <p>You'll meet the chefs to ensure their style, personality, and creativity align with your vision.</p>
-                    </div>
-                  </div>
-                  
-                  <div class="process-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                      <h5>The Perfect Match</h5>
-                      <p>With our guidance, you'll choose the chef who best fits the bill—someone who will turn your gathering into something truly memorable.</p>
-                    </div>
-                  </div>
-                </div>
+                <ol class="process-list">
+                  <li>
+                    <strong>Chef Selection</strong>
+                    <p>Once you reach out, we'll send you curated resumes from chefs matched to your tastes, event style, and household needs.</p>
+                  </li>
+                  <li>
+                    <strong>Personal Interviews</strong>
+                    <p>You'll meet the chefs to ensure their style, personality, and creativity align with your vision.</p>
+                  </li>
+                  <li>
+                    <strong>The Perfect Match</strong>
+                    <p>With our guidance, you'll choose the chef who best fits the bill—someone who will turn your gathering into something truly memorable.</p>
+                  </li>
+                </ol>
               </div>
             </div>
           </div>
+          
+          <!-- OUR CHEFS ACCORDION -->
           <div class="accordion-item" id="our-chefs-accordion">
             <div class="accordion-header">
               <h3>Our Chefs</h3>
@@ -352,96 +357,47 @@
           <div class="accordion-item" id="beyond-table-accordion">
             <div class="accordion-header">
               <h3>Beyond the Table</h3>
-              <div class="accordion-icon">+</div>
             </div>
             <div class="accordion-content">
-              <p class="section-intro">
-                Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering. These thoughtful additions transform meals into complete sensory experiences.
-              </p>
-              
-              <div class="category-grid">
-                <!-- Wine Pairing Guidance -->
-                <div class="category-card">
-                  <h4 class="category-title">Wine Pairing Guidance</h4>
-                  <div class="divider"></div>
-                  <ul class="event-list">
-                    <li>Expert wine recommendations tailored to your menu</li>
-                    <li>Curated selections from local Santa Barbara vineyards</li>
-                    <li>In-home wine tasting experiences with sommeliers</li>
-                    <li>Custom flight creation for multi-course experiences</li>
-                    <li>Pricing: From complimentary guidance to full sommelier service</li>
-                    <li>In partnership with Renegade Wines</li>
-                    <li>Educational notes on region, varietal, and pairing principles</li>
-                  </ul>
-                </div>
-                
-                <!-- Table Setting & Styling -->
-                <div class="category-card">
-                  <h4 class="category-title">Table Setting & Styling</h4>
-                  <div class="divider"></div>
-                  <ul class="event-list">
-                    <li>Elegant table design customized to your occasion</li>
-                    <li>Premium linens, dinnerware, and glassware</li>
-                    <li>Seasonal floral arrangements from local growers</li>
-                    <li>Ambient lighting to create the perfect atmosphere</li>
-                    <li>Pricing: From $15 per guest for essentials to $60+ for luxury</li>
-                    <li>In collaboration with Santa Barbara Picnic Co.</li>
-                    <li>Themed options reflecting local coastal elegance</li>
-                  </ul>
-                </div>
-                
-                <!-- Bartending Services -->
-                <div class="category-card">
-                  <h4 class="category-title">Bartending Services</h4>
-                  <div class="divider"></div>
-                  <ul class="event-list">
-                    <li>Professional bartenders to serve drinks at your event</li>
-                    <li>Experienced mixologists who provide attentive service</li>
-                    <li>Connects you with trusted bartending professionals</li>
-                    <li>Custom cocktail menus featuring local ingredients and spirits</li>
-                  </ul>
-                </div>
-                
-                <!-- Specialty Cocktails -->
-                <div class="category-card">
-                  <h4 class="category-title">Specialty Cocktails</h4>
-                  <div class="divider"></div>
-                  <ul class="event-list">
-                    <li>Custom cocktail mixers created by your chef</li>
-                    <li>Unique flavor combinations to complement your menu</li>
-                    <li>Ready to add to your choice of liquor</li>
-                    <li>Seasonal ingredients that reflect Santa Barbara's bounty</li>
-                  </ul>
-                </div>
-                
-                <!-- Rental Coordination -->
-                <div class="category-card">
-                  <h4 class="category-title">Rental Coordination</h4>
-                  <div class="divider"></div>
-                  <ul class="event-list">
-                    <li>Connection with trusted local rental companies</li>
-                    <li>Assistance with all rental details for events</li>
-                    <li>Streamlined process for securing necessary equipment</li>
-                    <li>Expert advice on quantities and specific needs</li>
-                  </ul>
-                </div>
-                
-                <!-- Seasonal Produce Boxes -->
-                <div class="category-card">
-                  <h4 class="category-title">Seasonal Produce Boxes</h4>
-                  <div class="divider"></div>
-                  <ul class="event-list">
-                    <li>Hand-selected produce from local organic farms</li>
-                    <li>Artisanal oils, vinegars, and specialty items</li>
-                    <li>Chef-created recipes utilizing seasonal ingredients</li>
-                    <li>Information on featured farms and producers</li>
-                    <li>Pricing: From $45 weekly for essentials to $125 for gourmet</li>
-                    <li>Direct connection to Santa Barbara's agricultural heritage</li>
-                  </ul>
-                </div>
-              </div>
+              <!-- Beyond the Table content goes here -->
+              <div class="beyond-table-section">
+  <h4 class="section-title">Beyond the Table</h4>
+  <p class="section-intro">
+    Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering.
+  </p>
+  
+  <div class="category-grid">
+    <!-- Wine Pairing -->
+    <div class="category-card" data-category="wine">
+      <h4 class="category-title">Wine Pairing Guidance</h4>
+      <div class="divider"></div>
+      <ul class="event-list">
+        <li>Expert wine recommendations tailored to your menu</li>
+        <li>Curated selections from local Santa Barbara vineyards</li>
+        <li>In-home wine tasting experiences with sommeliers</li>
+        <li>Custom flight creation for multi-course experiences</li>
+        <li>Pricing: From complimentary guidance to full sommelier service</li>
+      </ul>
+    </div>
+    
+    <!-- Table Setting -->
+    <div class="category-card" data-category="tablesetting">
+      <h4 class="category-title">Table Setting & Styling</h4>
+      <div class="divider"></div>
+      <ul class="event-list">
+        <li>Elegant table design customized to your occasion</li>
+        <li>Premium linens, dinnerware, and glassware</li>
+        <li>Seasonal floral arrangements from local growers</li>
+        <li>Ambient lighting to create the perfect atmosphere</li>
+        <li>Pricing: From  per guest for essentials to + for luxury</li>
+      </ul>
+    </div>
+  </div>
+</div>
             </div>
           </div>
+          
+          <!-- FAQ ACCORDION -->
           <div class="accordion-item" id="faq-accordion">
             <div class="accordion-header">
               <h3>Frequently Asked Questions</h3>
@@ -586,5 +542,5 @@
     });
     </script>
 <script src="js/emergency-accordion.js"></script>
-<script src="js/accordion-fix.js"></script><script src="js/accordion-fix.js"></script></body>
+</body>
 </html>

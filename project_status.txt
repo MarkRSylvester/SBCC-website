@@ -1,0 +1,113 @@
+=== SBCC Project Status ===
+Last Updated: Sat May 10 17:58:18 PDT 2025
+
+Current Working Branches:
+* main
+
+Last 5 Commits:
+de6b889 Fix: Implemented emergency accordion functionality with working accordions
+c09a668 All Accordions Open - 2pm
+300bf51 4:30 update - everything is working (mostly)
+294d348 330 Build: Restore to first update of the day (clean slate)
+0680598 Update: Implement new accordion system and modal styles. Added new components and assets for improved UI/UX
+
+Uncommitted Changes:
+?? project_status.txt
+?? status.sh
+
+Key Files Modified:
+.DS_Store
+Our Story SBCC.pdf
+SBCC-Images/.DS_Store
+components/beyond-table-expanded.html
+components/faq-accordion.html
+index.html
+js/beyond-table.js
+package.json
+public/SBCC-Images/Dark-SBCC-logo.png
+public/SBCC-Images/Light-SBCC-logo.png
+public/SBCC-Images/Navy-SBCC-Logo.png
+public/SBCC-Images/beet-salad.jpg
+public/SBCC-Images/black-instagram-icon.png
+public/SBCC-Images/burratta-salad.jpg
+public/SBCC-Images/catering-header.jpg
+public/SBCC-Images/coastal-morning.jpg
+public/SBCC-Images/cocktails.jpg
+public/SBCC-Images/coco-portrait.jpg
+public/SBCC-Images/cupcakes.jpg
+public/SBCC-Images/dark-yelp-logo.png
+public/SBCC-Images/dried-vegetables.jpg
+public/SBCC-Images/fig-modal.png
+public/SBCC-Images/free-range-eggs.jpg
+public/SBCC-Images/fresh-produce.jpg
+public/SBCC-Images/gathering-modal.jpg
+public/SBCC-Images/hand-and-fig.jpg
+public/SBCC-Images/harvesting-herbs.jpg
+public/SBCC-Images/light-yelp-logo.png
+public/SBCC-Images/navy-instagram-icon.png
+public/SBCC-Images/navy-yelp-logo.png
+public/SBCC-Images/orange-tree.jpg
+public/SBCC-Images/pancakes.jpg
+public/SBCC-Images/picking-daisies.jpg
+public/SBCC-Images/picnic-tapas.jpg
+public/SBCC-Images/rowing-sb-coast.png
+public/SBCC-Images/rustic-noodles.jpeg
+public/SBCC-Images/saucing-salmon.jpg
+public/SBCC-Images/summer-fruit-salad.jpeg
+public/SBCC-Images/summer-salad.jpg
+public/SBCC-Images/tossed-vegetables.jpg
+public/SBCC-Images/weekly-meal-modal.jpg
+public/SBCC-Images/white-instagram-icon.png
+public/SBCC-Images/wine-glasses.jpg
+public/SBCC-Images/yelp-icon.png
+public/css/accordion-fix.css
+public/css/accordion-scroll.css
+public/css/accordion-standardize.css
+public/css/beyond-table-bullet-fix.css
+public/css/beyond-table-expanded-new.css
+public/css/beyond-table-expanded.css
+public/css/beyond-table-expanded.css.bak-20250505-180110
+public/css/beyond-table-fix.css
+public/css/beyond-table-titles.css
+public/css/beyond-table.css
+public/css/button-styles.css
+public/css/event-planning.css
+public/css/faq-accordion.css
+public/css/gatherings-styles.css
+public/css/gatherings.css
+public/css/modal-close.css
+public/css/modal-styles.css
+public/css/montecito.css
+public/css/our-story-accordion.css
+public/css/our-story.css
+public/css/styles.css
+public/favicon.ico
+public/index.html
+public/index.txt
+public/js/accordion-fix-all.js
+public/js/accordion-fix.js
+public/js/accordion-scroll-fix.js
+public/js/accordion-standardize.js
+public/js/accordion-universal-fix.js
+public/js/airtable-integration.js
+public/js/app.js
+public/js/beyond-table-bullet-fix.js
+public/js/beyond-table-fix.js
+public/js/beyond-table-fixed.js
+public/js/beyond-table-titles.js
+public/js/clean-duplicates.js
+public/js/components/Accordion.js
+public/js/components/Modal.js
+public/js/core/EventEmitter.js
+public/js/emergency-accordion.js
+public/js/explore-modal-fix.js
+public/js/faq-accordion.js
+public/js/gatherings-content.js
+public/js/our-story-accordion-emergency-fix.js
+public/js/our-story-accordion-fix.js
+public/js/our-story-accordion.js
+public/js/our-story.js
+public/js/standardize-dividers.js
+public/modal-test.html
+server.cjs
+server.js

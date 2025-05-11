@@ -1,0 +1,546 @@
+I'm continuing work on the Santa Barbara Chef Collective website. 
+Here's our current project status:
+
+mark@sherpa-2 SBCC-website % # Run these first to get oriented
+git status
+ls -la public/js/ | grep accordion
+ls -la public/css/ | grep accordion
+
+# Check the emergency accordion script
+cat public/js/emergency-accordion.js
+
+# Check current HTML structure for problematic sections
+grep -A 10 "Beyond the Table" public/index.html
+grep -A 10 "Our Chefs" public/index.html
+grep -A 10 "Our Menus" public/index.html
+zsh: command not found: #
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   public/css/accordion-fix.css
+	modified:   public/index.html
+	modified:   public/js/emergency-accordion.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	End of a Thread Report.txt
+	Starting a new Thread Command.txt
+	accordion-fix.css
+	complete-gatherings.html
+	css-link.html
+	gatherings-content-full.html
+	project_status.txt
+	public/index.html.bak
+	public/index.html.beyond-table-backup
+	public/index.html.gatherings-backup
+	public/js/add-css-link.js
+	public/js/emergency-accordion.js.bak
+	status.sh
+
+no changes added to commit (use "git add" and/or "git commit -a")
+-rw-r--r--@  1 mark  staff   2805 May  8 13:25 accordion-fix-all.js
+-rw-r--r--@  1 mark  staff   7065 May 10 17:15 accordion-fix.js
+-rw-r--r--@  1 mark  staff   3174 May  8 13:25 accordion-scroll-fix.js
+-rw-r--r--@  1 mark  staff   6569 May  8 13:25 accordion-standardize.js
+-rw-r--r--@  1 mark  staff   3964 May  8 13:25 accordion-universal-fix.js
+-rw-r--r--@  1 mark  staff   6614 May 10 18:56 emergency-accordion.js
+-rw-r--r--@  1 mark  staff   1709 May 10 18:50 emergency-accordion.js.bak
+-rw-r--r--@  1 mark  staff   2566 May  8 13:25 faq-accordion.js
+-rw-r--r--@  1 mark  staff   3917 May  8 13:25 our-story-accordion-emergency-fix.js
+-rw-r--r--@  1 mark  staff   2930 May  8 13:25 our-story-accordion-fix.js
+-rw-r--r--@  1 mark  staff   1851 May  8 13:25 our-story-accordion.js
+-rw-r--r--@  1 mark  staff   2060 May 10 18:56 accordion-fix.css
+-rw-r--r--@  1 mark  staff   1710 May  5 17:46 accordion-scroll.css
+-rw-r--r--@  1 mark  staff   1866 May  5 22:56 accordion-standardize.css
+-rw-r--r--@  1 mark  staff   2957 May  5 22:54 faq-accordion.css
+-rw-r--r--@  1 mark  staff   1915 May  7 15:29 our-story-accordion.css
+zsh: command not found: #
+
+// Function to add CSS for accordion styling
+function addAccordionCSS() {
+  console.log('Adding accordion CSS styling');
+  
+  // Create link element
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = '/css/accordion-fix.css';
+  link.id = 'accordion-fix-css';
+  
+  // Add to head if it doesn't exist already
+  if (!document.getElementById('accordion-fix-css')) {
+    document.head.appendChild(link);
+    console.log('Accordion CSS added to head');
+  }
+}
+
+// Call the function to add CSS
+addAccordionCSS();
+
+// Simple emergency accordion fix
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Emergency accordion fix running');
+  
+  // Add click handlers to all accordion headers
+  document.querySelectorAll('.accordion-header').forEach(function(header) {
+    header.addEventListener('click', function(e) {
+      // Stop any other event handlers
+      e.preventDefault();
+      e.stopPropagation();
+      
+      console.log('Accordion clicked:', this.textContent.trim());
+      
+      // Get the accordion item
+      const item = this.closest('.accordion-item');
+      
+      // Toggle active class
+      const wasActive = item.classList.contains('active');
+      
+      // First close all accordions
+      document.querySelectorAll('.accordion-item').forEach(function(accordionItem) {
+        accordionItem.classList.remove('active', 'open');
+        
+        // Hide content
+        const content = accordionItem.querySelector('.accordion-content');
+        if (content) {
+          content.style.display = 'none';
+          content.style.maxHeight = '0px';
+        }
+      });
+      
+      // If this wasn't active before, open it
+      if (!wasActive) {
+        item.classList.add('active', 'open');
+        
+        // Show content
+        const content = item.querySelector('.accordion-content');
+        if (content) {
+          content.style.display = 'block';
+          content.style.maxHeight = '2000px'; // Large enough for any content
+          
+          console.log('Displaying content:', content.innerHTML.substring(0, 100) + '...');
+        }
+      }
+    }, true); // Use capture phase to run before other handlers
+  });
+  
+  console.log('Emergency accordion fix complete');
+});
+// Debug function to log accordion content
+function debugAccordionContent() {
+  setTimeout(function() {
+    console.log('Debugging accordion content');
+    
+    // Find Gatherings accordion
+    const gatheringsAccordion = document.querySelector('[id="gatherings-accordion"]');
+    if (gatheringsAccordion) {
+      console.log('Found Gatherings accordion:', gatheringsAccordion);
+      
+      // Find accordion content
+      const content = gatheringsAccordion.querySelector('.accordion-content');
+      if (content) {
+        console.log('Accordion content HTML:', content.innerHTML.substring(0, 300) + '...');
+        
+        // Log content height
+        console.log('Content height:', content.scrollHeight + 'px');
+        
+        // Force display
+        content.style.maxHeight = '1000px';
+        content.style.overflowY = 'auto';
+        content.style.display = 'block';
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        
+        // Hide the Plan Your Gathering button
+        const buttons = content.querySelectorAll('button');
+        buttons.forEach(button => {
+          console.log('Found button:', button.textContent);
+          button.style.display = 'none';
+        });
+      } else {
+        console.log('No accordion content found');
+      }
+    } else {
+      console.log('Could not find Gatherings accordion');
+    }
+  }, 1000); // Delay to ensure DOM is ready
+}
+
+// Call debug function
+debugAccordionContent();
+
+
+// Debug and fix function
+function fixAccordionHeights() {
+  console.log('Fixing accordion heights and visibility');
+  
+  // Wait for DOM to be fully loaded
+  setTimeout(function() {
+    // Fix all accordion items
+    document.querySelectorAll('.accordion-item').forEach(function(item) {
+      // Get the content div
+      const content = item.querySelector('.accordion-content');
+      if (content) {
+        console.log('Fixing accordion content in:', item.id || 'unnamed accordion');
+        
+        // Force content to be visible
+        content.style.display = 'block';
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        content.style.height = 'auto';
+        content.style.minHeight = '300px';
+        content.style.maxHeight = '80vh';
+        content.style.overflow = 'auto';
+        
+        // Hide Plan Your Gathering button if found
+        const buttons = content.querySelectorAll('button');
+        buttons.forEach(button => {
+          if (button.textContent.includes('Gathering')) {
+            console.log('Hiding button:', button.textContent);
+            button.style.display = 'none';
+          }
+        });
+        
+        // Check if this is an active accordion
+        if (item.classList.contains('active') || item.classList.contains('open')) {
+          console.log('This accordion is already open');
+        } else {
+          console.log('This accordion is closed - no fixes needed yet');
+        }
+      }
+    });
+    
+    // Extra fix for the Gatherings accordion specifically
+    const gatheringsAccordion = document.querySelector('#gatherings-accordion');
+    if (gatheringsAccordion) {
+      const content = gatheringsAccordion.querySelector('.accordion-content');
+      if (content) {
+        console.log('Special fix for Gatherings accordion');
+        
+        // Force it to be expanded
+        gatheringsAccordion.classList.add('active', 'open');
+        
+        // Ensure content is visible with enough space
+        content.style.display = 'block';
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        content.style.height = 'auto';
+        content.style.minHeight = '500px';
+        content.style.maxHeight = '80vh';
+        content.style.overflow = 'auto';
+        
+        // Force display all children
+        Array.from(content.children).forEach(child => {
+          child.style.display = 'block';
+          child.style.visibility = 'visible';
+          child.style.opacity = '1';
+        });
+      }
+    }
+  }, 1000); // Wait 1 second for everything to load
+}
+
+// Run the function
+fixAccordionHeights();
+
+// Also run it when an accordion is clicked
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.accordion-header')) {
+    console.log('Accordion clicked - running fixes in 500ms');
+    setTimeout(fixAccordionHeights, 500);
+  }
+});
+
+zsh: command not found: #
+              <h3>Beyond the Table</h3>
+            </div>
+            <div class="accordion-content">
+              <!-- Beyond the Table content goes here -->
+              <div class="beyond-table-section">
+  <h4 class="section-title">Beyond the Table</h4>
+  <p class="section-intro">
+    Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering.
+  </p>
+  
+  <div class="category-grid">
+    <!-- Wine Pairing -->
+    <div class="category-card" data-category="wine">
+      <h4 class="category-title">Wine Pairing Guidance</h4>
+      <div class="divider"></div>
+      <ul class="event-list">
+              <h3>Our Chefs</h3>
+            </div>
+            <div class="accordion-content">
+              <!-- Our Chefs content goes here -->
+              <p>Chef content placeholder</p>
+            </div>
+          </div>
+          
+          <!-- OUR MENUS ACCORDION -->
+          <div class="accordion-item" id="our-menus-accordion">
+            <div class="accordion-header">
+              <h3>Our Menus</h3>
+            </div>
+            <div class="accordion-content">
+              <h3>Our Menus</h3>
+            </div>
+            <div class="accordion-content">
+              <!-- Our Menus content goes here -->
+              <p>Menu content placeholder</p>
+            </div>
+          </div>
+          
+          <!-- GATHERINGS ACCORDION -->
+          <div class="accordion-item" id="gatherings-accordion">
+            <div class="accordion-header">
+              <h3>Gatherings & Celebrations</h3>
+            </div>
+            <div class="accordion-content">
+mark@sherpa-2 SBCC-website % 
+
+
+mark@sherpa-2 SBCC-website % cat public/js/emergency-accordion.js
+
+// Function to add CSS for accordion styling
+function addAccordionCSS() {
+  console.log('Adding accordion CSS styling');
+  
+  // Create link element
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = '/css/accordion-fix.css';
+  link.id = 'accordion-fix-css';
+  
+  // Add to head if it doesn't exist already
+  if (!document.getElementById('accordion-fix-css')) {
+    document.head.appendChild(link);
+    console.log('Accordion CSS added to head');
+  }
+}
+
+// Call the function to add CSS
+addAccordionCSS();
+
+// Simple emergency accordion fix
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Emergency accordion fix running');
+  
+  // Add click handlers to all accordion headers
+  document.querySelectorAll('.accordion-header').forEach(function(header) {
+    header.addEventListener('click', function(e) {
+      // Stop any other event handlers
+      e.preventDefault();
+      e.stopPropagation();
+      
+      console.log('Accordion clicked:', this.textContent.trim());
+      
+      // Get the accordion item
+      const item = this.closest('.accordion-item');
+      
+      // Toggle active class
+      const wasActive = item.classList.contains('active');
+      
+      // First close all accordions
+      document.querySelectorAll('.accordion-item').forEach(function(accordionItem) {
+        accordionItem.classList.remove('active', 'open');
+        
+        // Hide content
+        const content = accordionItem.querySelector('.accordion-content');
+        if (content) {
+          content.style.display = 'none';
+          content.style.maxHeight = '0px';
+        }
+      });
+      
+      // If this wasn't active before, open it
+      if (!wasActive) {
+        item.classList.add('active', 'open');
+        
+        // Show content
+        const content = item.querySelector('.accordion-content');
+        if (content) {
+          content.style.display = 'block';
+          content.style.maxHeight = '2000px'; // Large enough for any content
+          
+          console.log('Displaying content:', content.innerHTML.substring(0, 100) + '...');
+        }
+      }
+    }, true); // Use capture phase to run before other handlers
+  });
+  
+  console.log('Emergency accordion fix complete');
+});
+// Debug function to log accordion content
+function debugAccordionContent() {
+  setTimeout(function() {
+    console.log('Debugging accordion content');
+    
+    // Find Gatherings accordion
+    const gatheringsAccordion = document.querySelector('[id="gatherings-accordion"]');
+    if (gatheringsAccordion) {
+      console.log('Found Gatherings accordion:', gatheringsAccordion);
+      
+      // Find accordion content
+      const content = gatheringsAccordion.querySelector('.accordion-content');
+      if (content) {
+        console.log('Accordion content HTML:', content.innerHTML.substring(0, 300) + '...');
+        
+        // Log content height
+        console.log('Content height:', content.scrollHeight + 'px');
+        
+        // Force display
+        content.style.maxHeight = '1000px';
+        content.style.overflowY = 'auto';
+        content.style.display = 'block';
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        
+        // Hide the Plan Your Gathering button
+        const buttons = content.querySelectorAll('button');
+        buttons.forEach(button => {
+          console.log('Found button:', button.textContent);
+          button.style.display = 'none';
+        });
+      } else {
+        console.log('No accordion content found');
+      }
+    } else {
+      console.log('Could not find Gatherings accordion');
+    }
+  }, 1000); // Delay to ensure DOM is ready
+}
+
+// Call debug function
+debugAccordionContent();
+
+
+// Debug and fix function
+function fixAccordionHeights() {
+  console.log('Fixing accordion heights and visibility');
+  
+  // Wait for DOM to be fully loaded
+  setTimeout(function() {
+    // Fix all accordion items
+    document.querySelectorAll('.accordion-item').forEach(function(item) {
+      // Get the content div
+      const content = item.querySelector('.accordion-content');
+      if (content) {
+        console.log('Fixing accordion content in:', item.id || 'unnamed accordion');
+        
+        // Force content to be visible
+        content.style.display = 'block';
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        content.style.height = 'auto';
+        content.style.minHeight = '300px';
+        content.style.maxHeight = '80vh';
+        content.style.overflow = 'auto';
+        
+        // Hide Plan Your Gathering button if found
+        const buttons = content.querySelectorAll('button');
+        buttons.forEach(button => {
+          if (button.textContent.includes('Gathering')) {
+            console.log('Hiding button:', button.textContent);
+            button.style.display = 'none';
+          }
+        });
+        
+        // Check if this is an active accordion
+        if (item.classList.contains('active') || item.classList.contains('open')) {
+          console.log('This accordion is already open');
+        } else {
+          console.log('This accordion is closed - no fixes needed yet');
+        }
+      }
+    });
+    
+    // Extra fix for the Gatherings accordion specifically
+    const gatheringsAccordion = document.querySelector('#gatherings-accordion');
+    if (gatheringsAccordion) {
+      const content = gatheringsAccordion.querySelector('.accordion-content');
+      if (content) {
+        console.log('Special fix for Gatherings accordion');
+        
+        // Force it to be expanded
+        gatheringsAccordion.classList.add('active', 'open');
+        
+        // Ensure content is visible with enough space
+        content.style.display = 'block';
+        content.style.visibility = 'visible';
+        content.style.opacity = '1';
+        content.style.height = 'auto';
+        content.style.minHeight = '500px';
+        content.style.maxHeight = '80vh';
+        content.style.overflow = 'auto';
+        
+        // Force display all children
+        Array.from(content.children).forEach(child => {
+          child.style.display = 'block';
+          child.style.visibility = 'visible';
+          child.style.opacity = '1';
+        });
+      }
+    }
+  }, 1000); // Wait 1 second for everything to load
+}
+
+// Run the function
+fixAccordionHeights();
+
+// Also run it when an accordion is clicked
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.accordion-header')) {
+    console.log('Accordion clicked - running fixes in 500ms');
+    setTimeout(fixAccordionHeights, 500);
+  }
+});
+
+mark@sherpa-2 SBCC-website % grep -A 10 "Beyond the Table" public/index.html
+grep -A 10 "Our Chefs" public/index.html
+grep -A 10 "Our Menus" public/index.html
+              <h3>Beyond the Table</h3>
+            </div>
+            <div class="accordion-content">
+              <!-- Beyond the Table content goes here -->
+              <div class="beyond-table-section">
+  <h4 class="section-title">Beyond the Table</h4>
+  <p class="section-intro">
+    Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering.
+  </p>
+  
+  <div class="category-grid">
+    <!-- Wine Pairing -->
+    <div class="category-card" data-category="wine">
+      <h4 class="category-title">Wine Pairing Guidance</h4>
+      <div class="divider"></div>
+      <ul class="event-list">
+              <h3>Our Chefs</h3>
+            </div>
+            <div class="accordion-content">
+              <!-- Our Chefs content goes here -->
+              <p>Chef content placeholder</p>
+            </div>
+          </div>
+          
+          <!-- OUR MENUS ACCORDION -->
+          <div class="accordion-item" id="our-menus-accordion">
+            <div class="accordion-header">
+              <h3>Our Menus</h3>
+            </div>
+            <div class="accordion-content">
+              <h3>Our Menus</h3>
+            </div>
+            <div class="accordion-content">
+              <!-- Our Menus content goes here -->
+              <p>Menu content placeholder</p>
+            </div>
+          </div>
+          
+          <!-- GATHERINGS ACCORDION -->
+          <div class="accordion-item" id="gatherings-accordion">
+            <div class="accordion-header">
+              <h3>Gatherings & Celebrations</h3>
+            </div>
+            <div class="accordion-content">

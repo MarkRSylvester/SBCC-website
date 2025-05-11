@@ -129,7 +129,7 @@
   overflow: visible !important;
 }
 </style>
-<link rel="stylesheet" href="css/accordion-styles.css"><link rel="stylesheet" href="css/accordion-styles.css"></head>
+<link rel="stylesheet" href="css/accordion-styles.css"></head>
 <body>
     <header>
         <div class="container">
@@ -270,7 +270,6 @@
               </div>
             </div>
           </div>
-          <div class="accordion-item" id="our-chefs-accordion">
             <div class="accordion-header">
               <h3>Our Chefs</h3>
             </div>
@@ -344,11 +343,12 @@
         <div class="cta-container">
           <button class="button button-primary" data-modal="event-planning-modal">Plan Your Gathering</button>
         </div>
-      </div>
-            </div>
-          </div>
-          
-          <!-- BEYOND THE TABLE ACCORDION -->
+          <div class="accordion-item" id="beyond-table-accordion">
+  <div class="accordion-header">
+    <h3>Beyond the Table</h3>
+    <div class="accordion-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 12L16 4L14.59 2.58L8 9.17L1.41 2.58L0 4L8 12Z" fill="#2a4374"/>
           <div class="accordion-item" id="beyond-table-accordion">
             <div class="accordion-header">
               <h3>Beyond the Table</h3>
@@ -442,12 +442,6 @@
               </div>
             </div>
           </div>
-          <div class="accordion-item" id="faq-accordion">
-            <div class="accordion-header">
-              <h3>Frequently Asked Questions</h3>
-            </div>
-            <div class="accordion-content">
-              <!-- FAQ content goes here -->
               <p>FAQ content placeholder</p>
             </div>
           </div>
@@ -586,5 +580,5 @@
     });
     </script>
 <script src="js/emergency-accordion.js"></script>
-<script src="js/accordion-fix.js"></script><script src="js/accordion-fix.js"></script></body>
+<script src="js/accordion-fix.js"></script></body>
 </html>
