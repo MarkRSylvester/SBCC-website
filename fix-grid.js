@@ -1,0 +1,143 @@
+// SBCC Grid Fix - Safe for terminal pasting
+(function() {
+  // Fix function - runs on page load and periodically
+  function fixGrid() {
+    // Find the Beyond the Table accordion
+    var accordion = document.getElementById('beyond-table-accordion');
+    if (!accordion) return;
+    
+    // Find the content area
+    var content = accordion.querySelector('.accordion-content');
+    if (!content) return;
+    
+    // Create new HTML
+    var newHTML = '\
+      <p class="section-intro">\
+        Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering.\
+      </p>\
+      \
+      <div class="category-grid" style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px !important; margin-top: 20px !important;">\
+        \
+        <!-- Wine Pairing - Card 1 -->\
+        <div class="category-card" style="background-color: #FFFFFF !important; border-radius: 5px !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important; padding: 20px !important; height: 100% !important;">\
+          <h4 class="category-title" style="color: #1D3557 !important; font-family: \'Playfair Display\', serif !important; margin-bottom: 10px !important;">Wine Pairing Guidance</h4>\
+          <div class="divider" style="height: 2px !important; background-color: #4779B5 !important; width: 50px !important; margin-bottom: 15px !important;"></div>\
+          <ul class="event-list" style="list-style-type: none !important; padding-left: 0 !important;">\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #4779B5 !important;"></span>\
+              Expert wine recommendations tailored to your menu\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #4779B5 !important;"></span>\
+              Curated selections from local Santa Barbara vineyards\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #4779B5 !important;"></span>\
+              In-home wine tasting experiences with sommeliers\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #4779B5 !important;"></span>\
+              Custom flight creation for multi-course experiences\
+            </li>\
+          </ul>\
+        </div>\
+        \
+        <!-- Table Setting - Card 2 -->\
+        <div class="category-card" style="background-color: #FFFFFF !important; border-radius: 5px !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important; padding: 20px !important; height: 100% !important;">\
+          <h4 class="category-title" style="color: #1D3557 !important; font-family: \'Playfair Display\', serif !important; margin-bottom: 10px !important;">Table Setting & Styling</h4>\
+          <div class="divider" style="height: 2px !important; background-color: #E6DBC9 !important; width: 50px !important; margin-bottom: 15px !important;"></div>\
+          <ul class="event-list" style="list-style-type: none !important; padding-left: 0 !important;">\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E6DBC9 !important;"></span>\
+              Elegant table design customized to your occasion\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E6DBC9 !important;"></span>\
+              Premium linens, dinnerware, and glassware\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E6DBC9 !important;"></span>\
+              Seasonal floral arrangements from local growers\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E6DBC9 !important;"></span>\
+              Ambient lighting to create the perfect atmosphere\
+            </li>\
+          </ul>\
+        </div>\
+        \
+        <!-- Interactive Cooking - Card 3 -->\
+        <div class="category-card" style="background-color: #FFFFFF !important; border-radius: 5px !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important; padding: 20px !important; height: 100% !important;">\
+          <h4 class="category-title" style="color: #1D3557 !important; font-family: \'Playfair Display\', serif !important; margin-bottom: 10px !important;">Interactive Cooking Lessons</h4>\
+          <div class="divider" style="height: 2px !important; background-color: #E8B4A2 !important; width: 50px !important; margin-bottom: 15px !important;"></div>\
+          <ul class="event-list" style="list-style-type: none !important; padding-left: 0 !important;">\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E8B4A2 !important;"></span>\
+              Hands-on instruction for specific techniques or dishes\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E8B4A2 !important;"></span>\
+              Professional culinary methods and chef shortcuts\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E8B4A2 !important;"></span>\
+              Market tours and ingredient selection guidance\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #E8B4A2 !important;"></span>\
+              Recipe packets to recreate dishes at home\
+            </li>\
+          </ul>\
+        </div>\
+        \
+        <!-- Seasonal Produce - Card 4 -->\
+        <div class="category-card" style="background-color: #FFFFFF !important; border-radius: 5px !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important; padding: 20px !important; height: 100% !important;">\
+          <h4 class="category-title" style="color: #1D3557 !important; font-family: \'Playfair Display\', serif !important; margin-bottom: 10px !important;">Seasonal Produce Boxes</h4>\
+          <div class="divider" style="height: 2px !important; background-color: #A2A284 !important; width: 50px !important; margin-bottom: 15px !important;"></div>\
+          <ul class="event-list" style="list-style-type: none !important; padding-left: 0 !important;">\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #A2A284 !important;"></span>\
+              Hand-selected produce from local organic farms\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #A2A284 !important;"></span>\
+              Artisanal oils, vinegars, and specialty items\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #A2A284 !important;"></span>\
+              Chef-created recipes utilizing seasonal ingredients\
+            </li>\
+            <li style="margin-bottom: 8px !important; padding-left: 20px !important; position: relative !important;">\
+              <span style="position: absolute !important; left: 0 !important; top: 8px !important; width: 6px !important; height: 6px !important; border-radius: 50% !important; background-color: #A2A284 !important;"></span>\
+              Information on featured farms and producers\
+            </li>\
+          </ul>\
+        </div>\
+      </div>\
+    ';
+    
+    // Replace the content
+    content.innerHTML = newHTML;
+  }
+  
+  // Run right away if DOM is ready
+  if (document.readyState !== 'loading') {
+    fixGrid();
+  } else {
+    document.addEventListener('DOMContentLoaded', fixGrid);
+  }
+  
+  // Also run when the page has loaded
+  window.addEventListener('load', fixGrid);
+  
+  // Fix grid when accordions are clicked
+  document.addEventListener('click', function(event) {
+    if (event.target.closest('.accordion-header') || 
+        event.target.closest('.accordion-icon')) {
+      setTimeout(fixGrid, 100);
+    }
+  });
+  
+  // Run periodically to ensure it stays fixed
+  setInterval(fixGrid, 2000);
+})();

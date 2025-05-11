@@ -261,3 +261,482 @@
     font-size: 1.25rem;
   }
 }
+/* Fix text wrapping in Our Story */
+.founder-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .founder-content {
+    flex-direction: row;
+  }
+  
+  .founder-image {
+    flex: 0 0 200px;
+    margin-right: 1.5rem;
+  }
+  
+  .founder-text {
+    flex: 1;
+  }
+}
+/* Fix tapered divider lines */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, #A2A284 50%, transparent 100%);
+  margin: 1.5rem auto;
+  width: 80%;
+  max-width: 300px;
+  opacity: 0.6;
+}
+
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, #A2A284 50%, transparent 100%);
+  margin: 0.75rem auto 1rem auto;
+  width: 100%;
+  max-width: 100px;
+}
+/* Fix the numbers in circles in The Process */
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #2a4374;
+  color: white;
+  font-weight: bold;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+/* Additional fixes for the modal and accordions */
+
+/* Fix for founder content wrapping */
+.founder-content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .founder-content {
+    flex-direction: row;
+  }
+  
+  .founder-image {
+    flex: 0 0 200px;
+    margin-right: 1.5rem;
+  }
+  
+  .founder-text {
+    flex: 1;
+  }
+}
+
+/* Make all accordions start closed */
+.modal .accordion-content {
+  display: none !important;
+  height: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.modal .accordion-item.active .accordion-content {
+  display: block !important;
+  height: auto;
+  max-height: none;
+  overflow: auto;
+  padding: 1rem;
+}
+
+/* Fix divider centering */
+.divider, .section-divider {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure consistent styling across all sections */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FAQ-specific styling */
+.faq-question {
+  font-weight: 600;
+  color: #1D3557;
+  margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+  color: #666666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.faq-group h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4A5D23;
+}
+/* Fix the founder content layout */
+.founder-content {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.founder-image {
+  float: left;
+  width: 180px;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.founder-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.founder-text {
+  overflow: hidden;
+}
+
+/* Fix chevron display */
+.accordion-icon:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #2a4374;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.accordion-item.active .accordion-icon:before {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* Clear any weird invisible characters */
+.accordion-icon {
+  font-size: 0;
+  line-height: 0;
+}
+/* Fix process step numbers */
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #2a4374;
+  color: white;
+  font-weight: bold;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+/* Fix grid layouts for Gatherings and Beyond the Table */
+#gatherings-accordion .category-grid,
+#beyond-table-accordion .category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  #gatherings-accordion .category-grid,
+  #beyond-table-accordion .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Add some spacing and styling to the category cards */
+.category-card {
+  background-color: #F9F7F2;
+  border-radius: 4px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+/* Make sure chevrons rotate properly */
+.accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-icon:before {
+  transition: none;
+}
+/* Polish for category cards */
+.category-card {
+  background-color: #F9F7F2;
+  border-radius: 4px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+}
+
+.category-title {
+  font-family: 'Playfair Display', serif;
+  color: #1D3557;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.event-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-list li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: #333333;
+}
+
+.event-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #A2A284;
+}
+/* Final polish and consistency fixes */
+
+/* Make sure divider lines are properly styled */
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, #A2A284 50%, transparent 100%);
+  margin: 0.75rem auto 1rem auto;
+  width: 80%;
+  max-width: 150px;
+  opacity: 0.6;
+}
+
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, #A2A284 50%, transparent 100%);
+  margin: 1.5rem auto;
+  width: 80%;
+  max-width: 300px;
+  opacity: 0.6;
+}
+
+/* Make sure intro text is properly styled */
+.section-intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Fix founder section for all screen sizes */
+@media (max-width: 767px) {
+  .founder-image {
+    float: none;
+    width: 150px;
+    margin: 0 auto 1rem auto;
+    display: block;
+  }
+  
+  .founder-text {
+    overflow: visible;
+  }
+}
+
+/* Consistent padding for accordion content */
+.accordion-item.active .accordion-content {
+  padding: 1.5rem;
+}
+/* Make chevrons look better and ensure they're clickable */
+.accordion-icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(42, 67, 116, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.accordion-icon:hover {
+  background-color: rgba(42, 67, 116, 0.1);
+}
+
+.accordion-icon:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #2a4374;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon:before {
+  transform: rotate(180deg);
+}
+
+/* Make accordion headers more clickable */
+.accordion-header {
+  cursor: pointer;
+  padding: 1rem;
+  background-color: #f1f8ff;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+  background-color: #e5f0ff;
+}
+
+.accordion-header h3 {
+  margin: 0;
+  color: #2a4374;
+  font-weight: 500;
+}
+/* Make chevrons look better and ensure they're clickable */
+.accordion-icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(42, 67, 116, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.accordion-icon:hover {
+  background-color: rgba(42, 67, 116, 0.1);
+}
+
+.accordion-icon:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #2a4374;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon:before {
+  transform: rotate(180deg);
+}
+
+/* Make accordion headers more clickable */
+.accordion-header {
+  cursor: pointer;
+  padding: 1rem;
+  background-color: #f1f8ff;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+  background-color: #e5f0ff;
+}
+
+.accordion-header h3 {
+  margin: 0;
+  color: #2a4374;
+  font-weight: 500;
+}
+/* Clear fix for founder content */
+.founder-content {
+  overflow: auto; /* Clearfix */
+  margin-bottom: 2rem;
+}
+
+.founder-image {
+  float: left;
+  width: 160px;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.founder-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix for small screens */
+@media (max-width: 600px) {
+  .founder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .founder-image {
+    float: none;
+    margin-right: 0;
+  }
+}
