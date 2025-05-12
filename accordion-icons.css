@@ -1,0 +1,97 @@
+.accordion-toggle-icon {
+  transition: transform 0.3s ease, fill 0.3s ease;
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  fill: #4A5D23; /* Olive Grove */
+  display: inline-block;
+}
+
+.accordion-header[aria-expanded="true"] .accordion-toggle-icon {
+  transform: rotate(180deg);
+  fill: #1D3557; /* Coastal Navy */
+}
+
+.accordion-icon::before,
+.accordion-header::before,
+.accordion-header .accordion-icon::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* Kill unexpected icon clusters */
+.accordion-header > div[style*="border-radius"],
+.accordion-header > div > svg,
+.accordion-header > div > span,
+.accordion-header > div > .icon,
+.accordion-header > .icon,
+.accordion-header > .plus-icon,
+.accordion-header .accordion-icon:not(.accordion-toggle-icon),
+.accordion-header svg:not(.accordion-toggle-icon) {
+  display: none !important;
+}
+
+/* Final nuke for ghost + signs from .accordion-icon */
+.accordion-icon::before {
+  content: none !important;
+  display: none !important;
+}
+.accordion-icon {
+  display: none !important;
+}
+
+/* FINAL purge of all rogue .accordion-icon visuals */
+.accordion-icon,
+.accordion-icon::before,
+.accordion-icon::after {
+  all: unset !important;
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Absolute final blackout of the mystery plus */
+.accordion-icon,
+.accordion-icon::before,
+.accordion-icon::after {
+  content: none !important;
+  background: none !important;
+  mask: none !important;
+  -webkit-mask: none !important;
+  font-family: none !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: none !important;
+  display: none !important;
+}
+
+/* Kill rogue Font Awesome + icons */
+.accordion-icon::before,
+.accordion-icon::after,
+.fa-plus::before,
+.fas.fa-plus::before {
+  content: none !important;
+  display: none !important;
+  font-family: inherit !important;
+  font-weight: normal !important;
+}
+
+.accordion-icon::before,
+.accordion-icon::after,
+.accordion-icon {
+  content: '' !important;
+  display: none !important;
+  font-family: initial !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}

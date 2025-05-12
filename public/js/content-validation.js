@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (faqContent && !faqContent.querySelector('.faq-grid')) {
       // Re-inject if missing
       const script = document.createElement('script');
-      script.src = 'js/faq-format-fix.js';
       document.body.appendChild(script);
     }
     
