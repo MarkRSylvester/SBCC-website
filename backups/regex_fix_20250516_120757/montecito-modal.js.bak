@@ -1,0 +1,247 @@
+/* Santa Barbara Chef Collective - Montecito Modal JS */
+/* Fixed Click Functionality: $(date) */
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('SBCC Modal: Initializing...');
+  
+  // Initialize modals
+  initializeModals();
+  
+  // Initialize accordions
+  initializeAccordions();
+  
+  console.log('SBCC Modal: Initialization complete');
+});
+
+// Modal functionality
+function initializeModals() {
+  const modalTriggers = document.querySelectorAll('[data-modal]');
+  const modalClose = document.querySelectorAll('.modal-close');
+  const modals = document.querySelectorAll('.modal');
+  
+  // Modal open triggers
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', function() {
+      const modalId = trigger.getAttribute('data-modal');
+      const modal = document.getElementById(modalId);
+      
+      if (modal) {
+        openModal(modal);
+      } else {
+        console.error(`Modal with ID "${modalId}" not found`);
+      }
+    });
+  });
+  
+  // Modal close buttons
+  modalClose.forEach(close => {
+    close.addEventListener('click', function() {
+      const modal = close.closest('.modal');
+      closeModal(modal);
+    });
+  });
+  
+  // Close on outside click
+  modals.forEach(modal => {
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal(modal);
+      }
+    });
+  });
+  
+  // Close with ESC key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const openModal = document.querySelector('.modal.open');
+      if (openModal) {
+        closeModal(openModal);
+      }
+    }
+  });
+}
+
+// Open modal
+function openModal(modal) {
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+  modal.classList.add('open');
+  
+  // Set focus for accessibility
+  const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (firstFocusable) {
+    setTimeout(() => {
+      firstFocusable.focus();
+    }, 300);
+  }
+}
+
+// Close modal
+function closeModal(modal) {
+  document.body.style.overflow = ''; // Restore scrolling
+  modal.classList.remove('open');
+}
+
+// Accordion functionality - FIXED IMPLEMENTATION
+function initializeAccordions() {
+  console.log('Initializing accordions with fixed click functionality');
+  
+  // Direct and simplified implementation
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    // Remove any existing event listeners by cloning and replacing
+    const newHeader = header.cloneNode(true);
+    header.parentNode.replaceChild(newHeader, header);
+    
+    // Add direct click event with inline functions to avoid reference issues
+    newHeader.addEventListener('click', function() {
+      const accordionItem = this.closest('.accordion-item');
+      const accordionContent = accordionItem.querySelector('.accordion-content');
+      const accordionIcon = accordionItem.querySelector('.accordion-icon');
+      
+      // Toggle active class
+      const isActive = accordionItem.classList.contains('active');
+      
+      if (!isActive) {
+        // Opening the accordion
+        accordionItem.classList.add('active');
+        accordionItem.classList.add('open');
+        
+        // Set direct styles
+        accordionContent.style.display = 'block';
+        accordionContent.style.height = 'auto';
+        accordionContent.style.maxHeight = 'none';
+        accordionContent.style.padding = '20px';
+        accordionContent.style.overflow = 'auto';
+        
+        // Rotate icon if present
+        if (accordionIcon) {
+          accordionIcon.style.transform = 'rotate(180deg)';
+        }
+        
+        // Update ARIA
+        this.setAttribute('aria-expanded', 'true');
+        
+        console.log('Accordion opened:', accordionItem.id || 'unnamed accordion');
+      } else {
+        // Closing the accordion
+        accordionItem.classList.remove('active');
+        accordionItem.classList.remove('open');
+        
+        // Set direct styles
+        accordionContent.style.display = 'none';
+        accordionContent.style.height = '0';
+        accordionContent.style.maxHeight = '0';
+        accordionContent.style.padding = '0 1.5rem';
+        
+        // Reset icon rotation
+        if (accordionIcon) {
+          accordionIcon.style.transform = 'rotate(0deg)';
+        }
+        
+        // Update ARIA
+        this.setAttribute('aria-expanded', 'false');
+        
+        console.log('Accordion closed:', accordionItem.id || 'unnamed accordion');
+      }
+    });
+    
+    // Set ARIA attributes
+    newHeader.setAttribute('role', 'button');
+    newHeader.setAttribute('aria-expanded', 'false');
+    
+    // Add keyboard support
+    newHeader.setAttribute('tabindex', '0');
+    newHeader.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+  
+  // Handle items that should be open by default
+  document.querySelectorAll('.accordion-item.active.open').forEach(item => {
+    const content = item.querySelector('.accordion-content');
+    const header = item.querySelector('.accordion-header');
+    
+    if (!content || !header) return;
+    
+    // Ensure styles are applied correctly
+    content.style.display = 'block';
+    content.style.height = 'auto';
+    content.style.maxHeight = 'none';
+    content.style.padding = '20px';
+    content.style.overflow = 'auto';
+    
+    // Update ARIA
+    header.setAttribute('aria-expanded', 'true');
+    
+    console.log('Default open accordion initialized:', item.id || 'unnamed accordion');
+  });
+}
+
+// Debugging utility
+function logAccordionState() {
+  const items = document.querySelectorAll('.accordion-item');
+  
+  console.group('Accordion States');
+  items.forEach((item, index) => {
+    const header = item.querySelector('.accordion-header h3');
+    const title = header ? header.textContent : `Accordion ${index}`;
+    const isActive = item.classList.contains('active');
+    const isOpen = item.classList.contains('open');
+    const content = item.querySelector('.accordion-content');
+    const contentStyle = content ? window.getComputedStyle(content) : {};
+    
+    console.log(`${title}:`, { 
+      active: isActive, 
+      open: isOpen, 
+      display: contentStyle.display,
+      maxHeight: contentStyle.maxHeight,
+      classes: item.className
+    });
+  });
+  console.groupEnd();
+}
+
+// Check for any conflicting scripts
+function detectConflicts() {
+  const scripts = document.querySelectorAll('script');
+  let potentialConflicts = 0;
+  
+  scripts.forEach(script => {
+    if (script.src && script.src.indexOf('montecito-modal.js') === -1) {
+      if (script.src.indexOf('accordion') !== -1 || 
+          script.src.indexOf('collapse') !== -1 || 
+          script.src.indexOf('modal') !== -1) {
+        console.warn('Potential conflict detected:', script.src);
+        potentialConflicts++;
+      }
+    }
+  });
+  
+  if (potentialConflicts > 0) {
+    console.warn(`⚠️ Detected ${potentialConflicts} potential conflicting scripts`);
+  } else {
+    console.log('✅ No potential conflicts detected');
+  }
+  
+  return potentialConflicts;
+}
+
+// Make utility functions available globally
+window.sbcc = {
+  openModal: function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) openModal(modal);
+  },
+  closeModal: function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) closeModal(modal);
+  },
+  logAccordionState: logAccordionState,
+  detectConflicts: detectConflicts
+};
+
+// Run conflict detection on load
+setTimeout(detectConflicts, 1000);

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santa Barbara Chef Collective - Accordion Reference</title>
+  <style>
+    /* Basic styling for the reference */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    h1 {
+      color: #1D3557;
+      border-bottom: 2px solid #E6DBC9;
+      padding-bottom: 10px;
+    }
+    
+    .reference-section {
+      background-color: #F9F7F2;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+    
+    .code-example {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-left: 4px solid #1D3557;
+      overflow-x: auto;
+      font-family: monospace;
+      margin: 15px 0;
+    }
+    
+    h2 {
+      color: #4779B5;
+    }
+    
+    /* Actual accordion styles */
+    .accordion-item {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .accordion-item:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 5px;
+      background-color: #1D3557;
+    }
+    
+    .accordion-header {
+      background-color: #f9f9f9;
+      padding: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .accordion-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #1D3557;
+    }
+    
+    .accordion-content {
+      display: none;
+      padding: 0;
+    }
+    
+    .accordion-item.active .accordion-content,
+    .accordion-item.active.open .accordion-content {
+      display: block;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Santa Barbara Chef Collective - Accordion Reference</h1>
+  
+  <div class="reference-section">
+    <h2>Standard Accordion HTML Structure</h2>
+    <p>Use this HTML structure for all accordion elements in your project:</p>
+    
+    <div class="code-example">
+<pre>&lt;div class="accordion-item"&gt;
+  &lt;div class="accordion-header"&gt;
+    &lt;h3&gt;Accordion Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="accordion-content"&gt;
+    Content goes here
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+    </div>
+    
+    <h2>Open-by-Default Accordion HTML Structure</h2>
+    <p>For accordions that should be open when the page loads, use this structure:</p>
+    
+    <div class="code-example">
+<pre>&lt;div class="accordion-item active open"&gt;
+  &lt;div class="accordion-header"&gt;
+    &lt;h3&gt;Accordion Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="accordion-content" style="display:block; height:auto; max-height:none; padding:20px; overflow:auto;"&gt;
+    Content goes here
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+    </div>
+    
+    <h2>Live Examples</h2>
+    
+    <h3>Default Closed Accordion</h3>
+    <!-- Example of closed accordion -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <h3>Example: Closed Accordion</h3>
+      </div>
+      <div class="accordion-content">
+        <p>This accordion starts closed. Click the header to open it.</p>
+      </div>
+    </div>
+    
+    <h3>Default Open Accordion</h3>
+    <!-- Example of open accordion -->
+    <div class="accordion-item active open">
+      <div class="accordion-header">
+        <h3>Example: Open Accordion</h3>
+      </div>
+      <div class="accordion-content" style="display:block; height:auto; max-height:none; padding:20px; overflow:auto;">
+        <p>This accordion starts open because it has both the <code>active</code> and <code>open</code> classes, plus the necessary inline styles on the content element.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="reference-section">
+    <h2>JavaScript Integration</h2>
+    <p>Make sure to include our simplified accordion script at the end of your HTML:</p>
+    
+    <div class="code-example">
+<pre>&lt;script src="/public/js/accordion.js"&gt;&lt;/script&gt;</pre>
+    </div>
+    
+    <p>For debugging purposes, you can add this button to your page:</p>
+    
+    <div class="code-example">
+<pre>&lt;button onclick="window.debugAccordions()"&gt;Debug Accordions&lt;/button&gt;</pre>
+    </div>
+  </div>
+  
+  <script>
+    // Embedded accordion functionality for the examples
+    window.onload = function() {
+      var headers = document.querySelectorAll(".accordion-header");
+      
+      for (var i = 0; i < headers.length; i++) {
+        headers[i].onclick = function() {
+          var item = this.parentNode;
+          var content = this.nextElementSibling;
+          
+          if (item.classList.contains("active")) {
+            item.classList.remove("active");
+            item.classList.remove("open");
+            
+            if (content) {
+              content.style.display = "none";
+              content.style.padding = "0";
+            }
+          } else {
+            item.classList.add("active");
+            item.classList.add("open");
+            
+            if (content) {
+              content.style.display = "block";
+              content.style.padding = "20px";
+              content.style.height = "auto";
+              content.style.maxHeight = "none";
+              content.style.overflow = "auto";
+            }
+          }
+        };
+      }
+    };
+  </script>
+</body>
+</html>

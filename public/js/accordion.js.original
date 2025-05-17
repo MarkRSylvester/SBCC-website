@@ -1,0 +1,43 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const headers = document.querySelectorAll(".accordion-header");
+
+  headers.forEach(header => {
+    header.addEventListener("click", () => {
+      const clickedItem = header.closest(".accordion-item");
+      const isActive = clickedItem.classList.contains("active");
+
+      // Close all others
+      document.querySelectorAll(".accordion-item").forEach(item => {
+        if (item !== clickedItem) {
+          item.classList.remove("active");
+          const btn = item.querySelector(".accordion-header");
+          const content = item.querySelector(".accordion-content");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+          if (content) content.setAttribute("tabindex", "-1");
+        }
+      });
+
+      // Toggle clicked
+      const content = clickedItem.querySelector(".accordion-content");
+      const expanded = !isActive;
+      header.setAttribute("aria-expanded", expanded ? "true" : "false");
+      
+      if (expanded) {
+        // Simply add active class - no scrolling
+        clickedItem.classList.add("active");
+        content.setAttribute("tabindex", "0");
+      } else {
+        clickedItem.classList.remove("active");
+        content.setAttribute("tabindex", "-1");
+      }
+    });
+
+    // Keyboard accessibility
+    header.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        header.click();
+      }
+    });
+  });
+});

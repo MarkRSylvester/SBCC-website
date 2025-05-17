@@ -1,0 +1,13 @@
+/* Cache verification file - 20250516120207 */
+.verify-cache-20250516120207 {
+  display: block;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  z-index: 10000;
+  border-radius: 3px;
+}

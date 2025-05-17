@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santa Barbara Chef Collective - Culinary Excellence in Santa Barbara</title>
+    <link rel="stylesheet" href="css/accordion-styles.css" />
+    <link rel="stylesheet" href="css/modal-styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" />
+  </head>
+  <body>
+    <div id="explore-modal" class="modal open">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">×</button>
+        <div class="modal-header-image"></div>
+        <h2></h2>
+        <p class="modal-intro"></p>
+        <div class="accordion-container">
+          <!-- OUR STORY ACCORDION -->
+          <div class="accordion-item" id="our-story-accordion">
+            <div class="accordion-header">
+              <h3>Our Story</h3>
+              <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+              <h4>About Santa Barbara Chef Collective</h4>
+              <p>We're a community of local chefs dedicated to making private dining easy, personal, and unforgettable. Whether it's an intimate dinner, a milestone celebration, or a relaxed weekend retreat, we match you with the perfect chef—someone who brings your vision to life through thoughtfully prepared, beautifully presented food.</p>
+              <p>Founded by Coco—a former private yacht chef whose culinary journey began in the markets of France and carried her across the globe—we believe food should feel both elevated and deeply personal. From cooking for royalty on the high seas to families here in Santa Barbara, Coco's love for local ingredients and inspired menus now fuels a growing collective of chefs who share that same passion for connection and creativity.</p>
+              <p>At the heart of everything we do is community. We partner with local farms, fishers, and artisans to ensure every dish reflects the vibrant flavors of California's Central Coast. With global talent, local roots, and genuine hospitality, we're here to help.</p>
+              <img src="SBCC-images/coco-portrait.jpg" alt="Coco Portrait" />
+              <h4>Our Process: From Resume to Tableside</h4>
+              <ul>
+                <li><strong>Chef Selection:</strong> Once you reach out, we'll send you curated resumes from exceptional chefs—each chosen to match your flavor profile, event vibe, and household needs.</li>
+                <li><strong>Personal Interviews:</strong> You'll meet the chefs yourself to make sure their style, personality, and creativity align with your vision.</li>
+                <li><strong>Finding the Perfect Match:</strong> With our guidance, you'll choose the chef who feels like the right fit—someone who can turn your gathering into something extraordinary.</li>
+              </ul>
+              <h4>Discover the World's Best Chefs</h4>
+              <p>From Michelin-trained visionaries to creative culinary artisans, our chefs bring global talent to Santa Barbara tables. With specialties that span continents and cooking styles, they're united by a shared passion for quality, innovation, and hospitality.</p>
+              <h4>Connecting Great Chefs with Great Clients</h4>
+              <p>We've built a platform where finding your ideal private chef is easy and inspiring. Every chef is vetted, every detail considered. All you have to do is enjoy the experience.</p>
+              <h4>Celebrating Local Community and Talent</h4>
+              <p>We're proud to spotlight Santa Barbara's incredible culinary scene, which includes chefs, farmers, foragers, and fishermen. Every menu honors the Central Coast's bounty and the creativity of the people who call it home.</p>
+              <h4>Welcome to the Santa Barbara Chef Collective</h4>
+              <p>We're a community of local chefs on a shared mission: to make private dining effortless—and unforgettable. Whether you're planning an intimate dinner, a wedding, or a weekend retreat, we'll match you with the perfect chef to bring your vision to life through thoughtful, beautifully prepared food.</p>
+              <h4>Our Founder's Story</h4>
+              <p><strong>Coco's Journey:</strong> I had the joy of being a private yacht chef for eight years, cooking for royalty, celebrities, and adventurers while sailing the globe. But my passion for food began earlier, in the fresh markets of France, where I fell in love with seasonal ingredients, aged cheeses, and the art of gathering.</p>
+              <p>Motivated by that culture, I trained at Tante Marie's in San Francisco and have never stopped cooking since. From buying octopus in a Greek village to slicing fresh-caught sashimi in Alaska, I've always believed food should reflect where you are and who you're with.</p>
+              <p>Now rooted in Santa Barbara and close to family, I cook for local events and gatherings using vibrant, organic California ingredients. I specialize in Mediterranean and raw cuisine and love meals that make you feel great, body and soul.</p>
+              <p>Founding the Chef Collective let me bring together a team of chefs who care deeply about food, craft, and connection. I'm so glad you're here.<br>— Coco</p>
+              <h4>The Process</h4>
+              <ul>
+                <li><strong>Chef Selection:</strong> Once you reach out, we'll send you curated resumes from chefs matched to your tastes, event style, and household needs.</li>
+                <li><strong>Personal Interviews:</strong> You'll meet the chefs to ensure their style, personality, and creativity align with your vision.</li>
+                <li><strong>The Perfect Match:</strong> With our guidance, you'll choose the chef who best fits the bill—someone who will turn your gathering into something truly memorable.</li>
+              </ul>
+              <h4>What Makes Us Different</h4>
+              <ul>
+                <li><strong>Global Talent, Local Roots:</strong> From Michelin-trained masters to creative culinary artisans, our chefs bring world-class skill to Santa Barbara tables. Every chef is personally vetted and selected not just for talent, but for hospitality and heart.</li>
+                <li><strong>Connecting Great Chefs with Great Clients:</strong> Our platform makes it easy to browse and connect with top local chefs. Every detail is handled with care, so you can focus on the experience, not the logistics.</li>
+                <li><strong>Celebrating Local Flavor:</strong> We partner with Santa Barbara farmers, fishers, and foragers to create dishes that reflect the vibrant spirit of the Central Coast. Every meal is a celebration of community, seasonality, and creativity.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- OUR CHEFS ACCORDION -->
+          <div class="accordion-item" id="our-chefs-accordion"><div class="accordion-header"><h3>Our Chefs</h3><div class="accordion-icon"></div></div><div class="accordion-content"></div></div>
+
+          <!-- OUR MENUS ACCORDION -->
+          <div class="accordion-item" id="our-menus-accordion"><div class="accordion-header"><h3>Our Menus</h3><div class="accordion-icon"></div></div><div class="accordion-content"></div></div>
+
+          <!-- GATHERINGS ACCORDION -->
+          <div class="accordion-item" id="gatherings-accordion"><div class="accordion-header"><h3>Gatherings & Celebrations</h3><div class="accordion-icon"></div></div><div class="accordion-content"></div></div>
+
+          <!-- CULINARY EXPERIENCES ACCORDION -->
+          <div class="accordion-item" id="culinary-experiences-accordion">
+            <div class="accordion-header">
+              <h3>Culinary Experiences</h3>
+              <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+              <h4>Description</h4>
+              <p>Hands-on cooking instruction customized to your interests and skill level, led by our expert chefs in the comfort of your home or rental. These immersive experiences blend education with enjoyment, leaving you with skills that last a lifetime.</p>
+
+              <h4>Format Options</h4>
+              <ul>
+                <li>One-on-one personal instruction</li>
+                <li>Group classes for friends, family, or team-building</li>
+                <li>Market tours featuring Santa Barbara's stunning farmers markets</li>
+                <li>Specialized technique workshops</li>
+              </ul>
+
+              <h4>Features</h4>
+              <ul>
+                <li>Professional culinary methods and chef shortcuts</li>
+                <li>Ingredient selection guidance</li>
+                <li>Recipe packets to recreate dishes at home</li>
+                <li>Focus sessions on specific techniques or cuisines</li>
+                <li>Custom menus based on your skill level and interests</li>
+                <li>Wine or cocktail pairings to complement the cooking experience</li>
+              </ul>
+
+              <h4>Benefits</h4>
+              <ul>
+                <li>Elevate your kitchen confidence</li>
+                <li>Learn to create restaurant-quality dishes</li>
+                <li>Understand the philosophy behind great cooking</li>
+                <li>Connect with local ingredients and producers</li>
+                <li>Create memorable experiences with loved ones</li>
+                <li>Develop a deeper appreciation for culinary arts</li>
+              </ul>
+
+              <p><strong>Pricing:</strong> From $75 for basic sessions to $275 for comprehensive experiences with market tours</p>
+            </div>
+          </div>
+
+          <!-- BEYOND THE TABLE ACCORDION -->
+          <div class="accordion-item" id="beyond-table-accordion">
+            <div class="accordion-header">
+              <h3>Beyond the Table</h3>
+              <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+              <h4>Description</h4>
+              <p>Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering. These thoughtful additions transform meals into complete sensory experiences.</p>
+
+              <h4>Wine Pairing Guidance</h4>
+              <ul>
+                <li>Expert wine recommendations tailored to your menu</li>
+                <li>Curated selections from local Santa Barbara vineyards</li>
+                <li>In-home wine tasting experiences with sommeliers</li>
+                <li>Custom flight creation for multi-course experiences</li>
+                <li>Pricing: From complimentary guidance to full sommelier service</li>
+                <li>In partnership with Renegade Wines</li>
+                <li>Educational notes on region, varietal, and pairing principles</li>
+              </ul>
+
+              <h4>Table Setting & Styling</h4>
+              <ul>
+                <li>Elegant table design customized to your occasion</li>
+                <li>Premium linens, dinnerware, and glassware</li>
+                <li>Seasonal floral arrangements from local growers</li>
+                <li>Ambient lighting to create the perfect atmosphere</li>
+                <li>Pricing: From $15 per guest for essentials to $60+ for luxury</li>
+                <li>In collaboration with Santa Barbara Picnic Co.</li>
+                <li>Themed options reflecting local coastal elegance</li>
+              </ul>
+
+              <h4>Bartending Services</h4>
+              <ul>
+                <li>Professional bartenders to serve drinks at your event</li>
+                <li>Experienced mixologists who provide attentive service</li>
+                <li>Connects you with trusted bartending professionals</li>
+                <li>Custom cocktail menus featuring local ingredients and spirits</li>
+              </ul>
+
+              <h4>Specialty Cocktails</h4>
+              <ul>
+                <li>Custom cocktail mixers created by your chef</li>
+                <li>Unique flavor combinations to complement your menu</li>
+                <li>Ready to add to your choice of liquor</li>
+                <li>Seasonal ingredients that reflect Santa Barbara's bounty</li>
+              </ul>
+
+              <h4>Rental Coordination</h4>
+              <ul>
+                <li>Connection with trusted local rental companies</li>
+                <li>Assistance with all rental details for events</li>
+                <li>Streamlined process for securing necessary equipment</li>
+                <li>Expert advice on quantities and specific needs</li>
+              </ul>
+
+              <h4>Seasonal Produce Boxes</h4>
+              <ul>
+                <li>Hand-selected produce from local organic farms</li>
+                <li>Artisanal oils, vinegars, and specialty items</li>
+                <li>Chef-created recipes utilizing seasonal ingredients</li>
+                <li>Information on featured farms and producers</li>
+                <li>Pricing: From $45 weekly for essentials to $125 for gourmet</li>
+                <li>Direct connection to Santa Barbara's agricultural heritage</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- SIGNATURE MEAL DELIVERIES ACCORDION -->
+          <div class="accordion-item" id="signature-meal-deliveries-accordion">
+            <div class="accordion-header">
+              <h3>Signature Meal Deliveries</h3>
+              <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+              <h4>Signature Meal Program</h4>
+              <p>Transform your everyday dining with chef-crafted meals delivered to your home on a schedule that suits your lifestyle. Our Signature Meal Program brings the expertise of Santa Barbara's finest culinary artists to your family table without the planning, shopping, or preparation.</p>
+              <h4>Program Features</h4>
+              <ul>
+                <li><strong>Personalized Menus:</strong> Tailored to your household's preferences, dietary needs, and schedule.</li>
+                <li><strong>Seasonal Ingredients:</strong> Fresh, locally-sourced produce and premium ingredients that change with the seasons.</li>
+                <li><strong>Flexible Scheduling:</strong> Choose from 2, 3, or 5 meals per week with easy adjustments as your needs change.</li>
+              </ul>
+              <h4>Dietary Preferences</h4>
+              <ul>
+                <li>Gluten-Free</li>
+                <li>Dairy-Free</li>
+                <li>Vegan</li>
+                <li>Vegetarian</li>
+                <li>Paleo</li>
+                <li>Keto</li>
+                <li>Low-FODMAP</li>
+                <li>Mediterranean</li>
+              </ul>
+              <p>Each meal arrives ready to heat and serve, with chef's notes on presentation and optional finishing touches.</p>
+            </div>
+          </div>
+
+          <!-- FAQ ACCORDION -->
+          <div class="accordion-item" id="faq-accordion"><div class="accordion-header"><h3>Frequently Asked Questions</h3><div class="accordion-icon"></div></div><div class="accordion-content"></div></div>
+        </div>
+        <div style="margin-top: 25px; text-align: center;"></div>
+      </div>
+    </div>
+
+    <!-- PLAN YOUR EVENT MODAL -->
+    <div id="event-modal" class="modal"></div>
+
+    <!-- WEEKLY MEALS MODAL -->
+    <div id="weekly-meals-modal" class="modal"></div>
+
+    <!-- <script src="js/clean-duplicates.js"></script> -->
+    <!-- <script src="js/standardize-dividers.js"></script> -->
+    <!-- <script src="js/accordion-universal-fix.js"></script> -->
+    <script>
+      // Immediate execution accordion fix
+      (function () {})();
+    </script>
+
+    <script src="js/populate-faq.js"></script>
+    <script src="js/update-gatherings.js"></script>
+    <script src="js/smooth-scrolling.js"></script>
+    <script src="scripts.js?v=1747011320"></script>
+<div class="accordion">
+  <div class="accordion-header" onclick="togglePricingAccordion(this)">
+    <h2>Gatherings & Celebrations</h2>
+    <span>Click to Expand</span>
+  </div>
+
+<div class="accordion-content">
+  <h4>General Questions</h4>
+  <ul>
+    <li><strong>Do you accommodate special diets?</strong><br>
+    Absolutely. Our chefs specialize in a wide range of dietary accommodations—from gluten-free to vegan, paleo, low-sodium, and more. Let us know what you need, and we'll match you with a chef who can deliver.</li>
+    <li><strong>Are you licensed and insured?</strong><br>
+    Yes. All chefs are vetted professionals, and the SBCC team carries appropriate licenses and insurance for events and private service.</li>
+  </ul>
+
+  <h4>Booking & Pricing</h4>
+  <ul>
+    <li><strong>How far in advance should I book?</strong><br>
+    We recommend booking at least 2–4 weeks in advance for events, and 5–7 days for weekly meals. We'll always try to accommodate your timing.</li>
+    <li><strong>Do you travel outside of Santa Barbara?</strong><br>
+    Yes. Many of our chefs travel throughout the region. Travel fees may apply depending on location.</li>
+    <li><strong>How much does it cost?</strong><br>
+    Pricing varies based on the service type, guest count, chef, and complexity. We provide full transparency before anything is confirmed.</li>
+  </ul>
+
+  <h4>Events & Gatherings</h4>
+  <ul>
+    <li><strong>Can I customize a menu?</strong><br>
+    Yes. Every SBCC experience is tailored to your preferences. You can collaborate with your chef or select from curated menus.</li>
+    <li><strong>Do I need to provide anything in my kitchen?</strong><br>
+    For in-home events or prep, we’ll review your kitchen setup in advance. Most chefs bring their own tools, but access to a stove and fridge is typically essential.</li>
+    <li><strong>Do you offer tastings?</strong><br>
+    For weddings or large events, tastings can be arranged with select chefs. Please inquire early.</li>
+  </ul>
+
+  <h4>Signature Meal Program</h4>
+  <ul>
+    <li><strong>What’s the difference between the Signature Meal Program and booking a chef for an event?</strong><br>
+    The Signature Meal Program is for regular, in-home nourishment. Events are one-time experiences. Different cadence, same heart.</li>
+  </ul>
+
+  <h4>Other Information</h4>
+  <ul>
+    <li><strong>What if I don’t see what I’m looking for?</strong><br>
+    Reach out! We love creative requests—whether it’s a themed dinner or a unique dietary need, we’re excited to collaborate.</li>
+  </ul>
+</div>
+    <div class="menu-section">
+      <p>From intimate dinner parties to milestone celebrations, our chefs create custom menus that reflect your vision and delight your guests. We handle everything from menu planning to execution, allowing you to be fully present as a host.</p>
+      <ul>
+        <li>Dinner Parties: Customized menus, full-service, $155–$190/person</li>
+        <li>Date Night: Intimate at-home fine dining with wine pairing</li>
+        <li>Special Occasions: Personalized culinary celebrations</li>
+        <li>Corporate Events: Executive-level catering with style</li>
+        <li>Holiday Celebrations: Traditional menus with a chef's touch</li>
+        <li>Milestone Celebrations: Thoughtful presentations for big moments</li>
+        <li>Bridal Events: Elegant, photo-worthy wedding journey moments</li>
+        <li>Cocktail Parties: Sophisticated bites and curated cocktails</li>
+        <li>Family Gatherings: Family-style service with shared traditions</li>
+        <li>Wine Dinners: Multi-course pairings with Santa Barbara wines</li>
+        <li>Al Fresco Dining: Seasonal outdoor experiences under the sky</li>
+      </ul>
+    </div>
+  </div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,120 @@
+/* Updated fix for Our Story accordion - adjusting internal heading sizes and layout */
+
+/* Adjust the heading sizes INSIDE the accordion content */
+#our-story-accordion .accordion-content h4 {
+  font-size: 1.25rem; /* Make section headers smaller compared to accordion title */
+  margin: 25px 0 20px;
+  text-align: center;
+  color: #1D3557; /* Navy */
+  font-family: 'Playfair Display', serif;
+}
+
+/* Fix the layout to single column with rectangular blocks */
+#our-story-accordion .story-section {
+  margin-bottom: 25px;
+}
+
+/* Convert the "What Makes Us Different" section to a vertical layout with full-width cards */
+#our-story-accordion .what-makes-different {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* Style each card as a full-width rectangle */
+#our-story-accordion .story-card {
+  background-color: #F9F7F2; /* Cream background from Montecito Mom palette */
+  padding: 20px;
+  border-radius: 5px;
+  border-left: 3px solid #1D3557; /* Navy left border */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#our-story-accordion .story-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#our-story-accordion .story-card h5 {
+  font-size: 1.1rem;
+  font-family: 'Playfair Display', serif;
+  color: #1D3557; /* Navy */
+  margin-bottom: 8px;
+}
+
+/* Style the founder section for better layout */
+#our-story-accordion .founder-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#our-story-accordion .founder-image {
+  margin: 0 auto 20px;
+  max-width: 280px;
+}
+
+#our-story-accordion .founder-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Add tablet/desktop styles to make founder section side-by-side */
+@media (min-width: 768px) {
+  #our-story-accordion .founder-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  #our-story-accordion .founder-image {
+    flex: 0 0 280px;
+    margin: 0 25px 0 0;
+  }
+}
+
+/* Style the process steps */
+#our-story-accordion .process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+#our-story-accordion .process-step {
+  display: flex;
+  padding: 20px;
+  background-color: #F9F7F2; /* Cream */
+  border-radius: 5px;
+  border-left: 3px solid #1D3557; /* Navy left border */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+#our-story-accordion .step-number {
+  width: 36px;
+  height: 36px;
+  background-color: #1D3557; /* Navy */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+#our-story-accordion .step-content h5 {
+  font-size: 1.05rem;
+  font-family: 'Playfair Display', serif;
+  color: #1D3557; /* Navy */
+  margin: 0 0 5px;
+}
+
+#our-story-accordion .section-divider {
+  margin: 30px auto;
+  width: 70%;
+}

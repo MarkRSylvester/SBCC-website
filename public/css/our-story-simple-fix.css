@@ -1,0 +1,41 @@
+/* Simple fix for Our Story accordion */
+
+/* Make the main accordion title larger */
+#our-story-accordion .accordion-header h3 {
+  font-size: 1.5rem;
+}
+
+/* Make the What Makes Us Different heading larger to balance with accordion title */
+#our-story-accordion h4 {
+  font-size: 1.4rem;
+  margin: 25px 0 20px;
+  text-align: center;
+}
+
+/* Fix the layout to single column */
+#our-story-accordion .story-section {
+  display: block;
+  width: 100%;
+}
+
+/* Style the content blocks consistently */
+#our-story-accordion .what-makes-different {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Each distinction card */
+#our-story-accordion .story-card {
+  background-color: #F9F7F2;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Make the dividers consistent */
+#our-story-accordion .section-divider {
+  margin: 30px auto;
+  width: 70%;
+}

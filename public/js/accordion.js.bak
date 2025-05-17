@@ -1,0 +1,73 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const headers = document.querySelectorAll(".accordion-header");
+
+  headers.forEach(header => {
+    header.addEventListener("click", () => {
+      const clickedItem = header.closest(".accordion-item");
+      const isActive = clickedItem.classList.contains("active");
+
+      // Close all others
+      document.querySelectorAll(".accordion-item").forEach(item => {
+        if (item !== clickedItem) {
+          item.classList.remove("active");
+          const btn = item.querySelector(".accordion-header");
+          const content = item.querySelector(".accordion-content");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+          if (content) content.setAttribute("tabindex", "-1");
+        }
+      });
+
+      // Toggle clicked
+      const content = clickedItem.querySelector(".accordion-content");
+      const expanded = !isActive;
+      header.setAttribute("aria-expanded", expanded ? "true" : "false");
+      if (expanded) {
+        // Scroll header into view BEFORE expanding content to prevent bounce, but only if needed
+        const modalContent = header.closest('.modal-content');
+        if (modalContent) {
+          const headerRect = header.getBoundingClientRect();
+          const modalRect = modalContent.getBoundingClientRect();
+          if (headerRect.top > modalRect.top + 2 || headerRect.top < modalRect.top - 2) {
+            header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+        setTimeout(() => {
+          clickedItem.classList.add("active");
+          content.setAttribute("tabindex", "0");
+          content.focus();
+        }, 120);
+      } else {
+        clickedItem.classList.remove("active");
+        content.setAttribute("tabindex", "-1");
+      }
+    });
+
+    // Keyboard accessibility
+    header.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        header.click();
+      }
+    });
+  });
+
+  // Scroll bubbling fix for modal accordion content
+  if (document.querySelector('#explore-modal')) {
+    document.querySelectorAll('#explore-modal .accordion-content').forEach(function(content) {
+      content.addEventListener('wheel', function(e) {
+        const atTop = content.scrollTop === 0;
+        const atBottom = Math.abs(content.scrollHeight - content.scrollTop - content.clientHeight) < 1;
+        if ((atTop && e.deltaY < 0) || (atBottom && e.deltaY > 0)) {
+          // Allow scroll to bubble up to modal
+          e.preventDefault();
+          const modalContent = content.closest('.modal-content');
+          if (modalContent) {
+            modalContent.scrollBy({ top: e.deltaY, behavior: 'auto' });
+          }
+        }
+        // Otherwise, let the content scroll normally
+      }, { passive: false });
+    });
+  }
+});
+ 

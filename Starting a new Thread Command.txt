@@ -18,3 +18,7 @@ Command Line Best Practices:
 - Avoid commands with spaces between bash and other commands which cause "command not found" errors
 - Use standard macOS/zsh compatible commands (avoid Linux-specific syntax)
 - When using sed on macOS, include empty string for -i parameter (sed -i '')
+
+Reminder, I am not a coder, so when you say things like Add these script tags just before /body - I am not going to do that and instead will ask you
+
+Please do not give me long lists of actions as I do the first one, then paste the results, and we never get to do the remaining things in the list, so one at a time.

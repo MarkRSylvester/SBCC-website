@@ -1,0 +1,73 @@
+/* FAQ-specific styling */
+.faq-section-title {
+  font-size: 22px !important;
+  color: #1D3557 !important;
+  font-family: 'Playfair Display', serif !important;
+  margin-top: 10px !important;
+  margin-bottom: 20px !important;
+  font-weight: 500 !important;
+}
+
+.faq-card .category-title {
+  font-size: 18px !important;
+  font-family: 'Playfair Display', serif !important;
+  color: #1D3557 !important;
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+  font-weight: 500 !important;
+}
+
+.faq-card .divider {
+  height: 2px !important;
+  width: 60px !important;
+  background: linear-gradient(to right, #1D3557, rgba(29, 53, 87, 0.1)) !important;
+  margin-bottom: 20px !important;
+  margin-top: 0 !important;
+}
+
+.faq-card {
+  background-color: #F9F7F2 !important;
+  border-radius: 5px !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+  padding: 25px !important;
+  transition: all 0.3s ease !important;
+}
+
+.faq-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.faq-card p {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #333333 !important;
+  margin-bottom: 0 !important;
+}
+
+#faq-accordion .section-intro {
+  font-size: 18px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 30px !important;
+  text-align: center !important;
+  color: #333333 !important;
+}
+
+#faq-accordion .section-divider {
+  height: 1px !important;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,0)) !important;
+  margin: 35px 0 !important;
+}
+
+#faq-accordion .category-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+@media (max-width: 768px) {
+  #faq-accordion .category-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

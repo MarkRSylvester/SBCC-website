@@ -1,0 +1,21 @@
+SAFE ACCORDION FIX APPROACH:
+
+1. First, run the diagnostic script to understand the current state:
+   - Open your website and the modal
+   - Open browser dev tools and go to Console
+   - Paste the content of accordion-diagnostic.js
+   - Check the output to understand what's happening with accordions
+
+2. If accordions are staying open, try refreshing the page to reset state
+
+3. Apply just the divider style fix without changing anything else:
+   - Paste the content of minimal-divider-fix.js
+   - This should ONLY affect divider styling
+
+4. Separately, apply the text size fix:
+   - Paste the content of our-story-text-fix.js
+   - This should ONLY affect text size in Our Story
+
+This approach separates concerns and minimizes the chance of breaking existing functionality.
+
+IMPORTANT: If you've added multiple script files in previous attempts, they might be conflicting. Consider removing extra script tags from your HTML before trying these fixes.

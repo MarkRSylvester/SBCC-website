@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SBCC Modal Test</title>
+  
+  <!-- Font imports -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Modal CSS with version param to bust cache -->
+  <link rel="stylesheet" href="/public/css/montecito-modal.css?v=reset">
+  
+  <style>
+    /* Base styles */
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #F9F7F2;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      color: #1D3557;
+    }
+    .container {
+      background-color: white;
+      border-radius: 5px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    .button {
+      background-color: #1D3557;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 3px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .button:hover {
+      background-color: #4779B5;
+      transform: translateY(-2px);
+    }
+    .controls {
+      margin: 30px 0;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .status {
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      background-color: #E6DBC9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Santa Barbara Chef Collective</h1>
+    <h2>Modal &amp; Accordion Test Page</h2>
+    
+    <div class="status">
+      <p><strong>Status:</strong> This is a clean test page to verify modal functionality with the reset implementation.</p>
+    </div>
+    
+    <div class="controls">
+      <button class="button" data-modal="test-modal">Open Test Modal</button>
+      <button class="button" id="check-status">Check Status</button>
+    </div>
+    
+    <div class="info">
+      <h3>Instructions:</h3>
+      <ol>
+        <li>Click "Open Test Modal" to verify the modal opens correctly</li>
+        <li>Test the accordions inside the modal</li>
+        <li>Verify that accordions open and close as expected</li>
+        <li>Click "Check Status" to run diagnostics</li>
+      </ol>
+    </div>
+  </div>
+  
+  <!-- Test Modal -->
+  <div id="test-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <h2>Test Modal</h2>
+      
+      <p class="section-intro">This modal contains test accordions to verify functionality.</p>
+      
+      <div class="accordion-container">
+        <!-- First Accordion -->
+        <div class="accordion-item" id="first-accordion">
+          <div class="accordion-header">
+            <h3>First Accordion</h3>
+            <div class="accordion-icon">+</div>
+          </div>
+          <div class="accordion-content">
+            <p>This is the content of the first accordion. If you can see this, the accordion is working.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc.</p>
+          </div>
+        </div>
+        
+        <!-- Second Accordion (open by default) -->
+        <div class="accordion-item active open" id="second-accordion">
+          <div class="accordion-header">
+            <h3>Second Accordion (Open by Default)</h3>
+            <div class="accordion-icon">+</div>
+          </div>
+          <div class="accordion-content" style="display:block; height:auto; max-height:none; padding:20px; overflow:auto;">
+            <p>This accordion should be open by default.</p>
+            <p>It uses the special "active open" classes and inline styles to ensure it displays properly.</p>
+          </div>
+        </div>
+        
+        <!-- Third Accordion -->
+        <div class="accordion-item" id="third-accordion">
+          <div class="accordion-header">
+            <h3>Third Accordion with Grid</h3>
+            <div class="accordion-icon">+</div>
+          </div>
+          <div class="accordion-content">
+            <p class="section-intro">This accordion contains a category grid to test more complex content.</p>
+            
+            <div class="category-grid">
+              <div class="category-card" data-category="wine">
+                <h4 class="category-title">Category One</h4>
+                <div class="divider"></div>
+                <ul class="event-list">
+                  <li>First item in the list</li>
+                  <li>Second item with more text to test wrapping</li>
+                  <li>Third item in the list</li>
+                </ul>
+              </div>
+              
+              <div class="category-card" data-category="tablesetting">
+                <h4 class="category-title">Category Two</h4>
+                <div class="divider"></div>
+                <ul class="event-list">
+                  <li>First item in the list</li>
+                  <li>Second item with more text to test wrapping</li>
+                  <li>Third item in the list</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Status Modal -->
+  <div id="status-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <h2>Diagnostic Status</h2>
+      <div id="status-results"></div>
+    </div>
+  </div>
+  
+  <!-- Modal JS with version param to bust cache -->
+  <script src="/public/js/montecito-modal.js?v=1747422477"></script>
+  
+  <!-- Diagnostic Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkStatusBtn = document.getElementById('check-status');
+      const statusResults = document.getElementById('status-results');
+      
+      checkStatusBtn.addEventListener('click', function() {
+        runDiagnostics();
+      });
+      
+      function runDiagnostics() {
+        const results = [];
+        let passed = 0;
+        let failed = 0;
+        
+        // Test 1: Modal JS loaded
+        try {
+          if (typeof window.sbcc === 'object') {
+            results.push('✅ Modal JS loaded correctly');
+            passed++;
+          } else {
+            results.push('❌ Modal JS not properly loaded');
+            failed++;
+          }
+        } catch (e) {
+          results.push(`❌ Error checking Modal JS: ${e.message}`);
+          failed++;
+        }
+        
+        // Test 2: Accordion initialization
+        try {
+          const accordionHeaders = document.querySelectorAll('.accordion-header');
+          let initialized = true;
+          
+          accordionHeaders.forEach(header => {
+            if (!header.getAttribute('role') === 'button') {
+              initialized = false;
+            }
+          });
+          
+          if (initialized) {
+            results.push('✅ Accordions initialized correctly');
+            passed++;
+          } else {
+            results.push('❌ Accordions not properly initialized');
+            failed++;
+          }
+        } catch (e) {
+          results.push(`❌ Error checking accordions: ${e.message}`);
+          failed++;
+        }
+        
+        // Test 3: CSS loaded
+        try {
+          const accordionItem = document.querySelector('.accordion-item');
+          const computedStyle = window.getComputedStyle(accordionItem);
+          
+          if (computedStyle.boxShadow && computedStyle.boxShadow !== 'none') {
+            results.push('✅ Modal CSS loaded correctly');
+            passed++;
+          } else {
+            results.push('❌ Modal CSS not properly loaded');
+            failed++;
+          }
+        } catch (e) {
+          results.push(`❌ Error checking CSS: ${e.message}`);
+          failed++;
+        }
+        
+        // Test 4: Default open accordion
+        try {
+          const secondAccordion = document.getElementById('second-accordion');
+          const isOpen = secondAccordion.classList.contains('active') && 
+                        secondAccordion.classList.contains('open');
+          
+          if (isOpen) {
+            results.push('✅ Default open accordion working');
+            passed++;
+          } else {
+            results.push('❌ Default open accordion not working');
+            failed++;
+          }
+        } catch (e) {
+          results.push(`❌ Error checking default open: ${e.message}`);
+          failed++;
+        }
+        
+        // Generate result HTML
+        const totalTests = passed + failed;
+        const resultHTML = `
+          <div style="margin-bottom: 20px;">
+            <p><strong>Tests Run:</strong> ${totalTests}</p>
+            <p style="color: green;"><strong>Passed:</strong> ${passed}</p>
+            <p style="color: red;"><strong>Failed:</strong> ${failed}</p>
+          </div>
+          
+          <div style="margin-bottom: 20px;">
+            <h3>Detailed Results:</h3>
+            <ul style="list-style-type: none; padding: 0;">
+              ${results.map(result => `<li style="margin-bottom: 8px;">${result}</li>`).join('')}
+            </ul>
+          </div>
+          
+          <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">
+            <h3>Next Steps:</h3>
+            ${failed > 0 ? `
+              <p>Some tests failed. Try these troubleshooting steps:</p>
+              <ol>
+                <li>Check browser console for JavaScript errors</li>
+                <li>Verify CSS file is loaded (Network tab in dev tools)</li>
+                <li>Try disabling any other JavaScript that might conflict</li>
+                <li>Ensure paths are correct in your HTML file</li>
+              </ol>
+            ` : `
+              <p>All tests passed! You can now:</p>
+              <ol>
+                <li>Integrate this implementation into your main application</li>
+                <li>Update all modal references to use this implementation</li>
+                <li>Add content to match your requirements</li>
+              </ol>
+            `}
+          </div>
+        `;
+        
+        // Show results in modal
+        statusResults.innerHTML = resultHTML;
+        window.sbcc.openModal('status-modal');
+      }
+    });
+  </script>
+  <script src="/js/modal-accordion.js"></script>
+  <script src="/js/accordion-initializer.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+/* Just Exploring Modal Updates */
+
+/* Add padding above the top image */
+#explore-modal .modal-header-image {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Elegant section separator */
+.sbcc-gradient-separator {
+  width: 100%;
+  max-width: 400px;
+  height: 4px;
+  margin: 2rem auto;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #4A5D23 30%,
+    #4A5D23 70%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.sbcc-gradient-separator:hover {
+  opacity: 1;
+}
+
+/* Fix accordion left borders with gradient */
+#explore-modal .accordion-item {
+  position: relative;
+  margin-bottom: 12px;
+  border-radius: 0 8px 8px 0;
+  background-color: #FFFFFF;
+  overflow: hidden;
+}
+
+/* Gradient border for accordion items */
+#explore-modal .accordion-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, #a8caff, #1d3557);
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+/* Animate gradient on active state */
+#explore-modal .accordion-item.active::before {
+  opacity: 1;
+  transform: scaleY(1.05);
+}
+
+/* Make accordion headers taller and center text */
+#explore-modal .accordion-header {
+  padding: 18px 20px;
+  min-height: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f8fd;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  margin-left: 6px; /* Account for gradient border */
+}
+
+/* Accordion content with internal scrolling */
+#explore-modal .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  padding: 0 20px;
+  scrollbar-gutter: stable;
+  position: relative;
+  z-index: 1;
+  margin-left: 6px; /* Account for gradient border */
+}
+
+#explore-modal .accordion-item.active .accordion-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 20px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Custom scrollbar styling */
+#explore-modal .accordion-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+#explore-modal .accordion-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 4px;
+}
+
+#explore-modal .accordion-content::-webkit-scrollbar-thumb {
+  background: rgba(29, 53, 87, 0.2);
+  border-radius: 4px;
+}
+
+#explore-modal .accordion-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 53, 87, 0.3);
+}
+
+/* Ensure modal content has proper spacing */
+#explore-modal .modal-content {
+  padding-top: 32px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Add spacing between accordions */
+#explore-modal .accordion-item + .accordion-item {
+  margin-top: 16px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  #explore-modal .accordion-header {
+    min-height: 56px; /* Slightly smaller on mobile */
+    padding: 16px 20px;
+  }
+  
+  #explore-modal .accordion-content {
+    padding: 0 16px;
+  }
+  
+  #explore-modal .accordion-item.active .accordion-content {
+    padding: 16px;
+  }
+  
+  /* Ensure next accordion is partially visible */
+  #explore-modal .accordion-item.active {
+    margin-bottom: 32px;
+  }
+}
+
+/* Signature Deliveries Grid */
+.signature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin: 2.5rem auto 2rem auto;
+  max-width: 700px;
+  width: 100%;
+}
+
+.signature-grid .grid-item {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(29, 53, 87, 0.08), 0 1.5px 6px rgba(74, 93, 35, 0.06);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+.signature-grid .grid-item:hover {
+  box-shadow: 0 8px 28px rgba(29, 53, 87, 0.13), 0 3px 12px rgba(74, 93, 35, 0.10);
+}
+
+.signature-grid .grid-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(29, 53, 87, 0.07);
+}
+
+.signature-grid .grid-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: #2a4374;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.signature-grid .grid-desc {
+  font-size: 1rem;
+  color: #4A5D23;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .signature-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  .signature-grid .grid-item {
+    padding: 1.5rem 1rem 1.25rem 1rem;
+  }
+  .signature-grid .grid-item img {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* Signature Program Grid */
+.signature-program-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin: 2.5rem auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.signature-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(29, 53, 87, 0.08), 0 1.5px 6px rgba(74, 93, 35, 0.06);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+.signature-card:hover {
+  box-shadow: 0 8px 28px rgba(29, 53, 87, 0.13), 0 3px 12px rgba(74, 93, 35, 0.10);
+}
+
+.signature-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(29, 53, 87, 0.07);
+}
+
+.signature-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: #4A5D23;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.signature-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #2a4374;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .signature-program-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .signature-card {
+    padding: 1.25rem;
+  }
+  
+  .signature-card img {
+    margin-bottom: 1rem;
+  }
+} 

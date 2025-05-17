@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Story Fix</title>
+  <script>
+    // After page loads, add script
+    window.onload = function() {
+      // Create script element
+      var script = document.createElement('script');
+      script.src = 'js/clean-story-fix.js';
+      
+      // Add to document
+      document.body.appendChild(script);
+      
+      // Message
+      alert('Our Story fix script added. Open the modal with the "Our Story" accordion to see the changes.');
+    };
+  </script>
+</head>
+<body>
+  <h1>Our Story Fix</h1>
+  <p>This page will add the fix script to your site.</p>
+  <p>Steps:</p>
+  <ol>
+    <li>Open your actual website in another tab</li>
+    <li>After seeing this alert, click "Just Exploring" to open the modal</li>
+    <li>Click on "Our Story" to open the accordion</li>
+    <li>The content should now be properly formatted</li>
+  </ol>
+  <script src="/js/modal-accordion.js"></script>
+  <script src="/js/accordion-initializer.js"></script>
+</body>
+</html>

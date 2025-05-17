@@ -1,0 +1,188 @@
+=== ACCORDION CSS FILE ANALYSIS ===
+Looking for accordion styles in CSS files...
+
+File: accordion-fix.css
+  Lines:       19
+  Accordion rules: 4
+  Last modified: 2025-05-14 11:55:33
+
+File: accordion-icon-fix.css
+  Lines:        0
+  Accordion rules: 0
+  Last modified: 2025-05-14 14:11:42
+
+File: accordion-icons.css
+  Lines:        0
+  Accordion rules: 0
+  Last modified: 2025-05-14 14:11:42
+
+File: accordion-scroll.css
+  Lines:       66
+  Accordion rules: 13
+  Last modified: 2025-05-05 17:46:21
+
+File: accordion-standardize.css
+  Lines:       96
+  Accordion rules: 11
+  Last modified: 2025-05-05 22:56:28
+
+File: accordion-styles.css
+  Lines:      178
+  Accordion rules: 25
+  Last modified: 2025-05-15 17:02:14
+
+File: faq-accordion.css
+  Lines:      152
+  Accordion rules: 13
+  Last modified: 2025-05-05 22:54:07
+
+File: our-story-accordion.css
+  Lines:       41
+  Accordion rules: 0
+  Last modified: 2025-05-13 13:58:42
+
+File: our-story-accordion.css
+  Lines:       41
+  Accordion rules: 0
+  Last modified: 2025-05-13 13:58:42
+
+File: our-story-custom.css
+  Lines:      215
+  Accordion rules: 24
+  Last modified: 2025-05-13 17:55:58
+
+File: our-story-fix-updated.css
+  Lines:      120
+  Accordion rules: 19
+  Last modified: 2025-05-12 20:19:20
+
+File: our-story-simple-fix.css
+  Lines:       41
+  Accordion rules: 9
+  Last modified: 2025-05-12 20:15:31
+
+File: our-story.css
+  Lines:       99
+  Accordion rules: 2
+  Last modified: 2025-05-05 23:57:55
+
+File: modal-styles.css
+  Lines:     2424
+  Accordion rules: 49
+  Last modified: 2025-05-15 21:31:22
+
+=== ACCORDION JS FILE ANALYSIS ===
+Looking for accordion functionality in JS files...
+
+File: accordion-fix.js
+  Lines:       55
+  Accordion references: 14
+  Toggle operations: 2
+  Last modified: 2025-05-14 11:55:22
+
+File: accordion-scroll.js
+  Lines:       19
+  Accordion references: 2
+  Toggle operations: 0
+  Last modified: 2025-05-12 22:19:53
+
+File: accordion-standardizer.js
+  Lines:       13
+  Accordion references: 5
+  Toggle operations: 0
+  Last modified: 2025-05-12 18:39:54
+
+File: accordion.js
+  Lines:       72
+  Accordion references: 8
+  Toggle operations: 3
+  Last modified: 2025-05-15 17:26:08
+
+File: comprehensive-accordion.js
+  Lines:      106
+  Accordion references: 30
+  Toggle operations: 2
+  Last modified: 2025-05-14 11:53:47
+
+File: fix-explore-accordion.js
+  Lines:       25
+  Accordion references: 3
+  Toggle operations: 2
+  Last modified: 2025-05-14 14:13:03
+
+File: force-accordion.js
+  Lines:       60
+  Accordion references: 19
+  Toggle operations: 2
+  Last modified: 2025-05-14 12:00:51
+
+File: clean-story-fix.js
+  Lines:      110
+  Accordion references: 11
+  Toggle operations: 0
+  Last modified: 2025-05-12 20:35:02
+
+File: direct-our-story-fix.js
+  Lines:      173
+  Accordion references: 15
+  Toggle operations: 0
+  Last modified: 2025-05-13 14:04:05
+
+File: fix-our-story.js
+  Lines:      229
+  Accordion references: 3
+  Toggle operations: 0
+  Last modified: 2025-05-13 14:04:14
+
+File: fixed-our-story.js
+  Lines:      181
+  Accordion references: 18
+  Toggle operations: 0
+  Last modified: 2025-05-13 14:04:30
+
+File: founder-story-fix.js
+  Lines:       51
+  Accordion references: 2
+  Toggle operations: 0
+  Last modified: 2025-05-14 11:57:54
+
+File: our-story-layout-fix.js
+  Lines:       97
+  Accordion references: 8
+  Toggle operations: 0
+  Last modified: 2025-05-13 14:03:47
+
+File: our-story-simple-fix.js
+  Lines:       97
+  Accordion references: 8
+  Toggle operations: 0
+  Last modified: 2025-05-13 14:03:55
+
+File: our-story.js
+  Lines:       82
+  Accordion references: 17
+  Toggle operations: 2
+  Last modified: 2025-05-13 14:04:38
+
+File: update-our-story.js
+  Lines:       13
+  Accordion references: 4
+  Toggle operations: 0
+  Last modified: 2025-05-12 21:04:50
+
+=== INLINE STYLES ANALYSIS ===
+
+=== CSS IMPORTS IN HTML ===
+4:<link rel="stylesheet" href="/accordion-icons.css">
+13:    <link rel="stylesheet" href="css/modal-styles.css">
+17:    <link rel="stylesheet" href="css/modal-close.css">
+19:    <link rel="stylesheet" href="css/our-story-accordion.css">
+20:    <link rel="stylesheet" href="css/our-story-fix-updated.css">
+21:    <link rel="stylesheet" href="css/our-story-simple-fix.css">
+22:    <link rel="stylesheet" href="css/our-story-custom.css">
+139:    <link rel="stylesheet" href="css/accordion-styles.css">
+140:    <link rel="stylesheet" href="css/accordion-icon-fix.css">
+
+=== JS IMPORTS IN HTML ===
+679:<script src="js/accordion.js"></script>
+

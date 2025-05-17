@@ -1,0 +1,114 @@
+/* Accordion Styling */
+.accordion-item {
+    position: relative;
+    margin-bottom: 1rem;
+    border-left: 4px solid #1D3557; /* Navy from the Montecito Mom palette */
+    background-color: #FFFFFF;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100%; /* Ensure it doesn't exceed container width */
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+
+.accordion-header h3 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #1D3557; /* Navy */
+    font-size: 1.25rem;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    color: #1D3557; /* Navy */
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    display: none;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+    padding: 1.5rem 2rem;
+    height: auto;
+    max-height: none;
+}
+
+.section-intro {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.category-card {
+    background-color: #F9F7F2; /* Cream */
+    border-radius: 5px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.category-title {
+    color: #1D3557; /* Navy */
+    font-family: 'Playfair Display', serif;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.divider {
+    height: 2px;
+    background-color: #4779B5; /* Mediterranean Blue */
+    width: 50px;
+    margin-bottom: 1rem;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.accordion-intro {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.accordion-intro { text-align: left; }
+.accordion-intro { text-align: left; }
+.accordion-intro { text-align: left !important; }
+.accordion-intro { font-size: 1rem; text-align: left; margin-bottom: 1em; }
+.accordion-header h3 { font-size: 1.25rem !important; }
+
+.accordion-item {
+  scroll-margin-top: 1rem;
+}

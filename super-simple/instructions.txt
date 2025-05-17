@@ -1,0 +1,47 @@
+SUPER SIMPLE ACCORDION IMPLEMENTATION
+=====================================
+
+This is a barebones accordion implementation that uses traditional JavaScript
+techniques to avoid conflicts with other scripts.
+
+HOW TO TEST:
+-----------
+1. Open super-simple/test.html in your browser
+2. Click on the accordions to verify they open and close
+3. Click the "Debug Accordions" button to see debugging info in the console
+
+HOW TO IMPLEMENT IN YOUR PROJECT:
+-------------------------------
+1. Add the script to your HTML before the closing </body> tag:
+   <script src="/path/to/accordion.js"></script>
+
+2. Ensure your HTML structure follows this pattern:
+   <div class="accordion-item">
+     <div class="accordion-header">
+       <h3>Accordion Title</h3>
+     </div>
+     <div class="accordion-content">
+       Content goes here
+     </div>
+   </div>
+
+3. For accordions that should be open by default, use:
+   <div class="accordion-item active">
+     ...
+     <div class="accordion-content" style="display: block; padding: 20px;">
+       ...
+     </div>
+   </div>
+
+4. Add the debug function to a button if needed:
+   <button onclick="window.debugAccordions()">Debug</button>
+
+TROUBLESHOOTING:
+--------------
+If you're still having issues:
+1. Check the browser console for any errors
+2. Use the debugAccordions() function to inspect the state
+3. Temporarily disable all other scripts to check for conflicts
+4. Ensure your HTML structure exactly matches the expected pattern
+
+This implementation uses only ES5 features for maximum compatibility.

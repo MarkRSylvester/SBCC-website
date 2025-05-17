@@ -12,6 +12,11 @@
   fill: #1D3557; /* Coastal Navy */
 }
 
+.accordion-header svg:not(.accordion-toggle-icon) {
+  /* display: none !important; */
+}
+
+/*
 .accordion-icon::before,
 .accordion-header::before,
 .accordion-header .accordion-icon::before {
@@ -20,7 +25,6 @@
   background: none !important;
 }
 
-/* Kill unexpected icon clusters */
 .accordion-header > div[style*="border-radius"],
 .accordion-header > div > svg,
 .accordion-header > div > span,
@@ -32,7 +36,6 @@
   display: none !important;
 }
 
-/* Final nuke for ghost + signs from .accordion-icon */
 .accordion-icon::before {
   content: none !important;
   display: none !important;
@@ -41,7 +44,6 @@
   display: none !important;
 }
 
-/* FINAL purge of all rogue .accordion-icon visuals */
 .accordion-icon,
 .accordion-icon::before,
 .accordion-icon::after {
@@ -57,7 +59,6 @@
   padding: 0 !important;
 }
 
-/* Absolute final blackout of the mystery plus */
 .accordion-icon,
 .accordion-icon::before,
 .accordion-icon::after {
@@ -74,7 +75,6 @@
   display: none !important;
 }
 
-/* Kill rogue Font Awesome + icons */
 .accordion-icon::before,
 .accordion-icon::after,
 .fa-plus::before,
@@ -95,3 +95,4 @@
   width: 0 !important;
   height: 0 !important;
 }
+*/

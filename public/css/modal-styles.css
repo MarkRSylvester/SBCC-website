@@ -71,6 +71,9 @@
   margin: 40px auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.3s ease-out;
+  overflow-y: auto;
+  max-height: 80vh;
+  padding-top: 2rem !important;
 }
 
 @keyframes fadeIn {
@@ -127,17 +130,18 @@
 }
 
 .modal-header-image {
+  position: relative;
   width: 100%;
-  max-height: 300px;
+  margin-bottom: 20px;
+  border-radius: 8px;
   overflow: hidden;
-  border-radius: 5px 5px 0 0;
 }
 
 .modal-header-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  display: block;
+  border-radius: 8px;
 }
 
 .modal h2 {
@@ -616,7 +620,6 @@ body.modal-open {
   .chefs-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    padding: 0 0.5rem;
   }
 
   .chef-card.expanded {
@@ -907,36 +910,23 @@ body.modal-open {
 
 /* Updated Header Image */
 .modal-header-image {
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
   position: relative;
-  margin: 0;
-  padding: 0;
-}
-
-.modal-header-image:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 70%, rgba(255,255,255,0.8) 100%);
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .modal-header-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  margin: 0;
-  padding: 0;
+  height: auto;
+  display: block;
+  border-radius: 8px;
 }
 
 /* Updated Accordion Design */
 .accordion-container {
-  padding: 2rem;
+  padding: 1.5rem 0.5rem;
 }
 
 .accordion-item {
@@ -948,12 +938,17 @@ body.modal-open {
 
 .accordion-header {
   background-color: #f0f5ff;
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 0 8px !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  font-size: 13px !important;
+  background: #f9f7f3 !important;
+  border-left: 6px solid #3E78B2 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
 }
 
 .accordion-header:hover {
@@ -961,16 +956,25 @@ body.modal-open {
 }
 
 .accordion-header h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  color: #3E78B2;
+  font-size: 13px !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
 }
 
 .accordion-icon {
-  font-size: 1.5rem;
   color: #3E78B2;
+  transition: transform 0.3s ease;
+  line-height: 1;
+  transform: rotate(0deg);
+  font-size: 24px;
+}
+
+.accordion-icon::before {
+  content: '+';
+}
+
+.accordion-item.active .accordion-icon::before {
+  content: '−';
 }
 
 .accordion-content {
@@ -984,6 +988,7 @@ body.modal-open {
 .accordion-item.active .accordion-content {
   padding: 1.5rem 2rem !important;
   max-height: 2000px;
+  padding-top: 2rem !important;
 }
 
 /* Updated Journey Buttons */
@@ -1748,13 +1753,16 @@ body.modal-open {
 
 #explore-modal .modal-content {
   background-color: white;
-  padding: 30px;
+  padding: 2rem !important;
   border-radius: 8px;
   max-width: 800px;
   width: 90%;
   position: relative;
   margin: 40px auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding-top: 0 !important;
+  margin-top: 40px !important;
+  overflow: auto !important;
 }
 
 #explore-modal .modal-close {
@@ -1776,27 +1784,18 @@ body.modal-open {
 
 /* Header Image */
 #explore-modal .modal-header-image {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
   position: relative;
-}
-
-#explore-modal .modal-header-image:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 70%, rgba(255,255,255,0.8) 100%);
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #explore-modal .modal-header-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 30%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
 }
 
 /* Modal Content */
@@ -1833,7 +1832,7 @@ body.modal-open {
 
 /* Accordion Styles */
 #explore-modal .accordion-container {
-  margin: 0 2rem 1.5rem;
+  padding: 1.5rem 0.5rem;
 }
 
 #explore-modal .accordion-item {
@@ -1859,16 +1858,17 @@ body.modal-open {
 }
 
 #explore-modal .accordion-header {
-  background-color: transparent;
-  padding: 8px 16px;  /* Exact pixel values for precise height */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-  border-left: none;
+  padding: 0 8px !important;
+  min-height: 28px !important;
+  height: 28px !important;
+  font-size: 13px !important;
+  background: #f9f7f3 !important;
+  border-left: 6px solid #3E78B2 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
 }
 
 #explore-modal .accordion-header:hover {
@@ -1878,12 +1878,9 @@ body.modal-open {
 }
 
 #explore-modal .accordion-header h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;  /* Exact pixel value for precise height */
-  font-weight: 600;
-  margin: 0;
-  color: #2a4374;
-  line-height: 1;
+  font-size: 13px !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
 }
 
 #explore-modal .accordion-icon {
@@ -1891,15 +1888,15 @@ body.modal-open {
   transition: transform 0.3s ease;
   line-height: 1;
   transform: rotate(0deg);
-  font-size: 24px;  /* Adjusted for the + symbol */
+  font-size: 24px;
 }
 
 #explore-modal .accordion-icon::before {
-  content: '+';  /* Changed back to + as it appears in screenshot */
+  content: '+';
 }
 
 #explore-modal .accordion-item.active .accordion-icon::before {
-  content: '−';  /* Using minus sign when open */
+  content: '−';
 }
 
 /* Override any box shadows */
@@ -2399,4 +2396,8 @@ body.modal-open {
     .diet-tag {
         font-size: 0.8em;
     }
+} 
+
+#explore-modal .modal-content .accordion-container {
+  padding: 2rem 1.5rem !important;
 } 

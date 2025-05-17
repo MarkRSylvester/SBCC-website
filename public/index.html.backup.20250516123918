@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/accordion-position-absolute.css"><style id="accordion-override">
+/* Override all accordion behavior with simpler implementation */
+.modal-content {
+  overflow-y: auto !important;
+}
+
+.accordion-item {
+  position: relative !important;
+  margin-bottom: 8px !important;
+  border-left: 4px solid #1D3557 !important;
+  border-radius: 0 8px 8px 0 !important;
+  background-color: #FFFFFF !important;
+  overflow: visible !important;
+}
+
+.accordion-header {
+  padding: 12px 16px !important;
+  cursor: pointer !important;
+  background-color: #f4f8fd !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.accordion-content {
+  display: none !important;
+  padding: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+.accordion-item.active .accordion-content {
+  display: block !important;
+  height: auto !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  padding: 16px !important;
+  opacity: 1 !important;
+}
+
+.accordion-icon svg {
+  transition: transform 0.3s ease !important;
+}
+
+.accordion-item.active .accordion-icon svg {
+  transform: rotate(180deg) !important;
+}
+
+/* Clean scrollbar styling */
+.accordion-content::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.accordion-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-radius: 4px !important;
+}
+
+.accordion-content::-webkit-scrollbar-thumb {
+  background: rgba(29, 53, 87, 0.2) !important;
+  border-radius: 4px !important;
+}
+</style>
+<link rel="stylesheet" href="/accordion-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Santa Barbara Chef Collective - Culinary Excellence in Santa Barbara">
+    <meta name="theme-color" content="#3E78B2">
+    <title>Santa Barbara Chef Collective</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/montecito.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/modal-styles.css">
+    <link rel="stylesheet" href="css/event-planning.css">
+    <link rel="stylesheet" href="css/gatherings.css">
+    <link rel="stylesheet" href="css/button-styles.css">
+    <link rel="stylesheet" href="css/modal-close.css">
+    <link rel="stylesheet" href="css/beyond-table.css">
+    <link rel="stylesheet" href="css/our-story-accordion.css">
+    <link rel="stylesheet" href="css/our-story-fix-updated.css">
+    <link rel="stylesheet" href="css/our-story-simple-fix.css">
+    <link rel="stylesheet" href="css/our-story-custom.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      .site-footer {
+        padding-top: 80px;
+        padding-bottom: 30px;
+      }
+      
+      .footer-brand {
+        margin-bottom: 10px;
+      }
+      
+      .footer-email {
+        margin-bottom: 15px;
+      }
+      
+      .footer-bottom {
+        margin-top: 25px;
+      }
+      
+      .footer-social {
+        margin-bottom: 25px;
+      }
+    </style>
+<style>  /* Emergency accordion CSS */  .accordion-item.active .accordion-content,  .accordion-item.open .accordion-content {    display: block !important;    max-height: none !important;    height: auto !important;    opacity: 1 !important;    visibility: visible !important;    overflow: visible !important;    padding: 20px !important;  } </style> 
+<style>
+/* Accordion scroll fix */
+.accordion-item.active .accordion-content, 
+.accordion-item.open .accordion-content {
+  max-height: 80vh !important; /* Allow scrolling within the viewport */
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  padding: 20px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Add a subtle scrollbar style */
+.accordion-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.accordion-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.accordion-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.accordion-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Make sure event grids are visible */
+.main-event-types-grid,
+.additional-event-types-grid,
+.category-grid {
+  display: grid;
+  margin-bottom: 20px;
+}
+
+/* Make sure no overflow is hidden */
+.accordion-item {
+  overflow: visible !important;
+}
+</style>
+
+<style>
+/* Accordion scroll fix */
+.accordion-item.active .accordion-content, 
+.accordion-item.open .accordion-content {
+  max-height: 80vh !important; /* Allow scrolling within the viewport */
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  padding: 20px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Add a subtle scrollbar style */
+.accordion-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.accordion-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.accordion-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.accordion-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Make sure event grids are visible */
+.main-event-types-grid,
+.additional-event-types-grid,
+.category-grid {
+  display: grid;
+  margin-bottom: 20px;
+}
+
+/* Make sure no overflow is hidden */
+.accordion-item {
+  overflow: visible !important;
+}
+</style>
+    <link rel="stylesheet" href="css/faq-fixes.css">
+    <link rel="stylesheet" href="css/chef-styles.css">
+    <link rel="stylesheet" href="css/menu-styles.css">
+    <link rel="stylesheet" href="css/accordion-styles.css">
+    <link rel="stylesheet" href="css/accordion-icon-fix.css">
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="/SBCC-Images/Navy-SBCC-Logo.png" alt="SBCC Logo" class="logo">
+                <div class="brand-container">
+                    <h1 class="brand">Santa Barbara Chef Collective</h1>
+                    <p class="tagline">Private Chefs for Extraordinary Experiences</p>
+                </div>
+            </div>
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Elevate Your Next Event with a Private Chef</h2>
+            <p class="hero-tagline">
+                <span class="tagline-line">Your story, your gathering, your flavors.<br>Crafted for those who crave an unforgettable memory.</span>
+            </p>
+            <div class="cta-buttons">
+                <button class="cta-button tertiary" data-modal-target="explore-modal">Just Exploring</button>
+                <button class="btn btn-primary" data-modal-target="event-modal">Plan Your Event</button>
+                <button class="btn btn-primary" data-modal-target="weekly-meals-modal">Weekly Meals</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">Santa Barbara Chef Collective</div>
+            <div class="footer-email"><a href="mailto:info@sbchefcollective.com">info@sbchefcollective.com</a></div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/sbchefcollective"><img src="/SBCC-Images/navy-instagram-icon.png" alt="Instagram"></a>
+                <a href="https://www.yelp.com/biz/santa-barbara-chef-collective-santa-barbara"><img src="/SBCC-Images/navy-yelp-logo.png" alt="Yelp"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <hr class="footer-divider">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a><span>|</span>
+                <a href="#">Terms & Conditions</a><span>|</span>
+                <a href="#">Cookie Policy</a><span>|</span>
+                <span>© 2025 Santa Barbara Chef Collective</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Just Exploring Modal -->
+    <div id="explore-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal"></button>
+        <div class="modal-header-image">
+          <img src="/SBCC-Images/catering-header.jpg" alt="Santa Barbara Chef Collective Catering" class="feature-image">
+        </div>
+        <h2>Welcome to Santa Barbara Chef Collective</h2>
+        <p class="modal-intro">Discover our curated culinary experiences, where expert chefs bring restaurant-quality dining directly to your home or event.</p>
+        <div class="accordion-container">
+          <!-- OUR STORY ACCORDION -->
+          <div class="accordion-item" id="our-story-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="our-story-content" id="our-story-header">
+              <span class="accordion-title">Our Story</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="our-story-content" role="region" aria-labelledby="our-story-header">
+              <div class="story-section">
+                <h4>Welcome to the Santa Barbara Chef Collective</h4>
+                <p>We're a community of local chefs on a shared mission: to make private dining effortless—and unforgettable. Whether you're planning an intimate dinner, a wedding, or a weekend retreat, we'll match you with the perfect chef to bring your vision to life through thoughtful, beautifully prepared food.</p>
+                <div class="section-divider"></div>
+              </div>
+              
+              <div class="story-section">
+                <h4>Our Founder's Story</h4>
+                <div class="founder-content">
+                  <div class="founder-image">
+                    <img src="/SBCC-Images/coco-portrait.jpg" alt="Coco, Founder of Santa Barbara Chef Collective">
+                  </div>
+                  <div class="founder-text">
+                  <p>I had the joy of being a private yacht chef for eight years, cooking for royalty, celebrities, and adventurers while sailing the globe. But my passion for food began earlier, in the fresh markets of France, where I fell in love with seasonal ingredients, aged cheeses, and the art of gathering.</p>
+                  <p>Motivated by that culture, I trained at Tante Marie's in San Francisco and have never stopped cooking since. From buying octopus in a Greek village to slicing fresh-caught sashimi in Alaska, I've always believed food should reflect where you are and who you're with.</p>
+                  <p>Now rooted in Santa Barbara and close to family, I cook for local events and gatherings using vibrant, organic California ingredients. I specialize in Mediterranean and raw cuisine and love meals that make you feel great, body and soul.</p>
+                  <p>Founding the Chef Collective let me bring together a team of chefs who care deeply about food, craft, and connection. I'm so glad you're here.</p>
+                    <p class="founder-signature">— Coco</p>
+                  </div>
+                </div>
+                <div class="section-divider"></div>
+              </div>
+              
+              <div class="story-section">
+                <h4>Global Talent, Local Roots</h4>
+                <p>From Michelin-trained masters to creative culinary artisans, our chefs bring world-class skill to Santa Barbara tables. Every chef is personally vetted and selected not just for talent, but for hospitality and heart.</p>
+                <div class="section-divider"></div>
+              </div>
+              
+              <div class="story-section">
+                <h4>Connecting Great Chefs with Great Clients</h4>
+                <p>Our platform makes it easy to browse and connect with top local chefs. Every detail is handled with care, so you can focus on the experience, not the logistics.</p>
+                <div class="section-divider"></div>
+              </div>
+              
+              <div class="story-section">
+                <h4>Celebrating Local Flavor</h4>
+                <p>We partner with Santa Barbara farmers, fishers, and foragers to create dishes that reflect the vibrant spirit of the Central Coast. Every meal is a celebration of community, seasonality, and creativity.</p>
+                <div class="section-divider"></div>
+              </div>
+              
+              <div class="story-section">
+                <h4>The Process</h4>
+                <div class="process-steps">
+                  <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                      <h5>Chef Selection</h5>
+                    <p>Once you reach out, we'll send you curated resumes from chefs matched to your tastes, event style, and household needs.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                      <h5>Personal Interviews</h5>
+                    <p>You'll meet the chefs to ensure their style, personality, and creativity align with your vision.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                      <h5>The Perfect Match</h5>
+                    <p>With our guidance, you'll choose the chef who best fits the bill—someone who will turn your gathering into something truly memorable.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" id="our-chefs-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="our-chefs-content" id="our-chefs-header">
+              <span class="accordion-title">Our Chefs</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="our-chefs-content" role="region" aria-labelledby="our-chefs-header">
+              <!-- Our Chefs content goes here -->
+              <p>Chef content placeholder</p>
+            </div>
+          </div>
+          
+          <!-- OUR MENUS ACCORDION -->
+          <div class="accordion-item" id="our-menus-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="our-menus-content" id="our-menus-header">
+              <span class="accordion-title">Our Menus</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="our-menus-content" role="region" aria-labelledby="our-menus-header">
+              <!-- Our Menus content goes here -->
+              <p>Menu content placeholder</p>
+            </div>
+          </div>
+          
+          <!-- GATHERINGS ACCORDION -->
+          <div class="accordion-item" id="gatherings-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="gatherings-content" id="gatherings-header">
+              <span class="accordion-title">Gatherings & Celebrations</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="gatherings-content" role="region" aria-labelledby="gatherings-header">
+              <!-- Gatherings content goes here -->
+      <div class="gatherings-section">
+        <h3>Gatherings & Celebrations</h3>
+        
+        <p class="intro-text">
+          From intimate dinner parties to milestone celebrations, our chefs create custom menus that reflect your vision and delight your guests. We handle everything from menu planning to execution, allowing you to be fully present as a host.
+        </p>
+        
+        <div class="event-types-grid">
+          <div class="event-type-card">
+            <h4>Intimate Dinners</h4>
+            <div class="event-type-underline"></div>
+            <p>Perfect for small gatherings of 2-12 guests. Enjoy a personalized dining experience with expert wine pairings and impeccable service.</p>
+          </div>
+          
+          <div class="event-type-card">
+            <h4>Special Occasions</h4>
+            <div class="event-type-underline"></div>
+            <p>Celebrate birthdays, anniversaries, or achievements with a memorable culinary experience tailored to your preferences.</p>
+          </div>
+        </div>
+        
+        <div class="features-section">
+          <h4>All Gatherings Include</h4>
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="feature-dot"></span>
+              <span class="feature-text">Personal chef consultation</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-dot"></span>
+              <span class="feature-text">On-site meal preparation</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-dot"></span>
+              <span class="feature-text">Professional service staff</span>
+            </div>
+          </div>
+        </div>
+        
+        <p class="booking-note">
+          Most events are booked 2–4 weeks in advance. For special occasions and larger gatherings, we recommend planning 4–6 weeks ahead.
+        </p>
+        
+        <div class="cta-container">
+          <button class="button button-primary" data-modal="event-planning-modal">Plan Your Gathering</button>
+        </div>
+      </div>
+            </div>
+          </div>
+          
+          <!-- BEYOND THE TABLE ACCORDION -->
+          <div class="accordion-item" id="beyond-table-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="beyond-table-content" id="beyond-table-header">
+              <span class="accordion-title">Beyond the Table</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="beyond-table-content" role="region" aria-labelledby="beyond-table-header">
+              <p class="section-intro">
+                Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering. These thoughtful additions transform meals into complete sensory experiences.
+              </p>
+              
+              <div class="category-grid">
+                <!-- Wine Pairing Guidance -->
+                <div class="category-card">
+                  <h4 class="category-title">Wine Pairing Guidance</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Expert wine recommendations tailored to your menu</li>
+                    <li>Curated selections from local Santa Barbara vineyards</li>
+                    <li>In-home wine tasting experiences with sommeliers</li>
+                    <li>Custom flight creation for multi-course experiences</li>
+                    <li>Pricing: From complimentary guidance to full sommelier service</li>
+                    <li>In partnership with Renegade Wines</li>
+                    <li>Educational notes on region, varietal, and pairing principles</li>
+                  </ul>
+                </div>
+                
+                <!-- Table Setting & Styling -->
+                <div class="category-card">
+                  <h4 class="category-title">Table Setting & Styling</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Elegant table design customized to your occasion</li>
+                    <li>Premium linens, dinnerware, and glassware</li>
+                    <li>Seasonal floral arrangements from local growers</li>
+                    <li>Ambient lighting to create the perfect atmosphere</li>
+                    <li>Pricing: From $15 per guest for essentials to $60+ for luxury</li>
+                    <li>In collaboration with Santa Barbara Picnic Co.</li>
+                    <li>Themed options reflecting local coastal elegance</li>
+                  </ul>
+                </div>
+                
+                <!-- Bartending Services -->
+                <div class="category-card">
+                  <h4 class="category-title">Bartending Services</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Professional bartenders to serve drinks at your event</li>
+                    <li>Experienced mixologists who provide attentive service</li>
+                    <li>Connects you with trusted bartending professionals</li>
+                    <li>Custom cocktail menus featuring local ingredients and spirits</li>
+                  </ul>
+                </div>
+                
+                <!-- Specialty Cocktails -->
+                <div class="category-card">
+                  <h4 class="category-title">Specialty Cocktails</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Custom cocktail mixers created by your chef</li>
+                    <li>Unique flavor combinations to complement your menu</li>
+                    <li>Ready to add to your choice of liquor</li>
+                    <li>Seasonal ingredients that reflect Santa Barbara's bounty</li>
+                  </ul>
+                </div>
+                
+                <!-- Rental Coordination -->
+                <div class="category-card">
+                  <h4 class="category-title">Rental Coordination</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Connection with trusted local rental companies</li>
+                    <li>Assistance with all rental details for events</li>
+                    <li>Streamlined process for securing necessary equipment</li>
+                    <li>Expert advice on quantities and specific needs</li>
+                  </ul>
+                </div>
+                
+                <!-- Seasonal Produce Boxes -->
+                <div class="category-card">
+                  <h4 class="category-title">Seasonal Produce Boxes</h4>
+                  <div class="divider"></div>
+                  <ul class="event-list">
+                    <li>Hand-selected produce from local organic farms</li>
+                    <li>Artisanal oils, vinegars, and specialty items</li>
+                    <li>Chef-created recipes utilizing seasonal ingredients</li>
+                    <li>Information on featured farms and producers</li>
+                    <li>Pricing: From $45 weekly for essentials to $125 for gourmet</li>
+                    <li>Direct connection to Santa Barbara's agricultural heritage</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" id="signature-meal-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="signature-meal-content" id="signature-meal-header">
+              <span class="accordion-title">Signature Meal Program</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="signature-meal-content" role="region" aria-labelledby="signature-meal-header">
+              <div class="menu-section">
+                <p>Transform your everyday dining with chef-crafted meals delivered to your home on a schedule that suits your lifestyle. Our Signature Meal Program brings the expertise of Santa Barbara's finest culinary artists to your family table without the planning, shopping, or preparation.</p>
+                <div class="category-grid">
+                  <div class="category-card">
+                    <h4>Personalized Menus</h4>
+                    <p>Tailored to your household's preferences, dietary needs, and schedule.</p>
+                  </div>
+                  <div class="category-card">
+                    <h4>Seasonal Ingredients</h4>
+                    <p>Fresh, locally-sourced produce and premium ingredients that change with the seasons.</p>
+                  </div>
+                  <div class="category-card">
+                    <h4>Flexible Scheduling</h4>
+                    <p>Choose from 2, 3, or 5 meals per week with easy adjustments as your needs change.</p>
+                  </div>
+                  <div class="category-card">
+                    <h4>Dietary Preferences</h4>
+                    <ul>
+                      <li>Gluten-Free</li>
+                      <li>Dairy-Free</li>
+                      <li>Vegan</li>
+                      <li>Vegetarian</li>
+                      <li>Paleo</li>
+                      <li>Keto</li>
+                      <li>Low-FODMAP</li>
+                      <li>Mediterranean</li>
+                    </ul>
+                  </div>
+                </div>
+                <p>Each meal arrives ready to heat and serve, with chef's notes on presentation and optional finishing touches.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" id="culinary-experiences-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="culinary-experiences-content" id="culinary-experiences-header">
+              <span class="accordion-title">Culinary Experiences</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="culinary-experiences-content" role="region" aria-labelledby="culinary-experiences-header">
+              <!-- Culinary Experiences content goes here -->
+              <p>Culinary Experiences content placeholder</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="faq-content" id="faq-header">
+              <span class="accordion-title">Frequently Asked Questions</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="faq-content" role="region" aria-labelledby="faq-header">
+              <!-- FAQ content goes here -->
+              <p>FAQ content placeholder</p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 25px; text-align: center;">
+          <button class="btn btn-primary" id="contact-us">Contact Us</button>
+        </div>
+      </div>
+    </div>
+    <!-- Plan Your Event Modal -->
+    <div id="event-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal"></button>
+        <div class="modal-header-image">
+          <img src="/SBCC-Images/gathering-modal.jpg" alt="Outdoor dinner gathering" class="feature-image">
+        </div>
+        <h2>Plan Your Event</h2>
+        <p class="modal-intro">Tell us about your vision, and we'll match you with the perfect chef and menu for your special occasion.</p>
+        <form id="event-form">
+          <div class="form-group">
+            <label for="event-type">Event Type</label>
+            <select id="event-type" name="eventType" required>
+              <option value="">Select an event type...</option>
+              <option value="dinner-party">Dinner Party</option>
+              <option value="special-occasion">Special Occasion</option>
+              <option value="corporate">Corporate Event</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="guest-count">Number of Guests</label>
+            <input type="number" id="guest-count" name="guestCount" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="event-date">Event Date</label>
+            <input type="date" id="event-date" name="eventDate" required>
+          </div>
+          <div class="form-group">
+            <label for="event-details">Tell us more about your event</label>
+            <textarea id="event-details" name="eventDetails" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <div style="margin-top: 25px; text-align: center;">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Weekly Meals Modal -->
+    <div id="weekly-meals-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal"></button>
+        <div class="modal-header-image">
+          <img src="/SBCC-Images/weekly-meal-modal.jpg" alt="Chef-prepared meals" class="feature-image">
+        </div>
+        <h2>Weekly Meal Service</h2>
+        <p class="modal-intro">Enjoy restaurant-quality meals in the comfort of your home, prepared by our expert chefs and customized to your preferences.</p>
+        <form id="meal-form">
+          <div class="form-group">
+            <label for="household-size">Household Size</label>
+            <input type="number" id="household-size" name="householdSize" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="meals-per-week">Meals Per Week</label>
+            <select id="meals-per-week" name="mealsPerWeek" required>
+              <option value="">Select frequency...</option>
+              <option value="2">2 meals per week</option>
+              <option value="3">3 meals per week</option>
+              <option value="5">5 meals per week</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dietary-preferences">Dietary Preferences (Optional)</label>
+            <textarea id="dietary-preferences" name="dietaryPreferences" rows="3" placeholder="Please note any dietary restrictions or preferences..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="meal-name">Your Name</label>
+            <input type="text" id="meal-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="meal-email">Email</label>
+            <input type="email" id="meal-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="meal-phone">Phone</label>
+            <input type="tel" id="meal-phone" name="phone">
+          </div>
+          <div style="margin-top: 25px; text-align: center;">
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+    // Emergency modal open fix
+    document.addEventListener('DOMContentLoaded', function() {
+      const modalTriggers = document.querySelectorAll('[data-modal-target]');
+      const modals = document.querySelectorAll('.modal');
+      console.log('Modal triggers found:', modalTriggers.length);
+      console.log('Modals found:', modals.length);
+      modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          const modalId = this.getAttribute('data-modal-target');
+          console.log('Trying to open modal:', modalId);
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.add('open');
+            console.log('Modal opened');
+          } else {
+            console.error('Modal not found:', modalId);
+          }
+        });
+      });
+    });
+    </script>
+<script src="js/populate-faq.js"></script>
+<script src="js/update-gatherings.js"></script>
+<script src="js/smooth-scrolling.js"></script>
+<script src="js/placeholder-chefs.js"></script>
+<script src="js/placeholder-menus.js"></script>
+<script src="js/update-culinary-experiences.js"></script>
+<script src="js/add-signature-meal.js"></script>
+<script src="js/accordion-toggle-only.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.modal-close').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      const modal = btn.closest('.modal');
+      if (modal) {
+        modal.classList.remove('open');
+      }
+    });
+  });
+});
+</script>
+</html>
