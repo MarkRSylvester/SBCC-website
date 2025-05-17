@@ -1,6 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/accordion-position-absolute.css"><style id="accordion-override">
+/* Override all accordion behavior with simpler implementation */
+.modal-content {
+  overflow-y: auto !important;
+}
+
+.accordion-item {
+  position: relative !important;
+  margin-bottom: 8px !important;
+  border-left: 4px solid #1D3557 !important;
+  border-radius: 0 8px 8px 0 !important;
+  background-color: #FFFFFF !important;
+  overflow: visible !important;
+}
+
+.accordion-header {
+  padding: 12px 16px !important;
+  cursor: pointer !important;
+  background-color: #f4f8fd !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.accordion-content {
+  display: none !important;
+  padding: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  transition: none !important;
+}
+
+.accordion-item.active .accordion-content {
+  display: block !important;
+  height: auto !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  padding: 16px !important;
+  opacity: 1 !important;
+}
+
+.accordion-icon svg {
+  transition: transform 0.3s ease !important;
+}
+
+.accordion-item.active .accordion-icon svg {
+  transform: rotate(180deg) !important;
+}
+
+/* Clean scrollbar styling */
+.accordion-content::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.accordion-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-radius: 4px !important;
+}
+
+.accordion-content::-webkit-scrollbar-thumb {
+  background: rgba(29, 53, 87, 0.2) !important;
+  border-radius: 4px !important;
+}
+</style>
 <link rel="stylesheet" href="/accordion-icons.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +83,9 @@
     <link rel="stylesheet" href="css/modal-close.css">
     <link rel="stylesheet" href="css/beyond-table.css">
     <link rel="stylesheet" href="css/our-story-accordion.css">
+    <link rel="stylesheet" href="css/our-story-fix-updated.css">
+    <link rel="stylesheet" href="css/our-story-simple-fix.css">
+    <link rel="stylesheet" href="css/our-story-custom.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
       .site-footer {
@@ -130,7 +199,11 @@
   overflow: visible !important;
 }
 </style>
-<link rel="stylesheet" href="css/accordion-styles.css"><link rel="stylesheet" href="css/accordion-styles.css"></head>
+    <link rel="stylesheet" href="css/faq-fixes.css">
+    <link rel="stylesheet" href="css/chef-styles.css">
+    <link rel="stylesheet" href="css/menu-styles.css">
+    <link rel="stylesheet" href="css/accordion-styles.css">
+    <link rel="stylesheet" href="css/accordion-icon-fix.css">
 <body>
     <header>
         <div class="container">
@@ -195,11 +268,15 @@
         <div class="accordion-container">
           <!-- OUR STORY ACCORDION -->
           <div class="accordion-item" id="our-story-accordion">
-            <div class="accordion-header">
-              <h3>Our Story</h3>
-              <div class="accordion-icon"></div>
-            </div>
-            <div class="accordion-content">
+            <button class="accordion-header" aria-expanded="false" aria-controls="our-story-content" id="our-story-header">
+              <span class="accordion-title">Our Story</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="our-story-content" role="region" aria-labelledby="our-story-header">
               <div class="story-section">
                 <h4>Welcome to the Santa Barbara Chef Collective</h4>
                 <p>We're a community of local chefs on a shared mission: to make private dining effortless—and unforgettable. Whether you're planning an intimate dinner, a wedding, or a weekend retreat, we'll match you with the perfect chef to bring your vision to life through thoughtful, beautifully prepared food.</p>
@@ -213,10 +290,10 @@
                     <img src="/SBCC-Images/coco-portrait.jpg" alt="Coco, Founder of Santa Barbara Chef Collective">
                   </div>
                   <div class="founder-text">
-                    <p>I had the joy of being a private yacht chef for eight years, cooking for royalty, celebrities, and adventurers while sailing the globe. But my passion for food began earlier, in the fresh markets of France, where I fell in love with seasonal ingredients, aged cheeses, and the art of gathering.</p>
-                    <p>Motivated by that culture, I trained at Tante Marie's in San Francisco and have never stopped cooking since. From buying octopus in a Greek village to slicing fresh-caught sashimi in Alaska, I've always believed food should reflect where you are and who you're with.</p>
-                    <p>Now rooted in Santa Barbara and close to family, I cook for local events and gatherings using vibrant, organic California ingredients. I specialize in Mediterranean and raw cuisine and love meals that make you feel great, body and soul.</p>
-                    <p>Founding the Chef Collective let me bring together a team of chefs who care deeply about food, craft, and connection. I'm so glad you're here.</p>
+                  <p>I had the joy of being a private yacht chef for eight years, cooking for royalty, celebrities, and adventurers while sailing the globe. But my passion for food began earlier, in the fresh markets of France, where I fell in love with seasonal ingredients, aged cheeses, and the art of gathering.</p>
+                  <p>Motivated by that culture, I trained at Tante Marie's in San Francisco and have never stopped cooking since. From buying octopus in a Greek village to slicing fresh-caught sashimi in Alaska, I've always believed food should reflect where you are and who you're with.</p>
+                  <p>Now rooted in Santa Barbara and close to family, I cook for local events and gatherings using vibrant, organic California ingredients. I specialize in Mediterranean and raw cuisine and love meals that make you feel great, body and soul.</p>
+                  <p>Founding the Chef Collective let me bring together a team of chefs who care deeply about food, craft, and connection. I'm so glad you're here.</p>
                     <p class="founder-signature">— Coco</p>
                   </div>
                 </div>
@@ -248,7 +325,7 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                       <h5>Chef Selection</h5>
-                      <p>Once you reach out, we'll send you curated resumes from chefs matched to your tastes, event style, and household needs.</p>
+                    <p>Once you reach out, we'll send you curated resumes from chefs matched to your tastes, event style, and household needs.</p>
                     </div>
                   </div>
                   
@@ -256,7 +333,7 @@
                     <div class="step-number">2</div>
                     <div class="step-content">
                       <h5>Personal Interviews</h5>
-                      <p>You'll meet the chefs to ensure their style, personality, and creativity align with your vision.</p>
+                    <p>You'll meet the chefs to ensure their style, personality, and creativity align with your vision.</p>
                     </div>
                   </div>
                   
@@ -264,7 +341,7 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                       <h5>The Perfect Match</h5>
-                      <p>With our guidance, you'll choose the chef who best fits the bill—someone who will turn your gathering into something truly memorable.</p>
+                    <p>With our guidance, you'll choose the chef who best fits the bill—someone who will turn your gathering into something truly memorable.</p>
                     </div>
                   </div>
                 </div>
@@ -272,10 +349,15 @@
             </div>
           </div>
           <div class="accordion-item" id="our-chefs-accordion">
-            <div class="accordion-header">
-              <h3>Our Chefs</h3>
-            </div>
-            <div class="accordion-content">
+            <button class="accordion-header" aria-expanded="false" aria-controls="our-chefs-content" id="our-chefs-header">
+              <span class="accordion-title">Our Chefs</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="our-chefs-content" role="region" aria-labelledby="our-chefs-header">
               <!-- Our Chefs content goes here -->
               <p>Chef content placeholder</p>
             </div>
@@ -283,10 +365,15 @@
           
           <!-- OUR MENUS ACCORDION -->
           <div class="accordion-item" id="our-menus-accordion">
-            <div class="accordion-header">
-              <h3>Our Menus</h3>
-            </div>
-            <div class="accordion-content">
+            <button class="accordion-header" aria-expanded="false" aria-controls="our-menus-content" id="our-menus-header">
+              <span class="accordion-title">Our Menus</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="our-menus-content" role="region" aria-labelledby="our-menus-header">
               <!-- Our Menus content goes here -->
               <p>Menu content placeholder</p>
             </div>
@@ -294,10 +381,15 @@
           
           <!-- GATHERINGS ACCORDION -->
           <div class="accordion-item" id="gatherings-accordion">
-            <div class="accordion-header">
-              <h3>Gatherings & Celebrations</h3>
-            </div>
-            <div class="accordion-content">
+            <button class="accordion-header" aria-expanded="false" aria-controls="gatherings-content" id="gatherings-header">
+              <span class="accordion-title">Gatherings & Celebrations</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="gatherings-content" role="region" aria-labelledby="gatherings-header">
               <!-- Gatherings content goes here -->
       <div class="gatherings-section">
         <h3>Gatherings & Celebrations</h3>
@@ -351,11 +443,15 @@
           
           <!-- BEYOND THE TABLE ACCORDION -->
           <div class="accordion-item" id="beyond-table-accordion">
-            <div class="accordion-header">
-              <h3>Beyond the Table</h3>
-              <div class="accordion-icon"></div>
-            </div>
-            <div class="accordion-content">
+            <button class="accordion-header" aria-expanded="false" aria-controls="beyond-table-content" id="beyond-table-header">
+              <span class="accordion-title">Beyond the Table</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="beyond-table-content" role="region" aria-labelledby="beyond-table-header">
               <p class="section-intro">
                 Extend your culinary experience beyond the dining table with our complementary offerings designed to enhance every aspect of your gathering. These thoughtful additions transform meals into complete sensory experiences.
               </p>
@@ -443,11 +539,73 @@
               </div>
             </div>
           </div>
-          <div class="accordion-item" id="faq-accordion">
-            <div class="accordion-header">
-              <h3>Frequently Asked Questions</h3>
+          <div class="accordion-item" id="signature-meal-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="signature-meal-content" id="signature-meal-header">
+              <span class="accordion-title">Signature Meal Program</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="signature-meal-content" role="region" aria-labelledby="signature-meal-header">
+              <div class="menu-section">
+                <p>Transform your everyday dining with chef-crafted meals delivered to your home on a schedule that suits your lifestyle. Our Signature Meal Program brings the expertise of Santa Barbara's finest culinary artists to your family table without the planning, shopping, or preparation.</p>
+                <div class="category-grid">
+                  <div class="category-card">
+                    <h4>Personalized Menus</h4>
+                    <p>Tailored to your household's preferences, dietary needs, and schedule.</p>
+                  </div>
+                  <div class="category-card">
+                    <h4>Seasonal Ingredients</h4>
+                    <p>Fresh, locally-sourced produce and premium ingredients that change with the seasons.</p>
+                  </div>
+                  <div class="category-card">
+                    <h4>Flexible Scheduling</h4>
+                    <p>Choose from 2, 3, or 5 meals per week with easy adjustments as your needs change.</p>
+                  </div>
+                  <div class="category-card">
+                    <h4>Dietary Preferences</h4>
+                    <ul>
+                      <li>Gluten-Free</li>
+                      <li>Dairy-Free</li>
+                      <li>Vegan</li>
+                      <li>Vegetarian</li>
+                      <li>Paleo</li>
+                      <li>Keto</li>
+                      <li>Low-FODMAP</li>
+                      <li>Mediterranean</li>
+                    </ul>
+                  </div>
+                </div>
+                <p>Each meal arrives ready to heat and serve, with chef's notes on presentation and optional finishing touches.</p>
+              </div>
             </div>
-            <div class="accordion-content">
+          </div>
+          <div class="accordion-item" id="culinary-experiences-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="culinary-experiences-content" id="culinary-experiences-header">
+              <span class="accordion-title">Culinary Experiences</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="culinary-experiences-content" role="region" aria-labelledby="culinary-experiences-header">
+              <!-- Culinary Experiences content goes here -->
+              <p>Culinary Experiences content placeholder</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq-accordion">
+            <button class="accordion-header" aria-expanded="false" aria-controls="faq-content" id="faq-header">
+              <span class="accordion-title">Frequently Asked Questions</span>
+              <span class="accordion-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 8L10 12L14 8" stroke="#23406A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="accordion-content" id="faq-content" role="region" aria-labelledby="faq-header">
               <!-- FAQ content goes here -->
               <p>FAQ content placeholder</p>
             </div>
@@ -553,15 +711,6 @@
         </form>
       </div>
     </div>
-    <!-- <script src="js/clean-duplicates.js"></script> -->
-    <!-- <script src="js/standardize-dividers.js"></script> -->
-    <!-- <script src="js/accordion-universal-fix.js"></script> -->
-    <!-- <script>
-    // Immediate execution accordion fix
-    (function() {
-      ...
-    })();
-    </script> -->
     <script>
     // Emergency modal open fix
     document.addEventListener('DOMContentLoaded', function() {
@@ -588,6 +737,22 @@
 <script src="js/populate-faq.js"></script>
 <script src="js/update-gatherings.js"></script>
 <script src="js/smooth-scrolling.js"></script>
+<script src="js/placeholder-chefs.js"></script>
+<script src="js/placeholder-menus.js"></script>
+<script src="js/update-culinary-experiences.js"></script>
+<script src="js/add-signature-meal.js"></script>
+<script src="js/accordion-toggle-only.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.modal-close').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      const modal = btn.closest('.modal');
+      if (modal) {
+        modal.classList.remove('open');
+      }
+    });
+  });
+});
+</script>
+<script src="js/accordion-inspector.js"></script>
 </html>
-</body>
-<script src="scripts.js"></script>
